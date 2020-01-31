@@ -14,6 +14,7 @@
 
 - (Ongoing) [Complete Intro to React, v5](https://frontendmasters.com/courses/complete-react-v5/) - Brian Holt (Microsoft)
 - [React For Beginners](https://reactforbeginners.com) - Wesley Bos
+- [Advanced React](https://advancedreact.com/) - Wesley Bos
 - [VR Software Development](https://www.udacity.com/course/vr-software-development--ud1014) - Google VR
 - [VR Scenes and Objects](https://www.udacity.com/course/vr-scenes-and-objects--ud1013) - Google VR
 - [Introduction to Virtual Reality](https://www.udacity.com/course/introduction-to-virtual-reality--ud1012) - Google VR
