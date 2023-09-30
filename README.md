@@ -12,7 +12,7 @@
 
 ## Online Courses
 
-- (Ongoing) [Complete Intro to React, v5](https://frontendmasters.com/courses/complete-react-v5/) - Brian Holt (Microsoft)
+- [Complete Intro to React, v5](https://frontendmasters.com/courses/complete-react-v5/) - Brian Holt (Microsoft)
 - [React For Beginners](https://reactforbeginners.com) - Wesley Bos
 - [Advanced React](https://advancedreact.com/) - Wesley Bos
 - [VR Software Development](https://www.udacity.com/course/vr-software-development--ud1014) - Google VR
