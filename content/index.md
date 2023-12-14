@@ -18,6 +18,4 @@
 
 - [[Carl Jung vs CBT]]
 
-[//]: # (Link references)
-
-[Carl Jung vs CBT]: ./posts/2023-12-14_carl_jung_vs_CBT#carl-jung-vs-cbt "Carl Jung vs CBT"
+[Carl Jung vs CBT]: ./posts/2023-12-14_carl_jung_vs_CBT.md
