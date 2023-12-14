@@ -1,7 +1,6 @@
 # Aviral Garg
 
 - [Github](https://github.com/gaviral)
-- [LinkedIn](https://www.linkedin.com/in/aviralgarg/)
 - [TIL][til]
 
 [//]: # (Link References)
