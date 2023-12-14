@@ -4,7 +4,7 @@ Find me on [GitHub](https://github.com/gaviral).
 
 ---
 
-[[Index]] | [[All Posts]]
+[[Index]] [[All Posts]]
 
 [All Posts]: ./content/posts/posts.md
 [Index]: ./content/index.md

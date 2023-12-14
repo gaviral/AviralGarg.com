@@ -31,7 +31,7 @@ Tags: [[Physical Health]] [[Technology]] [[Productivity]] [[User Experience]] [[
 
 ---
 
-[[Index]] | [[All Posts]]
+[[Index]] [[All Posts]]
 
 [Physical Health]: ../index.md#physical-health
 [Technology]: ../index.md#technology

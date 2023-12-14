@@ -17,7 +17,7 @@ Tags: [[Psychology]] [[Carl Jung]] [[Cognitive Behavioral Therapy]] [[Mental Hea
 
 ---
 
-[[Index]] | [[All Posts]]
+[[Index]] [[All Posts]]
 
 [Psychology]: ../index.md#psychology
 [Carl Jung]: ../index.md#carl-jung

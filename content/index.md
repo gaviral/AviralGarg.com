@@ -38,7 +38,7 @@
 
 ---
 
-[[Index]] | [[All Posts]]
+[[Index]] [[All Posts]]
 
 [Carl Jung vs CBT]: ./posts/2023-12-14_carl_jung_vs_CBT.md
 [Dark vs. Light Themes: Finding Your Perfect Match]: ./posts/2023-12-06_dark_vs_light_themes.md
