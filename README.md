@@ -1,5 +1,3 @@
-# Aviral Garg
-
 - [Github](https://github.com/gaviral)
 - [TIL][til]
 
