@@ -15,7 +15,13 @@
 
 Tags: [[Psychology]] [[Carl Jung]] [[Cognitive Behavioral Therapy]] [[Mental Health]]
 
+---
+
+[[Index]] | [[All Posts]]
+
 [Psychology]: ../index.md#psychology
 [Carl Jung]: ../index.md#carl-jung
 [Cognitive Behavioral Therapy]: ../index.md#cognitive-behavioral-therapy
 [Mental Health]: ../index.md#mental-health
+[Index]: ../index.md
+[All Posts]: ./posts.md
