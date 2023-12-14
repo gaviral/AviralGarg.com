@@ -1,6 +1,6 @@
 I'm Avi, a software engineer who enjoys writing about new learnings [here][All Posts].
 
-Find me on [GitHub](https://github.com/gaviral).
+Find me on <a href="https://github.com/gaviral" target="_blank">GitHub</a>.
 
 ---
 
