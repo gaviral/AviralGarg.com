@@ -17,7 +17,7 @@ Tags: [[Psychology]] [[Carl Jung]] [[Cognitive Behavioral Therapy]] [[Mental Hea
 
 [//]: # (Link references)
 
-[Psychology]: ../index.md#psychology "Psychology"
-[Carl Jung]: ../index.md#carl-jung "Carl Jung"
-[Cognitive Behavioral Therapy]: ../index.md#cognitive-behavioral-therapy "Cognitive Behavioral Therapy"
-[Mental Health]: ../index.md#mental-health "Mental Health"
+[Psychology]: ../index#psychology "Psychology"
+[Carl Jung]: ../index#carl-jung "Carl Jung"
+[Cognitive Behavioral Therapy]: ../index#cognitive-behavioral-therapy "Cognitive Behavioral Therapy"
+[Mental Health]: ../index#mental-health "Mental Health"
