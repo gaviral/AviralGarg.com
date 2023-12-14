@@ -5,4 +5,4 @@
 
 [//]: # (Link References)
 
-[til]: ./content/posts/posts.md "Today I Learned"
+[til]: ./content/posts/posts.md#today-i-learned "Today I Learned"
