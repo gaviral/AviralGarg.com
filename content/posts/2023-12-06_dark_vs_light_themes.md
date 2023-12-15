@@ -1,3 +1,7 @@
+[[Home]] | [[Index]] | [[All Posts]]
+
+---
+
 # Dark vs. Light Themes: Finding Your Perfect Match
 
 When deciding between dark and light themes, remember there's no universal solution. Your choice should be influenced by your environment, screen time, and specific eye conditions.
@@ -31,12 +35,11 @@ Tags: [[Ergonomics]] [[Physical Health]] [[Productivity]] [[Technology]] [[User 
 
 ---
 
-[[Index]] [[All Posts]]
-
+[Home]: ../../README.md
+[Index]: ../index.md
+[All Posts]: ./posts.md
 [Ergonomics]: ../index.md#ergonomics
 [Physical Health]: ../index.md#physical-health
 [Productivity]: ../index.md#productivity
 [Technology]: ../index.md#technology
 [User Experience]: ../index.md#user-experience
-[Index]: ../index.md
-[All Posts]: ./posts.md

@@ -1,3 +1,7 @@
+[[Home]] | [[Index]] | [[All Posts]]
+
+---
+
 # Carl Jung vs CBT
 
 [Video](https://www.youtube.com/watch?v=JVUIsYDfBlo)
@@ -17,11 +21,10 @@ Tags: [[Carl Jung]] [[Cognitive Behavioral Therapy]] [[Mental Health]] [[Psychol
 
 ---
 
-[[Index]] [[All Posts]]
-
+[Home]: ../../README.md
+[Index]: ../index.md
+[All Posts]: ./posts.md
 [Carl Jung]: ../index.md#carl-jung
 [Cognitive Behavioral Therapy]: ../index.md#cognitive-behavioral-therapy
 [Mental Health]: ../index.md#mental-health
 [Psychology]: ../index.md#psychology
-[Index]: ../index.md
-[All Posts]: ./posts.md

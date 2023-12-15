@@ -1,3 +1,7 @@
+[[Home]] | [[Index]] | [[All Posts]]
+
+---
+
 ## How Good Was Your Apology?
 
 ```
@@ -25,12 +29,11 @@ Tags: [[Communication]] [[Emotions]] [[Psychology]] [[Relationships]] [[Self-Imp
 
 ---
 
-[[Index]] [[All Posts]]
-
+[Home]: ../../README.md
+[Index]: ../index.md
+[All Posts]: ./posts.md
 [Communication]: ../index.md#communication
 [Emotions]: ../index.md#emotions
 [Psychology]: ../index.md#psychology
 [Relationships]: ../index.md#relationships
 [Self-Improvement]: ../index.md#self-improvement
-[Index]: ../index.md
-[All Posts]: ./posts.md

@@ -1,3 +1,7 @@
+[[Home]] | [[Index]] | [[All Posts]]
+
+---
+
 # Adler's Approach to Psychology
 
 Alfred Adler's approach to psychology, forming one of the pillars alongside Freud and Jung, is known for its focus on individual psychology. Here are the key aspects:
@@ -30,11 +34,10 @@ Tags: [[Alfred Adler]] [[Mental Health]] [[Psychology]] [[Social Interest]]
 
 ---
 
-[[Index]] [[All Posts]]
-
+[Home]: ../../README.md
+[Index]: ../index.md
+[All Posts]: ./posts.md
 [Alfred Adler]: ../index.md#alfred-adler
 [Mental Health]: ../index.md#mental-health
 [Psychology]: ../index.md#psychology
 [Social Interest]: ../index.md#social-interest
-[Index]: ../index.md
-[All Posts]: ./posts.md
