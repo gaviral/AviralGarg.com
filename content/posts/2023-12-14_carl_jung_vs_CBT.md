@@ -13,15 +13,15 @@
 - **Critique of CBT's Methodology**: The video criticizes CBT for its focus on changing thoughts and behaviors without understanding the underlying dynamics. It suggests that CBT fails to appreciate the complexity of human psychology.
 - **Advocacy for Jungian Approaches**: The speakers advocate for Jungian therapy, highlighting its focus on naturalistic, psychodynamic approaches that respect and integrate all aspects of the psyche.
 
-Tags: [[Psychology]] [[Carl Jung]] [[Cognitive Behavioral Therapy]] [[Mental Health]]
+Tags: [[Carl Jung]] [[Cognitive Behavioral Therapy]] [[Mental Health]] [[Psychology]]
 
 ---
 
 [[Index]] [[All Posts]]
 
-[Psychology]: ../index.md#psychology
 [Carl Jung]: ../index.md#carl-jung
 [Cognitive Behavioral Therapy]: ../index.md#cognitive-behavioral-therapy
 [Mental Health]: ../index.md#mental-health
+[Psychology]: ../index.md#psychology
 [Index]: ../index.md
 [All Posts]: ./posts.md
