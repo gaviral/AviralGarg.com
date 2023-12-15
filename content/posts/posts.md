@@ -1,4 +1,4 @@
-[Home] | [Index] | [All Posts]
+[Home] \| [Index] \| [All Posts]
 
 ---
 
