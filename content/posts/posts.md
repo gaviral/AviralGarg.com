@@ -13,7 +13,7 @@ This is a collection of small things I learn every day across a variety of domai
 - 2023-12-14: [Carl Jung vs CBT]
 - 2023-12-06: [Dark vs. Light Themes: Finding Your Perfect Match]
 
-## Book Notes
+## Books
 
 - [The Courage to Be Disliked]
 
