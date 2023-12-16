@@ -1,11 +1,6 @@
-# Avi's Notes: The Courage to Be Disliked
+# The Courage to Be Disliked
 
-<img src="./books/the_courage_to_be_disliked/intro.jpg" alt="The Courage to Be Disliked" width="200"/>
-
-## Key Points
-
-<!-- TODO -->
-coming soon...
+![The Courage to Be Disliked]
 
 ## Authors' Note
 
