@@ -2,7 +2,7 @@
 
 ---
 
-## How Good Was Your Apology?
+# How Good Was Your Apology?
 
 ```
 Did you...
