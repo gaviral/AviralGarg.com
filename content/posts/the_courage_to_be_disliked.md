@@ -37,7 +37,7 @@ YOUTH: A moment ago, you used the words “another philosophy,” but I’ve
 heard that your specialty is in Greek philosophy.
 
 PHILOSOPHER: Yes, Greek philosophy has been central to my life ever since I was
-a teenager. The great intellectual gures: Socrates, Plato, Aristotle. I am
+a teenager. The great intellectual gurus: Socrates, Plato, Aristotle. I am
 translating a work by Plato at the moment, and I expect to spend the rest of my
 life studying classical Greek thought.
 

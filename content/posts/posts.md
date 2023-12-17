@@ -23,6 +23,7 @@ This is a collection of small things I learn every day across a variety of domai
 [Home]: ../../README.md
 [Index]: ../index.md
 [All Posts]: ./posts.md
+[Prominent Members of the Vienna Psychoanalytic Society]: ./2023-12-17_prominent_members_of_vienna_psychoanalutic_society.md
 [How Good Was Your Apology?]: ./2023-12-15_how_good_was_your_apology.md
 [Adler's Approach to Psychology]: ./2023-12-15_adlers_approach_to_psychology.md
 [Carl Jung vs CBT]: ./2023-12-14_carl_jung_vs_CBT.md
