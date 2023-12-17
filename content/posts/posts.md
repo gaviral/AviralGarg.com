@@ -8,6 +8,7 @@ This is a collection of small things I learn every day across a variety of domai
 
 ## TILs
 
+- 2023-12-17: [Prominent Members of the Vienna Psychoanalytic Society]
 - 2023-12-15: [How Good Was Your Apology?]
 - 2023-12-15: [Adler's Approach to Psychology]
 - 2023-12-14: [Carl Jung vs CBT]
