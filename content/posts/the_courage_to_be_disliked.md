@@ -8,25 +8,25 @@
 Adlerian psychology enjoys a broad base of support in Europe and the United States, and presents simple and straightforward answers to the philosophical question: How can one be happy? Adlerian psychology might hold the key. Reading this book could change your life. Now, let us accompany the young man and venture beyond the “door.” -->
 
 - **Author's Statement**:
-  - **Psychology Giants**: Sigmund Freud, Carl Jung, Alfred Adler
-  - **Book Focus**: Adler's ideas and teachings
-    - Format: Narrative dialogue between philosopher and young man
-  - **Adlerian Psychology**:
-    - Popular in Europe and US
-    - Answers question: How to achieve happiness?
-  - **Impact**: Reading the book could be life-changing
+    - **Psychology Giants**: Sigmund Freud, Carl Jung, Alfred Adler
+    - **Book Focus**: Adler's ideas and teachings
+        - Format: Narrative dialogue between philosopher and young man
+    - **Adlerian Psychology**:
+        - Popular in Europe and US
+        - Answers question: How to achieve happiness?
+    - **Impact**: Reading the book could be life-changing
 
 ## Prologue
 
 <!-- On the outskirts of the thousand-year-old city lived a philosopher who taught that the world was simple and that happiness was within the reach of every man, instantly. A young man who was dissatisfied with life went to visit this philosopher to get to the heart of the matter. This youth found the world a chaotic mass of contradictions and, in his anxious eyes, any notion of happiness was completely absurd. -->
 
 - **Story Setup**:
-  - **Philosopher's Teachings**: Life's simplicity and instant happiness
-    - Location: Outskirts of a thousand-year-old city
-  - **Young Man's Quest**:
-    - Dissatisfied with life
-    - Visits philosopher for clarity
-    - Views world as chaotic, happiness as absurd
+    - **Philosopher's Teachings**: Life's simplicity and instant happiness
+        - Location: Outskirts of a thousand-year-old city
+    - **Young Man's Quest**:
+        - Dissatisfied with life
+        - Visits philosopher for clarity
+        - Views world as chaotic, happiness as absurd
 
 ---
 
@@ -74,7 +74,6 @@ proposed an “individual psychology” based on his own original theories.
             - **Adler**: Original member of Vienna Psychoanalytic Society
                 - Led by Freud, included Jung
                 - Developed "individual psychology" after splitting from group
-
 
 ---
 
