@@ -79,4 +79,4 @@ proposed an “individual psychology” based on his own original theories.
 
 [//]: # (Link References)
 
-[The Courage to Be Disliked]: ./books/the_courage_to_be_disliked/intro.jpg
+[The Courage to Be Disliked]: ./intro.jpg
