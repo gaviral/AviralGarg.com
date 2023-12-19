@@ -8,6 +8,7 @@ This is a collection of small things I learn every day across a variety of domai
 
 ## TILs
 
+- 2023-12-19: [Badminton]
 - 2023-12-17: [Prominent Members of the Vienna Psychoanalytic Society]
 - 2023-12-15: [How Good Was Your Apology?]
 - 2023-12-15: [Adler's Approach to Psychology]
@@ -23,6 +24,7 @@ This is a collection of small things I learn every day across a variety of domai
 [Home]: ../../README.md
 [Index]: ../index.md
 [All Posts]: ./posts.md
+[Badminton]: ./2023-12-19_badminton.md
 [Prominent Members of the Vienna Psychoanalytic Society]: ./2023-12-17_prominent_members_of_vienna_psychoanalutic_society.md
 [How Good Was Your Apology?]: ./2023-12-15_how_good_was_your_apology.md
 [Adler's Approach to Psychology]: ./2023-12-15_adlers_approach_to_psychology.md
