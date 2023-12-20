@@ -9,6 +9,7 @@ This is a collection of small things I learn every day across a variety of domai
 ## TILs
 
 - 2023-12-19: Deep dive: [Badminton]
+- 2023-12-18: [Three Waves of Psychotherapy]
 - 2023-12-17: [Prominent Members of the Vienna Psychoanalytic Society]
 - 2023-12-16: Deep dive: [The Courage to Be Disliked]
 - 2023-12-15: [How Good Was Your Apology?]
@@ -32,6 +33,7 @@ This is a collection of small things I learn every day across a variety of domai
 [Index]: ../index.md
 [All Posts]: ./posts.md
 [Badminton]: ./2023-12-19_badminton.md
+[Three Waves of Psychotherapy]: ./2023-12-18_three_waves_of_psychotherapy.md
 [Prominent Members of the Vienna Psychoanalytic Society]: ./2023-12-17_prominent_members_of_vienna_psychoanalutic_society.md
 [The Courage to Be Disliked]: ./books/the_courage_to_be_disliked/notes.md
 [How Good Was Your Apology?]: ./2023-12-15_how_good_was_your_apology.md

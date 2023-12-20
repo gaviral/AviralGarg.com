@@ -25,6 +25,11 @@
 ## Cognitive Behavioral Therapy
 
 - [Carl Jung vs CBT]
+- [Three Waves of Psychotherapy]
+
+## Cognitive Therapy
+
+- [Three Waves of Psychotherapy]
 
 ## Communication
 
@@ -45,6 +50,7 @@
 ## History
 
 - [Prominent Members of the Vienna Psychoanalytic Society]
+- [Three Waves of Psychotherapy]
 
 ## Learning
 
@@ -75,6 +81,11 @@
 - [How Good Was Your Apology?]
 - [Adler's Approach to Psychology]
 - [Prominent Members of the Vienna Psychoanalytic Society]
+- [Three Waves of Psychotherapy]
+
+## Psychotherapy
+
+- [Three Waves of Psychotherapy]
 
 ## Relationships
 
@@ -100,6 +111,10 @@
 
 - [Dark vs. Light Themes: Finding Your Perfect Match]
 
+## Third Wave Therapies
+
+- [Three Waves of Psychotherapy]
+
 ## User Experience
 
 - [Dark vs. Light Themes: Finding Your Perfect Match]
@@ -114,6 +129,7 @@
 [Index]: ./index.md
 [All Posts]: ./posts/posts.md
 [Badminton]: ./posts/2023-12-19_badminton.md
+[Three Waves of Psychotherapy]: ./posts/2023-12-18_three_waves_of_psychotherapy.md
 [Prominent Members of the Vienna Psychoanalytic Society]: ./posts/2023-12-17_prominent_members_of_vienna_psychoanalutic_society.md
 [How Good Was Your Apology?]: ./posts/2023-12-15_how_good_was_your_apology.md
 [Adler's Approach to Psychology]: ./posts/2023-12-15_adlers_approach_to_psychology.md
