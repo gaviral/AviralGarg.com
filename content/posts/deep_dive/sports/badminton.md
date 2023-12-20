@@ -82,11 +82,11 @@ Tags: [[Badminton]] [[Learning]] [[Physical Health]] [[Productivity]] [[Sports]]
 
 ---
 
-[Home]: ../../README.md
-[Index]: ../index.md
-[All Posts]: ./posts.md
-[Badminton]: ../index.md#badminton
-[Learning]: ../index.md#learning
-[Physical Health]: ../index.md#physical-health
-[Productivity]: ../index.md#productivity
-[Sports]: ../index.md#sports
+[Home]: ../../../../README.md
+[Index]: ../../../index.md
+[All Posts]: ../../posts.md
+[Badminton]: ../../../index.md#badminton
+[Learning]: ../../../index.md#learning
+[Physical Health]: ../../../index.md#physical-health
+[Productivity]: ../../../index.md#productivity
+[Sports]: ../../../index.md#sports

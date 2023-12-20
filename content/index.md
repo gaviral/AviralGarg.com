@@ -128,11 +128,11 @@
 [Home]: ../README.md
 [Index]: ./index.md
 [All Posts]: ./posts/posts.md
-[Badminton]: ./posts/2023-12-19_badminton.md
+[Badminton]: ./posts/deep_dive/sports/badminton.md
 [Three Waves of Psychotherapy]: ./posts/2023-12-18_three_waves_of_psychotherapy.md
 [Prominent Members of the Vienna Psychoanalytic Society]: ./posts/2023-12-17_prominent_members_of_the_vienna_psychoanalytic_society.md
 [How Good Was Your Apology?]: ./posts/2023-12-15_how_good_was_your_apology.md
 [Adler's Approach to Psychology]: ./posts/2023-12-15_adlers_approach_to_psychology.md
 [Carl Jung vs CBT]: ./posts/2023-12-14_carl_jung_vs_CBT.md
 [Dark vs. Light Themes: Finding Your Perfect Match]: ./posts/2023-12-06_dark_vs_light_themes.md
-[The Courage to Be Disliked]: ./posts/books/the_courage_to_be_disliked/notes.md
+[The Courage to Be Disliked]: ./posts/deep_dive/books/the_courage_to_be_disliked/notes.md

@@ -32,10 +32,10 @@ This is a collection of small things I learn every day across a variety of domai
 [Home]: ../../README.md
 [Index]: ../index.md
 [All Posts]: ./posts.md
-[Badminton]: ./2023-12-19_badminton.md
+[Badminton]: ./deep_dive/sports/badminton.md
 [Three Waves of Psychotherapy]: ./2023-12-18_three_waves_of_psychotherapy.md
 [Prominent Members of the Vienna Psychoanalytic Society]: ./2023-12-17_prominent_members_of_the_vienna_psychoanalytic_society.md
-[The Courage to Be Disliked]: ./books/the_courage_to_be_disliked/notes.md
+[The Courage to Be Disliked]: ./deep_dive/books/the_courage_to_be_disliked/notes.md
 [How Good Was Your Apology?]: ./2023-12-15_how_good_was_your_apology.md
 [Adler's Approach to Psychology]: ./2023-12-15_adlers_approach_to_psychology.md
 [Carl Jung vs CBT]: ./2023-12-14_carl_jung_vs_CBT.md
