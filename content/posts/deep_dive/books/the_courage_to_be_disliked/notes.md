@@ -43,7 +43,7 @@ In [this not], the authors set the stage for a transformative exploration of Adl
 
 ## Introduction
 
-### Intro - 1
+### Exploring Life's Simplicity: The Youth's Initial Challenge
 
 <!--
 YOUTH: I want to ask you once again; you do believe that the world is, in all ways, a simple place?
@@ -69,7 +69,7 @@ PHILOSOPHER: No, I would welcome the opportunity. I have been hoping to hear fro
 
 ---
 
-### Intro - 2
+### From Childhood Innocence to Adult Realities: The Youth's Perspective
 
 <!-- 
 YOUTH: Thanks. I do not intend to dismiss you out of hand. I will take your views into consideration and then look at the possibilities that present themselves. ‘The world is simple and life is simple, too’—if there is anything in this thesis that might contain truth, it would be life from a child’s point of view. Children do not have any obvious duties, like paying taxes or going to work. They are protected by their parents and society, and can spend days free from care. They can imagine a future that goes on forever and do whatever they want. They don’t have to see grim reality—they are blindfolded. So, to them the world must have a simple form. However, as a child matures to adulthood the world reveals its true nature. Very shortly, the child will know how things really are and what he is really allowed to do. His opinion will alter and all he will see is impossibility. His romantic view will end and be replaced by cruel realism.
