@@ -19,7 +19,7 @@ Adlerian psychology enjoys a broad base of support in Europe and the United Stat
     - **Potential Influence**: Suggests that the insights within could be life-altering.
     - **Reader's Journey**: Invites readers to delve into the dialogue and explore beyond conventional thinking.
 
-In this note, the authors set the stage for a transformative exploration of Adler's ideas, framed through a compelling dialogue. The book not only reflects on the legacies of Freud, Jung, and Adler but also promises to offer clear, applicable insights into achieving happiness, suggesting a profound impact on its readers.
+In [this note](https://archive.org/details/the-courage-to-be-disliked-how-to-change-your-life-and-achieve-real-happiness/page/n7/mode/1up), the authors set the stage for a transformative exploration of Adler's ideas, framed through a compelling dialogue. The book not only reflects on the legacies of Freud, Jung, and Adler but also promises to offer clear, applicable insights into achieving happiness, suggesting a profound impact on its readers.
 
 ---
 
@@ -37,7 +37,7 @@ In this note, the authors set the stage for a transformative exploration of Adle
     - **Youth's View of the World**: Sees it as filled with contradictions and chaos.
     - **Happiness**: Perceived by the youth as a far-fetched, absurd concept.
 
-This prologue introduces us to a classic philosophical setting where a young man, grappling with life's complexities, seeks wisdom from a philosopher known for his unconventional yet simple views on life and happiness. It paints a picture of a thought-provoking journey into the depths of human understanding and happiness through Adlerian psychology.
+[This prologue](https://archive.org/details/the-courage-to-be-disliked-how-to-change-your-life-and-achieve-real-happiness/page/n8/mode/1up) introduces us to a classic philosophical setting where a young man grappling with life’s complexities seeks wisdom from a philosopher known for his unconventional yet straightforward views on life and happiness. Through Adlerian psychology, it paints a picture of a thought-provoking journey into the depths of human understanding and happiness.
 
 ---
 
@@ -63,7 +63,7 @@ PHILOSOPHER: No, I would welcome the opportunity. I have been hoping to hear fro
     - **Youth's Strategy**: To argue against and seek flaws in the philosopher's views.
     - **Philosopher's Stance**: Open to discussion, looking forward to learning from the youth's point of view.
 
-This introduction sets up a dialogue between a questioning youth and an optimistic philosopher, delving into the complexities of life through Adlerian psychology.
+[This introduction](https://archive.org/details/the-courage-to-be-disliked-how-to-change-your-life-and-achieve-real-happiness/page/n9/mode/1up) sets up a dialogue between a questioning youth and an optimistic philosopher, delving into the complexities of life through Adlerian psychology.
 
 ---
 
