@@ -67,8 +67,6 @@ PHILOSOPHER: No, I would welcome the opportunity. I have been hoping to hear fro
 
 [This introduction] sets up a dialogue between a questioning youth and an optimistic philosopher, delving into the complexities of life through Adlerian psychology.
 
----
-
 ### From Childhood Innocence to Adult Realities: The Youth's Perspective
 
 <!-- 
