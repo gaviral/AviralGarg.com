@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f05e1f0-a2f4-4675-aa07-f69e445637eb" name="Changes" comment="gh-pages.yaml and more...">
-      <change beforePath="$PROJECT_DIR$/hugo.yaml" beforeDir="false" />
+    <list default="true" id="0f05e1f0-a2f4-4675-aa07-f69e445637eb" name="Changes" comment="add .idea files and remove hugo.yaml from roote dir">
+      <change beforePath="$PROJECT_DIR$/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/posts/my-first-post.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/posts/my-first-post.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +60,7 @@
       <option name="presentableId" value="Default" />
       <updated>1703312285062</updated>
       <workItem from="1703312287123" duration="462000" />
-      <workItem from="1703312881482" duration="2093000" />
+      <workItem from="1703312881482" duration="2356000" />
     </task>
     <task id="LOCAL-00001" summary="reset">
       <option name="closed" value="true" />
@@ -149,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703316498778</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="add .idea files and remove hugo.yaml from roote dir">
+      <option name="closed" value="true" />
+      <created>1703316870168</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1703316870168</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,6 +184,7 @@
     <MESSAGE value="Initial config files" />
     <MESSAGE value="Initial post testing" />
     <MESSAGE value="gh-pages.yaml and more..." />
-    <option name="LAST_COMMIT_MESSAGE" value="gh-pages.yaml and more..." />
+    <MESSAGE value="add .idea files and remove hugo.yaml from roote dir" />
+    <option name="LAST_COMMIT_MESSAGE" value="add .idea files and remove hugo.yaml from roote dir" />
   </component>
 </project>
