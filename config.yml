@@ -20,7 +20,7 @@ params:
   description: "Aviral Garg's website"
   keywords: [Avi, Aviral, Garg, Aviral Garg, aviralgarg, aviralgarg.com, aviralgarg.github.io, aviralgarg.github.com]
   author: Aviral Garg
-  images: ["https://aviralgarg.com/images/profile.jpg, https://aviralgarg.com/images/profile.jpg"]
+  # images: ["https://aviralgarg.com/images/profile.jpg, https://aviralgarg.com/images/profile.jpg"]
   DateFormat: "Jan 2, 2006"
   defaultTheme: dark # auto, dark, light
   disableThemeToggle: false
@@ -45,10 +45,10 @@ params:
     # disableHLJS: true # to disable highlight.js
     # disableFingerprinting: true
     favicon: "/images/profile.jpg"
-    favicon16x16: "https://aviralgarg.com/images/profile.jpg"
-    favicon32x32: "https://aviralgarg.com/images/profile.jpg"
-    apple_touch_icon: "https://aviralgarg.com/images/profile.jpg"
-    safari_pinned_tab: "https://aviralgarg.com/images/profile.jpg"
+    favicon16x16: "/images/profile.jpg"
+    favicon32x32: "/images/profile.jpg"
+    apple_touch_icon: "/images/profile.jpg"
+    safari_pinned_tab: "/images/profile.jpg"
 
   label:
     text: "Home"
