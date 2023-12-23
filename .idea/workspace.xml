@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f05e1f0-a2f4-4675-aa07-f69e445637eb" name="Changes" comment="added past posts">
-      <change afterPath="$PROJECT_DIR$/content/posts/2023-12-06_dark_vs_light_themes.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/content/posts/2023-12-14_carl_jung_vs_CBT.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/content/posts/2023-12-15_adlers_approach_to_psychology.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/content/posts/2023-12-15_how_good_was_your_apology.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/content/posts/2023-12-17_prominent_members_of_the_vienna_psychoanalytic_society.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/content/posts/2023-12-18_three_waves_of_psychotherapy.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/content/posts/deep_dive/sports/badminton.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/_gen/images/profile_hua1dce7cc5644c40a51d5d49ac7a0c8fe_738841_0x35_resize_q75_box.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/_gen/images/profile_hua1dce7cc5644c40a51d5d49ac7a0c8fe_738841_120x120_resize_q75_box.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/posts/my-first-post.md" beforeDir="false" />
+    <list default="true" id="0f05e1f0-a2f4-4675-aa07-f69e445637eb" name="Changes" comment="minor config changes">
       <change beforePath="$PROJECT_DIR$/themes/PaperMod" beforeDir="false" afterPath="$PROJECT_DIR$/themes/PaperMod" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +59,7 @@
       <option name="presentableId" value="Default" />
       <updated>1703312285062</updated>
       <workItem from="1703312287123" duration="462000" />
-      <workItem from="1703312881482" duration="4157000" />
+      <workItem from="1703312881482" duration="4393000" />
     </task>
     <task id="LOCAL-00001" summary="reset">
       <option name="closed" value="true" />
@@ -201,7 +189,23 @@
       <option name="project" value="LOCAL" />
       <updated>1703319047268</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="added past posts">
+      <option name="closed" value="true" />
+      <created>1703321272851</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1703321272851</updated>
+    </task>
+    <task id="LOCAL-00018" summary="minor config changes">
+      <option name="closed" value="true" />
+      <created>1703321561166</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1703321561166</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,6 +237,7 @@
     <MESSAGE value="http to https issue resolution attempt" />
     <MESSAGE value="change to default mode" />
     <MESSAGE value="added past posts" />
-    <option name="LAST_COMMIT_MESSAGE" value="added past posts" />
+    <MESSAGE value="minor config changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor config changes" />
   </component>
 </project>
