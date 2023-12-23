@@ -58,7 +58,7 @@ params:
 
   # profile-mode
   profileMode:
-    enabled: true # needs to be explicitly set
+    enabled: false # needs to be explicitly set
     title: Aviral Garg
     subtitle: Software Engineer
     imageUrl: "/images/profile.jpg"
