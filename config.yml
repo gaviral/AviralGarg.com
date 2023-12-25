@@ -15,32 +15,32 @@ minify:
   minifyOutput: true
 
 params:
-  env: production # to enable google analytics, opengraph, twitter-cards and schema.
+  env: production # to enable Google Analytics, opengraph, twitter-cards and schema.
   title: Aviral Garg
   description: "Aviral Garg's website"
   keywords: ["Aviral Garg", "Aviral", "Garg", "Software Engineer"]
   author: Aviral Garg
   # author: ["Me", "You"] # multiple authors
   images: ["images/profile.jpg"]
-  DateFormat: "January 2, 2006"
-  defaultTheme: dark # auto, light
+  DateFormat: "Jan 2, 2006"
+  defaultTheme: light # auto, dark, light
   disableThemeToggle: false
 
-  ShowReadingTime: true
+  ShowReadingTime: false
   ShowShareButtons: true
-  ShowPostNavLinks: true
+  ShowPostNavLinks: false
   ShowBreadCrumbs: true
-  ShowCodeCopyButtons: false
-  ShowWordCount: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: false
   ShowRssButtonInSectionTermList: true
   UseHugoToc: true
-  disableSpecial1stPost: false
+  disableSpecial1stPost: true
   disableScrollToTop: false
   comments: false
   hidemeta: false
-  hideSummary: false
-  showtoc: false
-  tocopen: false
+  hideSummary: true
+  showtoc: true
+  tocopen: true
 
   assets:
     # disableHLJS: true # to disable highlight.js
@@ -53,8 +53,8 @@ params:
 
   label:
     text: "Home"
-    icon: /images/profile.jpg
-    iconHeight: 35
+#    icon: /images/profile.jpg
+#    iconHeight: 35
 
   # profile-mode
   profileMode:
