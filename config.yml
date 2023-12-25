@@ -1,6 +1,6 @@
 baseURL: "https://aviralgarg.com/"
 title: Aviral Garg
-paginate: 7
+paginate: 5
 theme: PaperMod
 
 enableRobotsTXT: true
