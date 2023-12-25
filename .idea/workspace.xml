@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f05e1f0-a2f4-4675-aa07-f69e445637eb" name="Changes" comment="fix: add details to config.yml">
+    <list default="true" id="0f05e1f0-a2f4-4675-aa07-f69e445637eb" name="Changes" comment="fix: modify details in config.yml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/_gen/images/profile_hua1dce7cc5644c40a51d5d49ac7a0c8fe_738841_0x35_resize_q75_box.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/_gen/images/profile_hua1dce7cc5644c40a51d5d49ac7a0c8fe_738841_120x120_resize_q75_box.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +61,7 @@
       <updated>1703312285062</updated>
       <workItem from="1703312287123" duration="462000" />
       <workItem from="1703312881482" duration="4393000" />
-      <workItem from="1703475866749" duration="2263000" />
+      <workItem from="1703475866749" duration="3138000" />
     </task>
     <task id="LOCAL-00001" summary="reset">
       <option name="closed" value="true" />
@@ -225,7 +223,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703476129055</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="fix: modify details in config.yml">
+      <option name="closed" value="true" />
+      <created>1703479724336</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1703479724336</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,6 +266,7 @@
     <MESSAGE value="minor config changes" />
     <MESSAGE value="rest config.yl" />
     <MESSAGE value="fix: add details to config.yml" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: add details to config.yml" />
+    <MESSAGE value="fix: modify details in config.yml" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: modify details in config.yml" />
   </component>
 </project>
