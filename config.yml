@@ -14,6 +14,12 @@ minify:
   disableXML: true
   minifyOutput: true
 
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # is necessary for the search feature
+
 params:
   env: production # to enable Google Analytics, opengraph, twitter-cards and schema.
   title: Aviral Garg
@@ -122,6 +128,10 @@ menu:
       name: tags
       url: /tags/
       weight: 20
+    - identifier: search
+      name: search
+      url: /search/
+      weight: 30
     # - identifier: example
     #   name: example.org
     #   url: https://example.org
