@@ -1,7 +1,7 @@
 +++
-title = 'Sports: Badminton'
+title = 'Badminton'
 date = 2023-12-15T23:13:41-08:00
-draft = false
+draft = true
 tags = ['Badminton', 'Learning', 'Physical Health', 'Productivity', 'Sports']
 +++
 

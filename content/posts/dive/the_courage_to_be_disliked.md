@@ -1,5 +1,5 @@
 +++
-title = 'Book: The Courage to Be Disliked'
+title = 'The Courage to Be Disliked'
 date = 2023-12-22T23:13:41-08:00
 draft = true
 tags = ['Alfred Adler', 'Carl Jung', 'Psychology', 'Sigmund Freud']
