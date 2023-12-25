@@ -4,120 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f05e1f0-a2f4-4675-aa07-f69e445637eb" name="Changes" comment="fix: add theme">
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/common/404.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/common/archive.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/common/footer.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/common/header.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/common/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/common/post-entry.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/common/post-single.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/common/profile-mode.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/common/search.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/common/terms.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/core/license.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/core/reset.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/core/theme-vars.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/core/zmedia.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/extended/blank.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/hljs/an-old-hope.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/css/includes/scroll-bar.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/js/fastsearch.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/js/fuse.basic.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/js/highlight.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/assets/js/license.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/go.mod" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/ar.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/be.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/bg.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/bn.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/ca.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/ckb.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/cs.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/da.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/de.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/el.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/en.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/eo.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/es.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/fa.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/fr.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/he.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/hi.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/hr.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/hu.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/id.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/it.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/ja.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/ko.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/ku.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/mn.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/ms.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/nl.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/no.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/pl.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/pt.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/ro.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/ru.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/sv.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/sw.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/th.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/tr.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/uk.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/uz.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/vi.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/zh-tw.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/i18n/zh.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/images/screenshot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/images/tn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/404.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/_default/_markup/render-image.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/_default/archives.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/_default/baseof.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/_default/index.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/_default/list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/_default/rss.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/_default/search.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/_default/single.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/_default/terms.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/anchored_headings.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/author.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/breadcrumbs.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/comments.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/cover.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/edit_post.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/extend_footer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/extend_head.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/footer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/head.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/header.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/home_info.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/index_profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/post_canonical.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/post_meta.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/post_nav_links.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/share_icons.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/social_icons.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/svg.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/templates/opengraph.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/templates/schema_json.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/templates/twitter_cards.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/toc.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/partials/translation_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/shortcodes/collapse.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/shortcodes/figure.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/shortcodes/inTextImg.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/shortcodes/ltr.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/shortcodes/rawhtml.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/layouts/shortcodes/rtl.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/PaperMod/theme.toml" afterDir="false" />
+    <list default="true" id="0f05e1f0-a2f4-4675-aa07-f69e445637eb" name="Changes" comment="fix: draft -&gt; final version">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/archetypes/default.md" beforeDir="false" afterPath="$PROJECT_DIR$/archetypes/default.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/content/posts/2023-12-06_dark_vs_light_themes.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/posts/2023-12-06_dark_vs_light_themes.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/posts/2023-12-14_carl_jung_vs_CBT.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/posts/2023-12-14_carl_jung_vs_CBT.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/posts/2023-12-15_adlers_approach_to_psychology.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/posts/2023-12-15_adlers_approach_to_psychology.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/posts/2023-12-15_how_good_was_your_apology.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/posts/2023-12-15_how_good_was_your_apology.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/posts/2023-12-17_prominent_members_of_the_vienna_psychoanalytic_society.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/posts/2023-12-17_prominent_members_of_the_vienna_psychoanalytic_society.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/posts/2023-12-18_three_waves_of_psychotherapy.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/posts/2023-12-18_three_waves_of_psychotherapy.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/content/posts/deep_dive/books/the_courage_to_be_disliked/the_courage_to_be_disliked.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/posts/deep_dive/books/the_courage_to_be_disliked/the_courage_to_be_disliked.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/content/posts/deep_dive/sports/badminton.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/posts/deep_dive/sports/badminton.md" afterDir="false" />
     </list>
@@ -178,7 +74,7 @@
       <workItem from="1703312881482" duration="4393000" />
       <workItem from="1703475866749" duration="3772000" />
       <workItem from="1703482018414" duration="6000" />
-      <workItem from="1703482032957" duration="22000" />
+      <workItem from="1703482032957" duration="359000" />
     </task>
     <task id="LOCAL-00001" summary="reset">
       <option name="closed" value="true" />
@@ -356,7 +252,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703480499154</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="fix: add theme back">
+      <option name="closed" value="true" />
+      <created>1703482133208</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1703482133208</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -395,6 +299,8 @@
     <MESSAGE value="rest config.yl" />
     <MESSAGE value="fix: add details to config.yml" />
     <MESSAGE value="fix: modify details in config.yml" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: modify details in config.yml" />
+    <MESSAGE value="fix: add theme back" />
+    <MESSAGE value="fix: draft -&gt; final version" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: draft -&gt; final version" />
   </component>
 </project>
