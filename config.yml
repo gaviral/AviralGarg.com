@@ -65,11 +65,11 @@ params:
     imageWidth: 120
     imageHeight: 120
     imageTitle: Aviral Garg
-    buttons:
-      - name: Posts
-        url: posts
-      - name: Tags
-        url: tags
+    # buttons:
+    #   - name: Posts
+    #     url: posts
+    #   - name: Tags
+    #     url: tags
 
   # home-info mode
 #  homeInfoParams:
