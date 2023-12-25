@@ -5,8 +5,6 @@ draft = false
 tags = ['Communication', 'Emotions', 'Psychology', 'Relationships', 'Self-Improvement']
 +++
 
-# How Good Was Your Apology?
-
 ```
 Did you...
 

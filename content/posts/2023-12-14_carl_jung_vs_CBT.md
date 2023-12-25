@@ -5,9 +5,11 @@ draft = false
 tags = ['Carl Jung', 'Cognitive Behavioral Therapy', 'Mental Health', 'Psychology']
 +++
 
-# Carl Jung vs CBT
-
 [Video](https://www.youtube.com/watch?v=JVUIsYDfBlo)
+
+<!-- html version where link opens in a new tab -->
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JVUIsYDfBlo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen target="_blank"></iframe>
 
 ## Key Insights
 

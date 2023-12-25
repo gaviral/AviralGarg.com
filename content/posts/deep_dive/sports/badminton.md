@@ -5,8 +5,6 @@ draft = false
 tags = ['Badminton', 'Learning', 'Physical Health', 'Productivity', 'Sports']
 +++
 
-# Badminton
-
 ## Levels of Play
 
 ### Level 1 (Beginner)

@@ -1,11 +1,9 @@
 +++
-title = 'Adlers Approach to Psychology'
+title = 'Adler Approach to Psychology'
 date = 2023-12-15T23:13:41-08:00
 draft = false
 tags = ['Alfred Adler', 'Mental Health', 'Psychology', 'Social Interest']
 +++
-
-# Adler's Approach to Psychology
 
 Alfred Adler's approach to psychology, forming one of the pillars alongside Freud and Jung, is known for its focus on individual psychology. Here are the key aspects:
 

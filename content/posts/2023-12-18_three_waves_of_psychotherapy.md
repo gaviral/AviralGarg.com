@@ -5,8 +5,6 @@ draft = false
 tags = ['Cognitive Behavioral Therapy', 'Cognitive Therapy', 'History', 'Psychology', 'Psychotherapy', 'Third Wave Therapies']
 +++
 
-# Three Waves of Psychotherapy
-
 ## Introduction
 
 The three waves of psychotherapy are:

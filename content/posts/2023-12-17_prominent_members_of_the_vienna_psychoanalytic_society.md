@@ -5,8 +5,6 @@ draft = false
 tags = ['Alfred Adler', 'Anna Freud', 'Carl Jung', 'Ernest Jones', 'History', 'Otto Rank', 'Psychology', 'Sigmund Freud', 'Wilhelm Reich']
 +++
 
-# Prominent Members of the Vienna Psychoanalytic Society
-
 The Vienna Psychoanalytic Society, founded by Sigmund Freud in 1902, was an influential organization in the early development of psychoanalysis. While it had many members over the years, some of the most popular and prominent members, in addition to Freud himself, included:
 
 ## Carl Jung

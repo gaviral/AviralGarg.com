@@ -5,8 +5,6 @@ draft = false
 tags = ['Ergonomics', 'Physical Health', 'Productivity', 'Technology', 'User Experience']
 +++
 
-# Dark vs. Light Themes: Finding Your Perfect Match
-
 When deciding between dark and light themes, remember there's no universal solution. Your choice should be influenced by your environment, screen time, and specific eye conditions.
 
 ## Advantages of Dark Themes
