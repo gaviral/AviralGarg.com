@@ -1,7 +1,7 @@
 +++
 title = 'Carl Jung vs CBT'
 date = 2023-12-14T23:13:41-08:00
-draft = true
+draft = false
 tags = ['Carl Jung', 'Cognitive Behavioral Therapy', 'Mental Health', 'Psychology']
 +++
 

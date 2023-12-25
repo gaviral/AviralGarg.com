@@ -1,13 +1,13 @@
 +++
 title = 'Book: The Courage to Be Disliked'
 date = 2023-12-22T23:13:41-08:00
-draft = true
+draft = false
 tags = ['Alfred Adler', 'Carl Jung', 'Psychology', 'Sigmund Freud']
 +++
 
 # The Courage to Be Disliked
 
-![The Courage to Be Disliked](../../../../../images/the_courage_to_be_disliked.jpg)
+![The Courage to Be Disliked](https://github.com/gaviral/avi/blob/main/assets/images/the_courage_to_be_disliked.jpg?raw=true)
 
 ## Authors' Note
 

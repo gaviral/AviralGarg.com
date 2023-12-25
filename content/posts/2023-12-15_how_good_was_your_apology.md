@@ -1,7 +1,7 @@
 +++
 title = 'How Good Was Your Apology?'
 date = 2023-12-15T23:13:41-08:00
-draft = true
+draft = false
 tags = ['Communication', 'Emotions', 'Psychology', 'Relationships', 'Self-Improvement']
 +++
 
