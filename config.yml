@@ -2,55 +2,42 @@ baseURL: "https://aviralgarg.com"
 title: Aviral Garg
 paginate: 5
 theme: PaperMod
-
 params:
-  env: production
+  env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: Aviral Garg
   description: "Aviral Garg's website"
-  keywords: [Avi, Aviral, Garg, Aviral Garg, aviralgarg, aviralgarg.com, aviralgarg.github.io, aviralgarg.github.com]
   author: Aviral Garg
-  images: ["https://aviralgarg.com/images/profile.jpg, https://aviralgarg.com/images/profile.jpg"]
-  DateFormat: "Jan 2, 2006"
-  defaultTheme: dark # auto, dark, light
-  disableThemeToggle: false
 
-  ShowReadingTime: true
+  defaultTheme: auto
+  disableThemeToggle: false
   ShowShareButtons: true
+  ShowReadingTime: true
+  disableSpecial1stPost: true
+  displayFullLangName: true
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
-  ShowCodeCopyButtons: false
-  ShowWordCount: true
-  # ShowRssButtonInSectionTermList: true
-  UseHugoToc: true
-  disableSpecial1stPost: false
-  disableScrollToTop: false
+  ShowCodeCopyButtons: true
+  ShowRssButtonInSectionTermList: true
+  ShowAllPagesInArchive: true
+  ShowPageNums: true
+  ShowToc: true
   comments: false
-  hidemeta: false
-  hideSummary: false
-  showtoc: false
-  tocopen: false
+  images: ["images/profile.jpg"]
 
   assets:
     # disableHLJS: true # to disable highlight.js
     # disableFingerprinting: true
-    favicon: "/images/profile.jpg"
-    favicon16x16: "/images/profile.jpg"
-    favicon32x32: "/images/profile.jpg"
-    apple_touch_icon: "/images/profile.jpg"
-    safari_pinned_tab: "/images/profile.jpg"
+    favicon: "https://github.com/gaviral/avi/blob/main/assets/images/profile.jpg?raw=true"
+    favicon16x16: "https://github.com/gaviral/avi/blob/main/assets/images/profile.jpg?raw=true"
+    favicon32x32: "https://github.com/gaviral/avi/blob/main/assets/images/profile.jpg?raw=true"
+    apple_touch_icon: "https://github.com/gaviral/avi/blob/main/assets/images/profile.jpg?raw=true"
+    safari_pinned_tab: "https://github.com/gaviral/avi/blob/main/assets/images/profile.jpg?raw=true"
 
-  label:
-    text: "Home"
-    # icon: /apple-touch-icon.png
-    icon: "/images/profile.jpg"
-    iconHeight: 35
-
-  # profile-mode
   profileMode:
     enabled: true # needs to be explicitly set
     title: Aviral Garg
     subtitle: Software Engineer
-    imageUrl: "/images/profile.jpg"
+    imageUrl: "https://github.com/gaviral/avi/blob/main/assets/images/profile.jpg?raw=true"
     imageWidth: 120
     imageHeight: 120
     imageTitle: Aviral Garg

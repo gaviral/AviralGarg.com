@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f05e1f0-a2f4-4675-aa07-f69e445637eb" name="Changes" comment="minor config changes">
-      <change beforePath="$PROJECT_DIR$/themes/PaperMod" beforeDir="false" afterPath="$PROJECT_DIR$/themes/PaperMod" afterDir="false" />
+    <list default="true" id="0f05e1f0-a2f4-4675-aa07-f69e445637eb" name="Changes" comment="fix: add details to config.yml">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/_gen/images/profile_hua1dce7cc5644c40a51d5d49ac7a0c8fe_738841_0x35_resize_q75_box.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/_gen/images/profile_hua1dce7cc5644c40a51d5d49ac7a0c8fe_738841_120x120_resize_q75_box.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,19 +40,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -60,6 +63,7 @@
       <updated>1703312285062</updated>
       <workItem from="1703312287123" duration="462000" />
       <workItem from="1703312881482" duration="4393000" />
+      <workItem from="1703475866749" duration="2263000" />
     </task>
     <task id="LOCAL-00001" summary="reset">
       <option name="closed" value="true" />
@@ -205,7 +209,23 @@
       <option name="project" value="LOCAL" />
       <updated>1703321561166</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="rest config.yl">
+      <option name="closed" value="true" />
+      <created>1703475928575</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1703475928575</updated>
+    </task>
+    <task id="LOCAL-00020" summary="fix: add details to config.yml">
+      <option name="closed" value="true" />
+      <created>1703476129055</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1703476129055</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,6 +258,8 @@
     <MESSAGE value="change to default mode" />
     <MESSAGE value="added past posts" />
     <MESSAGE value="minor config changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor config changes" />
+    <MESSAGE value="rest config.yl" />
+    <MESSAGE value="fix: add details to config.yml" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: add details to config.yml" />
   </component>
 </project>
