@@ -34,7 +34,7 @@ weight = 3
   [markup.tableOfContents]
     endLevel = 4
     ordered = false
-    startLevel = 2
+    startLevel = 1
   [markup.highlight]
     codeFences = true
     guessSyntax = false

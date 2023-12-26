@@ -24,7 +24,7 @@ Adlerian psychology enjoys a broad base of support in Europe and the United Stat
     - **Potential Influence**: Suggests that the insights within could be life-altering.
     - **Reader's Journey**: Invites readers to delve into the dialogue and explore beyond conventional thinking.
 
-In [this not], the authors set the stage for a transformative exploration of Adler's ideas, framed through a compelling dialogue. The book not only reflects on the legacies of Freud, Jung, and Adler but also promises to offer clear, applicable insights into achieving happiness, suggesting a profound impact on its readers.
+In [this note], the authors set the stage for a transformative exploration of Adler's ideas, framed through a compelling dialogue. The book not only reflects on the legacies of Freud, Jung, and Adler but also promises to offer clear, applicable insights into achieving happiness, suggesting a profound impact on its readers.
 
 ---
 
