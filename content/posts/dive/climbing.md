@@ -7,6 +7,10 @@ tags = ['Climbing', 'Learning', 'Physical Health', 'Productivity', 'Sports']
 
 ## Levels of Indoor Rock Climbing
 
+Today I learned about climbing! I went to a climbing gym for the first time and had a blast. I learned a lot about the sport and the different levels of climbing. With some internet research, I also learned about the different types of climbing, including top-rope climbing, lead climbing, and bouldering. I'm excited to continue learning and improving my climbing skills!
+
+Here is what I learned about the different levels of indoor rock climbing:
+
 ### First Timer Level (Beginner)
 
 As a beginner in indoor rock climbing, here are the key aspects to focus on:
@@ -42,7 +46,7 @@ As a beginner in indoor rock climbing, here are the key aspects to focus on:
 3. **High-Intensity Training**: Engaging in rigorous training routines for peak performance.
 4. **Leadership**: Taking leadership roles in climbing communities or teams.
 
-## Section Two: Definitions of Indoor Rock Climbing Jargons
+## Definitions
 
 1. **Smearing**: Using the sole of the climbing shoe to gain traction on a surface without a defined foothold.
 2. **Edging**: Placing the edge of the climbing shoe on a foothold.
