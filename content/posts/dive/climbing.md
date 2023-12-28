@@ -1,6 +1,6 @@
 +++
 title = 'Climbing'
-date = 2023-12-26T01:40:41-08:00
+date = 2023-12-26
 draft = false
 tags = ['Climbing', 'Learning', 'Physical Health', 'Productivity', 'Sports']
 +++

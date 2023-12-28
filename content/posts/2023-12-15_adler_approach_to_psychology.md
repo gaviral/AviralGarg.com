@@ -1,6 +1,6 @@
 +++
 title = 'Adler Approach to Psychology'
-date = 2023-12-15T23:13:41-08:00
+date = 2023-12-15
 draft = false
 tags = ['Alfred Adler', 'Mental Health', 'Psychology', 'Social Interest']
 +++

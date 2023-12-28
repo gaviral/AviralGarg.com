@@ -1,6 +1,6 @@
 +++
 title = 'La Gomera - Where Words Whisper On The Wind'
-date = 2023-12-25T11:59:12-08:00
+date = 2023-12-25
 draft = false
 tags = ['Canary Islands', 'Communication', 'Culture', 'Language', 'Spain', 'Tradition', 'UNESCO']
 +++

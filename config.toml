@@ -36,8 +36,8 @@ weight = 3
     ordered = false
     startLevel = 1
   [markup.highlight]
-    codeFences = true
-    guessSyntax = false
+    codeFences = false
+    guessSyntax = true
     hl_Lines = ""
     lineNoStart = 1
     lineNos = true

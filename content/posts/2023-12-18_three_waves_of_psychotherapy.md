@@ -1,6 +1,6 @@
 +++
 title = 'Three Waves of Psychotherapy'
-date = 2023-12-18T23:13:41-08:00
+date = 2023-12-18
 draft = false
 tags = ['Cognitive Behavioral Therapy', 'Cognitive Therapy', 'History', 'Psychology', 'Psychotherapy', 'Third Wave Therapies']
 +++
