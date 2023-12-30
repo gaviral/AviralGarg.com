@@ -5,7 +5,7 @@ theme = "cactus"
 copyright = "Avi"
 
 #disqusShortname = "example" # Used when comments is enabled. If not set, site title will be used.
-#googleAnalytics = "UA-1234-5" # Used when googleAnalyticsAsync is false. If not set, googleAnalyticsAsync will be used.
+googleAnalytics = "G-L7ML19J01G" # Used when googleAnalyticsAsync is false. If not set, googleAnalyticsAsync will be used.
 
 #summaryLength = 2
 
