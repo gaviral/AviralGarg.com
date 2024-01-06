@@ -1,7 +1,7 @@
 +++
 title = 'Dark vs. Light Themes: Finding Your Perfect Match'
 date = 2023-12-06
-draft = false
+draft = true
 tags = ['Ergonomics', 'Physical Health', 'Productivity', 'Technology', 'User Experience']
 +++
 
