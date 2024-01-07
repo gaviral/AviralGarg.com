@@ -5,6 +5,4 @@ draft = false
 tags = ['machine learning', 'mind map']
 +++
 
-# Machine Learning Mind Map
-
 [Machine Learning Mind Map](https://gaviral.github.io/map/)

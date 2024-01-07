@@ -1,10 +1,8 @@
 +++
-title = 'Multi-Platform 2D Apple Game Development'
+title = 'Apple Game Development: Multi-Platform 2D Game Development with SpriteKit'
 date = 2023-12-29
 draft = false
 +++
-
-# Apple Game Development: Multi-Platform 2D Game Development with SpriteKit
 
 ## Project Structure
 
