@@ -1,11 +1,10 @@
 +++
 title = 'The Courage to Be Disliked'
 date = 2023-12-22
-draft = true
 tags = ['Alfred Adler', 'Carl Jung', 'Psychology', 'Sigmund Freud']
 +++
 
-![The Courage to Be Disliked](https://github.com/gaviral/avi/blob/main/assets/images/the_courage_to_be_disliked.jpg?raw=true)
+![The Courage to Be Disliked](https://github.com/gaviral/avi/blob/main/static/images/the_courage_to_be_disliked.jpg?raw=true)
 
 ## Authors' Note
 
