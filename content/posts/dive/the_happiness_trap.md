@@ -1,7 +1,7 @@
 +++
 title = 'The Happiness Trap'
 date = 2024-06-25
-tags = ['
+tags = ['']
 +++
 
 ![The Happiness Trap](https://github.com/gaviral/avi/blob/main/static/images/the_happiness_trap.jpg?raw=true)
