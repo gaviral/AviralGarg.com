@@ -1,7 +1,7 @@
 +++
 title = "Machine Learning Mind Map"
 date = 2024-01-06
-draft = false
+draft = true
 tags = ['machine learning', 'mind map']
 +++
 

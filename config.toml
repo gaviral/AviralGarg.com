@@ -55,7 +55,7 @@ rss = true # generate rss feed. default value is false
 # Home page settings
 #description = "I like to write about things I learn."
 mainSectionTitle = "Today I Learned:"
-#showAllPostsOnHomePage = false # default
+#showAllPostsOnHomePage = true # default
 postsOnHomePage = 10 # this option will be ignored if showAllPostsOnHomePage is set to true
 #tagsOverview = true # show tags overview by default.
 #showProjectsList = true # show projects list by default (if projects data file exists).

@@ -1,5 +1,5 @@
 +++
-title = 'The Courage to Be Disliked'
+title = 'The Courage to Be Disliked - Work In Progress'
 date = 2023-12-22
 tags = ['Alfred Adler', 'Carl Jung', 'Psychology', 'Sigmund Freud']
 +++

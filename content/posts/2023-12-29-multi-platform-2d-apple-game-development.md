@@ -1,7 +1,7 @@
 +++
 title = 'Apple Game Development: Multi-Platform 2D Game Development with SpriteKit'
 date = 2023-12-29
-draft = false
+draft = true
 +++
 
 ## Project Structure
