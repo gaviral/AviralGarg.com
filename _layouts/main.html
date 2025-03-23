@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <!-- GitHub Markdown CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+    <!-- Inter font for modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Mermaid support -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Global mermaid initialization with themes
+        let mermaidConfig = {
+            startOnLoad: true,
+            theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+            securityLevel: 'loose',
+            fontFamily: 'Inter',
+        };
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            mermaid.initialize(mermaidConfig);
+        });
+    </script>
+    <style>
+        :root[data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #24292e;
+            --table-bg: #ffffff;
+            --table-border: #e1e4e8;
+            --toggle-bg: #e1e4e8;
+            --toggle-circle: #ffffff;
+            --home-button-bg: #f6f8fa;
+            --home-button-hover: #e1e4e8;
+            --home-button-text: #24292e;
+        }
+        
+        :root[data-theme="dark"] {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --table-bg: #161b22;
+            --table-border: #30363d;
+            --toggle-bg: #30363d;
+            --toggle-circle: #0d1117;
+            --home-button-bg: #21262d;
+            --home-button-hover: #30363d;
+            --home-button-text: #c9d1d9;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .markdown-body {
+            box-sizing: border-box;
+            margin: 0%;
+            padding: 45px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* Simple table styling */
+        .markdown-body table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+            background-color: var(--table-bg);
+        }
+
+        .markdown-body table th,
+        .markdown-body table td {
+            padding: 8px 16px;
+            border: 1px solid var(--table-border);
+            background: none !important;
+        }
+
+        .markdown-body table tr {
+            background: none !important;
+        }
+
+        .nav-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .home-button {
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--home-button-bg);
+            color: var(--home-button-text);
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .home-button:hover {
+            background-color: var(--home-button-hover);
+        }
+
+        .home-button svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        /* Theme toggle switch styling */
+        .theme-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--toggle-bg);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-switch::after {
+            content: '';
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            width: 26px;
+            height: 26px;
+            background: var(--toggle-circle);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        [data-theme="dark"] .theme-switch::after {
+            transform: translateX(30px);
+        }
+
+        .theme-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8px;
+            box-sizing: border-box;
+            pointer-events: none;
+            color: var(--text-color);
+        }
+
+        .theme-icons svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body class="markdown-body">
+    <div class="nav-controls">
+        <a href="/" class="home-button" aria-label="Go to home page">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
+            </svg>
+        </a>
+        <div class="theme-switch" onclick="toggleTheme()" role="button" tabindex="0">
+            <div class="theme-icons">
+                <svg class="sun-icon" viewBox="0 0 24 24">
+                    <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24">
+                    <path d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    {{ content }}
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+
+            // Store all mermaid diagram definitions
+            const mermaidDivs = document.querySelectorAll('.mermaid');
+            const diagrams = Array.from(mermaidDivs).map(div => div.innerHTML);
+            
+            // Clear all mermaid divs
+            mermaidDivs.forEach(div => {
+                // Save the inner content (the diagram definition)
+                const definition = div.innerHTML;
+                // Mark this div for processing
+                div.setAttribute('data-mermaid-definition', definition);
+                // Clear the div content
+                div.innerHTML = '';
+            });
+
+            // Update mermaid configuration with new theme
+            mermaidConfig.theme = newTheme === 'dark' ? 'dark' : 'default';
+            
+            // Completely reset mermaid
+            window.mermaid.initialize(mermaidConfig);
+            
+            // Render all diagrams again with new theme
+            mermaidDivs.forEach((div, index) => {
+                const definition = div.getAttribute('data-mermaid-definition');
+                const id = `mermaid-diagram-${index}-${Date.now()}`;
+                
+                try {
+                    window.mermaid.render(id, definition).then(result => {
+                        div.innerHTML = result.svg;
+                    });
+                } catch (error) {
+                    console.error('Failed to render mermaid diagram', error);
+                    // Fallback - show the original diagram code
+                    div.innerHTML = definition;
+                }
+            });
+        }
+
+        // Set initial theme based on localStorage or default to light
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>

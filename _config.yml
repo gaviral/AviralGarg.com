@@ -1,0 +1,15 @@
+exclude:
+  - data
+  - .git
+  - .gitignore
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - .venv
+  - __pycache__
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "main"

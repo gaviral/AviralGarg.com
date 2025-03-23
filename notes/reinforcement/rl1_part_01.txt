@@ -1,0 +1,1670 @@
+Hey, everyone, how's it going? My name is Randy Cogill. I will be the instructor today.
+So today we'll be covering reinforcement learning, which is going to be, I believe, a new area
+for you. So, yeah, let's get started. I can give you a quick introduction.
+So, yeah, my name is Randy I am currently a senior research scientist at Amazon, so I'm in Amazon's AGI division, which was formerly part of Alexa AI, working on generative AI applications in support of the Alexa voice assistant as well as some some other internal applications.
+Prior to that, I was an assistant professor in systems engineering for a number of years
+at University of Virginia.
+I was a research scientist at IBM Research, and I had also spent some time building supply
+chain optimization applications for a large retail chain here in the U.S.
+I did a PhD in electrical engineering from Stanford and did my master's there as well
+and did a bachelor's in electrical engineering at Manhattan College prior to that.
+So backgrounds all in EE have been working sort of in a mixture of both operations research
+and more recently machine learning and AI.
+But this topic of reinforcement learning is one that's really interesting to me because
+it definitely straddles those two areas.
+So before we get going, why don't we collect a little bit of information on who's here today.
+So you should all have access to the chat as well as the Q&A.
+So in the chat, if you could put in your name, your current role, your current location,
+and your current company, we can get a sense of who else is on the call.
+So I have a son, people connecting from San Jose.
+I believe usually we have a lot of Bay Area folks in these classes.
+Ben? Raja? Awesome. Great. Yeah. Thanks. It looks like we have about 15 folks here. So
+welcome. Welcome, everyone. So I think this is probably information that's kind of generally
+shared with you the start of most of these classes, but it doesn't hurt to kind of
+go through how things like interaction and QA will work in this lecture. So obviously
+you're strongly encouraged to interact with me
+and other instructors during these classes.
+That's probably where you get the most value.
+So don't be shy to speak up and get clarifications.
+The way we will do that today is
+we'll use the Q&A feature in Zoom.
+If there are sort of natural spots to stop
+or there are questions that really should be cleared up
+before we proceed, because maybe there's
+some understanding that needs to be clarified before we go on to other topics. I'll try to
+get those periodically as we go through each section. For those questions that I don't get to,
+kind of in the midst of the lecture at the end of each of the blocks, there'll be basically
+four blocks in this particular lecture at each of those. We'll try to go through the
+rest of the Q&A queue and make sure all those questions get answered. But the Q&A feature in
+there. I'll answer them by voice. I think if there's a need to sort of have more back
+and forth discussion, we can unmute folks and bring them on, but otherwise we'll just
+try to manage it directly through the Q&A. And then you'll have, like you do for your
+other modules, you'll have an assignment, you'll have multiple choice questions. You
+know, by all means, spend time on those ahead of time. We'll have a doubt session
+where we can answer some questions midweek on those,
+as well as a problem solution review session later on
+on Thursday, where we can go through the solutions.
+So yeah, use all those resources.
+I'll be at those other two sessions later in the week.
+And let's definitely interact as much as possible
+if areas are not clear.
+OK, so I think in the past you have covered,
+you've had some exposure to generative AI models
+and applications.
+This topic that we're covering here is really quite different,
+although there is a small area of overlap.
+I think you might have seen text-to-text and text-to-image
+generative AI models.
+I think the last time I had taught this one,
+I think folks had just seen text-to-text at that point.
+You had learned about the architecture of large language
+models and learned a bit about how large language
+models are pre-trained and fine-tuned.
+And one of the areas that you might have covered there is reinforcement learning with human
+feedback as a way to fine tune large language models.
+So that connects a little bit to what we're going to talk about today, although we're
+going to get into a lot more detail about some of the underlying theory, as well
+as applications of reinforcement learning that are quite different than the way that
+reinforcement learning with human feedback is used in large language models.
+So maybe before we proceed, we could have a quick recap quiz on some of that content
+that you saw in the past, specifically how it relates to what we will talk about today.
+So when you are fine-tuning a large language model by reinforcement learning with human
+feedback, there are two things that we want to think about here that connect to reinforcement
+learning. Number one, there's this notion of a reward function. That's something that
+you have to obtain as part of that process of implementing reinforcement learning with
+human feedback. So the first question is, how do you obtain your reward function?
+And then once you have that reward function, what do you use it for? So maybe give that
+a minute of thought, if you have a kind of crisp answer
+that you want to share with the rest of the class,
+by all means, put that into the chat.
+And then we can discuss and link that up
+to what we'll be talking about in more detail today.
+I see one comment here mentioning that loss
+is the negative of reward.
+And that's the idea for how you use it, right?
+What you want to do is you want
+to tune the model's parameters so that outputs
+that you generate for given input prompts,
+maximize that reward, right?
+Like that's sort of the target loss
+that you're trying to optimize.
+And so there's another question here about the reward
+might depend on the task you're using the LLM for.
+And so that's true.
+So the loss that you're fine tuning for in that case
+can depend on sort of which stage of training you're in.
+So something like cross entropy is often
+used when you're tuning these models to predict
+to the next token given the context.
+But reward can kind of capture sort
+of more nuanced preferences for certain outputs over others.
+So the idea here is that typically the way
+reinforcement learning with human feedback is used
+is when you're fine tuning one of these large language
+models, often what you do as a first pass is you say,
+I'm just going to give you a whole ton of text,
+and I'm going to tune that model
+get good at predicting what the next word is given a past context of prior words, and that's the area
+where you might use something like a cross-entropy loss. Then you might do some additional fine-tuning
+to sort of capture a certain style or certain alignment in the model, like you want to say,
+you know, if I want to use this model to do Q&A, for example, I'm going to give it
+lots of examples of question and answer pairs, and I can do some additional fine-tuning of that
+model. And then usually when you use reinforcement learning with human feedback, you're trying
+to capture more subjective qualities about which, you know, given two responses, which
+one might be preferable to a human reviewer. And so often what you do is you have human
+reviewers review multiple potential outputs. Often, you know, typically the way they're
+presented is you might have two or more outputs and they're either ranked or you're
+even pairwise comparisons, like A is better than B,
+B is better than A. And then you learn, essentially,
+a model that rewards those preferable outputs higher
+than the less preferable outputs.
+And then once you have that reward function,
+you use it to tune your model so it's
+more likely to generate outputs that yield higher reward
+than outputs that yield lower reward.
+So that's sort of the specific way that reinforcement learning or techniques related to reinforcement
+learning are used in LLMs.
+So today we're going to talk about the whole bigger, broader area of reinforcement learning
+and cover a lot more ground beyond what you might have seen before.
+So just to give you an overview of the agenda for today.
+So, in the first hour, what I want to do is more just kind of motivate reinforcement learning,
+show you some tools that you can use, some open source tools that you can use to test
+out reinforcement learning algorithms, which is something that's super useful to have
+at your disposal if you're actually trying to implement these algorithms, and then
+kind of go through what are the key ingredients of a typical reinforcement learning setup.
+When you're setting up one of these problems,
+there are a few different things.
+I mentioned states, actions, and rewards.
+These are things that you have to model
+when you're setting up a reinforcement learning
+problem.
+Just go through what the key concept is underlying those,
+because those are something that you're just
+going to see coming up over and over again when we cover
+reinforcement learning.
+And I'll mention in the course of this one example
+that we'll use as a running example throughout this
+module, and that's the game of blackjack.
+right, there's a card game called Blackjack, and we'll go through the sort of general rules
+of it first, but what we'll do is we'll teach a reinforcement, an agent to learn how to play
+Blackjack pretty well just through reinforcement learning, by just, you know, essentially by
+trying to play the game over and over and over again and improving each time it plays.
+So that's where we'll also introduce this Blackjack example, and that's part of this
+environment, this tool set called the Chimnasium, which is a really useful tool set for testing out
+reinforcement learning algorithms. So then in the second hour, we will spend some time talking about
+something called Markov decision processes. And so Markov decision processes are a class of models
+for modeling problems that involve making decisions sequentially over time. There's not
+going to be any learning. We're not talking about learning algorithms at that point, but
+sort of talking about the fundamental sort of modeling framework that these type of
+sequential decision problems can be posed and a lot of the key elements that you need to
+understand to move on to learning algorithms are covered there. And then we'll see how
+Blackjack can be modeled as one of these Markov decision processes and you can get an optimal
+strategy out by solving that Markov decision process. It's kind of a painful process
+because there's a lot of details of the model that need to be sort of painstakingly be spelled out.
+But that will help motivate the next section, which is getting into learning algorithms.
+We're learning algorithms. You don't have to do that explicit modeling. So we'll talk about an
+algorithm called Q-learning, and then we'll see how that applies to blackjack. And then we'll
+finally cover something called deep Q-learning, which is an extension of Q-learning that
+that generally can be used in problems where sort of what's called the state space, you
+know, certain elements of the model are too large to capture directly through tabular
+Q learning. This gives us a way to solve larger problems. And this is the thing,
+you know, you might have seen these, you know, deep mind examples from 10 years ago
+where they taught learning algorithms how to play video games really well. Like you
+things playing Super Mario Brothers and Atari 2600 games really skillfully. So deep Q learning was
+one of the algorithms that was introduced to achieve that. So that's where we'll stop
+at the end of this reinforcement learning part one module. Okay, so the key learning objectives
+for this module are one, to understand what reinforcement learning is at a high level and
+understand how it differs from other machine learning
+paradigms.
+So you've seen supervised learning so far.
+You've seen unsupervised learning.
+And this is really sort of a completely different third
+machine learning paradigm that deals
+with its own class of problems that's
+sort of unrelated to those two.
+So understand where this fits in in relation to those
+things that you've seen in the past.
+Understand what Markov decision processes are
+and how they provide the modeling framework
+that underlies reinforcement learning methods.
+So there are a whole bunch of different
+reinforcement learning algorithms
+and in the reinforcement learning two module,
+you're gonna learn a whole other class
+of these policy-based methods.
+But the key thing that underlies both of those
+is this idea that really what you're doing
+is you're using a learning algorithm
+to solve this thing called a Markov decision process.
+So understanding what that common modeling framework is
+is super important.
+And then we're going to focus for the rest of the module on these value-based methods
+for reinforcement learning, specifically algorithms in the Q-learning family.
+So we're going to understand what Q-learning is, the underlying concepts, and how it's
+implemented in code.
+So we'll look at code notebooks for each of those four sections that I mentioned
+previously, and we'll see exactly how Q-learning is implemented, and you'll see a relatively
+compact implementation of it and see how it gets applied to the blackjack example.
+And then finally, we'll understand what deep Q learning is, understand how it's conceptually
+a little bit different from the traditional tabular Q learning that we cover in the
+previous section, and you'll see its implementation in code as well.
+So you'll see a full reusable implementation of deep Q learning.
+And I should say at this point, the expectation for the assignment that you'll be given
+after this module is to implement these algorithms
+on a different problem than the blackjack problem
+that we cover here.
+But it turns out the implementations
+that you'll see for blackjack are fairly general
+and they're fairly reusable.
+So you might have to solve a couple of small issues
+related to what's unique about this new problem.
+But you'll see how what we cover here
+transfers to a totally different problem.
+But the same algorithms can be used.
+Okay, so we'll start with the reinforcement learning intro section, and then we'll take
+a short break once that's over, and then we'll move on to the remaining three.
+All right, so before we get started on reinforcement learning, I want to give you a little problem
+to think about.
+You don't have to write out the answer right now, right?
+This is something that I want you to be thinking about all throughout this module.
+And the reason why I'm doing this is that it's kind of an easy problem to state.
+It's just a little game, and you can
+think about what strategy you would use to play this game.
+But the kinds of considerations you
+make when thinking about what strategy used to play this game
+are exactly the kinds of things that
+get modeled when we talk about Markov decision
+processes.
+So if you start to formulate what
+the issues are in the context of this simple concrete
+example, that will give you something
+to base some of this more theoretical stuff
+that we'll see later on against.
+Let's think about this game. The idea is it's a simple betting game. I'm going to give you
+a six-sided die, and you're going to roll it. If it lands on one, the game is over.
+You don't win anything. That's the bad outcome. If you roll a one out of the six possible
+outcomes, game's over. You don't win anything. Otherwise, if you roll two through six,
+you have a choice.
+You could stop right then, and if you stop right then,
+I'll pay you N dollars, where N is the number
+that's showing on the top of the die.
+That's the number that you rolled.
+Or you get to try again.
+So you can already imagine if you're thinking
+about strategies for playing this game.
+And you could try this again.
+You could try as many times as you like
+until you either decide to stop
+or you roll a one and the game ends.
+So you can think about, you know,
+just the kind of strategies you might consider.
+Like, if you roll a six, you're never going to do better than that, right?
+That's probably a good time to stop and collect your payout of $6 because you're never going
+to see a better outcome. But what if you roll a two, right? Two's not great. You could probably
+do better if you roll again. But there's a chance that you might roll a one if you roll
+again, in which case you don't get $2. You get nothing, right? And so there are a number
+of things going on here, right? There's this idea that you're making decisions over time,
+and you might need to make those decisions multiple times
+about whether you stop or keep playing.
+There's uncertainty about the future.
+Like you don't know what you're gonna roll in the future,
+but you know whether you maybe have a better chance
+of doing better than what you have right now
+or doing worse than what you have right now.
+And you're ultimately trying to weigh all of that together
+to figure out, okay, what decision should I make
+right now, should I roll again or should I stop?
+So all of that that's going on in that example
+is something we're gonna kind of see generalized
+quite a bit in the types of problems
+that reinforcement learning is designed to solve.
+OK.
+So what can we actually do with reinforcement learning?
+What can we solve with it?
+I want to switch over to these slides
+because they have this animation.
+And so here we have this almost kind
+of disturbing-looking video of this robot that's
+learning how to walk.
+And it's learning how to walk on its own
+by just interacting directly with its environment.
+So that's sort of the key idea with reinforcement learning
+is that reinforcement learning is used,
+it's a class of algorithms that help,
+you'd say learning agents
+that can interact with their environment.
+They can learn to perform some sort of task
+by just continually interacting with their environment.
+So what's going on here with this quadruped robot
+is, you know, actually explicitly programming something like this, you know, with a control
+algorithm that tells it exactly how to coordinate all of its limbs in order to walk is a complicated
+task. And so the idea is that this is just going to learn to walk and not only walk,
+but do it robustly in the face of possible disturbances by just interacting directly with
+environment, right? So maybe it has a sense that being upright as opposed to on its back is good,
+right? So there's some reward associated with being oriented upright versus on your back.
+And maybe it has a target location that it wants to reach. Like it wants to reach one of the
+corners of this map that it's on. So being closer to that corner versus further away from
+that corner is also a good thing. So that's all the robot knows. And it knows maybe it
+actuate certain limbs, but it has no concept of cause and effect, like how actuating its limbs will
+get it to achieve its goals. But it just starts interacting with its environment. It starts
+learning what's getting it closer and what's getting it further away from achieving its
+goals, and it keeps doing the things that seem to work and not doing the things that don't seem
+to work, and it gets better and better and better as it goes. So in this case, there's
+specific algorithm that's being used here that, you know, in about 30 minutes, the robot seems
+to learn to almost upright itself. It's almost getting itself on four legs. And after additional
+practice with this, it starts to actually be able to walk. Then after being exposed to
+disturbances, like somebody hitting it with this cardboard tube here, it starts to learn how
+to recover from those kinds of disturbances and gets to the point where it actually becomes
+pretty skilled at performing this task of walking
+and maybe getting itself to a specific goal location.
+So yeah, one thing about reinforcement learning
+is it's used to control systems like physical systems
+like robots, it's used in self-driving cars.
+And so that's probably the biggest area
+where you'll see this used.
+Robotics is a huge area for reinforcement learning.
+But it's also something that you see frequently
+in other types of environments
+where decisions need to be made under uncertainty.
+So games are a really popular kind of demonstration area
+for reinforcement learning.
+In fact, there's serious applications there
+as games as well.
+One of the very, very earliest implementations
+of something like Q-learning, I guess
+that's probably going back almost 30 years,
+was the development of a learning algorithm
+learned how to play backgammon, the board game backgammon, really well. In fact, it was better
+than, it got to the point where it was better than most human players but also played very
+differently than human players and human players ended up learning a lot about how it played and
+it actually ended up influencing the way expert players actually played the game.
+So it's used in games and there are also some applications in finance as well.
+And so somebody asked a question, could this be used in public policy decisions? And
+In principle, yes, right?
+It's something that I don't know of any application there.
+I think the key thing is being able
+to get rapid feedback, right?
+You try a thing, you get some rapid feedback
+about whether or not it worked and you try again,
+and you can just try again and again and again.
+I guess public policy decisions can be tricky there
+because maybe you don't have that mechanism
+to get rapid feedback.
+But in principle, like if you could maybe
+use some sort of simulations to sort of bootstrap
+and get started, maybe something like this could be used.
+The broader field of operations research and Markov decision
+processes I know are used much broader in areas of planning,
+where you can maybe explicitly model the environment
+that you're operating in a bit better.
+But yeah, definitely kind of hold on to that idea.
+If that's an area that you work
+in as we're shaping up kind of the general class
+of models, I'd be curious to hear
+if you're seeing a match there.
+OK.
+So as I said, reinforcement learning
+is aimed at teaching agents to take actions in an environment
+in order to maximize some cumulative reward.
+It might be some reward that you only earn once,
+like in our dice game.
+You get paid once when you decide to stop the game.
+Or it can be some reward that you're just
+collecting over time and you're making decisions
+continually over time.
+Either one, you could imagine in our dice game, you get zero reward until the end.
+You still have this notion of cumulative reward, and we'll get into a lot more detail on this later.
+But the idea is that an agent is interacting with its environment, it's trying out different actions,
+it's getting feedback, and it's ultimately aimed at maximizing some measure of reward.
+So that's kind of nicely captured in this diagram here.
+And we'll see lots of examples where we see this in action.
+But here you have your learning agent
+that is interacting with its environment
+here by taking actions.
+Once it interacts with its environment,
+it collects some feedback through measurements
+of the environment.
+Here, we'll call this a state.
+And we'll say more about what the state actually
+generally means.
+But you could think of this as the measurements
+of your environment that you take.
+And you're also getting some feedback about whether you're achieving reward or you're actually
+incurring penalties, and that's going to guide you towards trying out more actions that
+hopefully will earn rewards rather than penalties, and you'll over time be adapting this agent's
+behavior so that after a while, you have a policy of being able to do what you want
+do skillfully, where being successful is measured in terms of this reward, achieving high reward.
+So this is pretty different than what you've seen before. I'm assuming that the main areas
+that you've seen before are supervised learning, unsupervised learning, and most of the learning
+paradigms and the types of problems that you've been exposed to fit into one of those two
+paradigms. And this sequential and interactive nature of reinforcement learning is one of the
+key things that differentiates it from supervised learning and unsupervised learning. To greatly
+simplify the whole picture, what you're doing when you do supervised learning is you're basically
+learning general rules that can accurately map input features to outputs. And you're learning
+those through examples, whether it's regression or classification. You're given lots of examples
+of inputs, lots of examples of what should be the outputs,
+then you're learning some sort of model
+that can accurately predict those outputs
+from those inputs.
+And unsupervised learning is doing
+something kind of similar, although you don't necessarily
+have labels, right?
+Pure unsupervised learning, you have no labels.
+If you're doing something semi-supervised,
+you might have some labels, but many examples
+that aren't unlabeled.
+But there, you're more learning
+the structure of the data from lots of unlabeled data.
+Here are lots of inputs.
+So OK, I'm going to learn that these things basically
+break into certain clusters.
+And maybe those clusters have specific meaning to them.
+But in all these cases, you're
+learning something about relationships
+among data items from individual examples.
+And here we're doing something very different.
+We're directly interacting with some environment.
+we're getting feedback about what happened when we did something, right? What was the
+outcome of our action? And we're using that to tune some sort of policy that helps us
+interact effectively with the environment. So it's very different conceptually than what
+you've seen with supervised and unsupervised learning. So in terms of, you know, reinforcement
+learning itself, it's a really big area. It's a really broad area in terms of the amount of
+There are lots of different algorithms.
+We're only going to focus on two of them in this module.
+But the majority of the work,
+the most commonly known algorithms,
+I would say fit into these two based categories
+where these are model-free.
+These are model-free methods,
+meaning that we don't have a model of the environment.
+We don't start with a model of the environment.
+We don't actually ever explicitly learn
+model of the environment. There are some artifacts that we end up learning that help us come up with
+policies, but we don't necessarily ever have a direct model saying, oh, if I do A, then B
+might happen. And these basically break into what are called value-based methods and policy-based
+methods. So the value-based methods are the ones that we're going to talk about today.
+And when you get to the reinforcement learning part two module, you'll talk about what are
+called policy-based methods, which is a different concept, but ultimately aimed at solving the
+same problem.
+And then there are also other approaches like model-based methods that try to explicitly
+learn a model of the environment and things like multi-agent reinforcement learning that
+try to learn policies separately for lots of interacting agents.
+Those are other areas of this very broad field of reinforcement learning.
+We're focusing on these value-based and policy-based methods, which I'd say 90% of the time when you talk to somebody about reinforcement learning, that's probably what they're actually talking about.
+So we're going to cover the big ones in these two modules.
+So if you wanted to have a broad taxonomy that kind of captures all of the key algorithms that have been developed in this field,
+you know, it might look something like this, where the model-free methods are what we're
+focusing on in the next two modules. Q-learning, these are the value-based methods that we
+talk about today. Policy optimization, those are the policy-based methods that you'll
+talk about in the reinforcement learning part two module. So you're covering a good
+part of that taxonomy between these two modules.
+Okay, so I want to show, okay, so we had talked about reinforcement learning and how it's
+different from supervised learning and unsupervised learning.
+When you want to work hands-on with supervised learning, what do you do, right?
+Well, you get access to some sort of data set that you can build a model off of and
+then test your model on, right?
+That data set might have a lot of input data
+that you're going to extract some features from and maybe
+some labels that you want to try to learn.
+But you get this data set.
+You can get this data set.
+You can train the parameters of a model
+against that data set if you're
+building some parametric model.
+And then you can test to see how accurately it
+can predict the labels.
+But that's the thing that you
+need when you want to work hands-on with this.
+Well, what do you do when you
+work hands-on with reinforcement learning?
+Like, do you need a robot?
+You need some sort of environment
+that you can interact with and that you can actuate
+and that you can measure the responses from.
+And that's not necessarily gonna be like some data set,
+like a data set with labels and features
+that you have when you're doing supervised learning.
+So how do you work hands-on
+with reinforcement learning algorithms
+as you're learning this stuff,
+if it requires interacting
+with some type of environment interactively.
+And so there's one really nice toolkit
+that we're gonna use to demonstrate
+reinforcement learning here.
+You're gonna use it in your assignments that you work on.
+And in fact, it's used very heavily,
+even in academic literature on reinforcement learning.
+It's kind of a go-to place for testing out
+new algorithms.
+And that's this toolkit called Gymnasium.
+So this used to be maintained by OpenAI.
+It was called OpenAI Gym.
+I think OpenAI has kind of shifted focus away from maintaining this because they've got
+bigger and better things, I guess, that they're focusing on right now, but this is now being
+maintained by another organization, and it's still open sourced, and it's still very
+similar to the original format of OpenAI Gym.
+So I could show you what this looks like.
+So you can find this by if you just search for open AI gym or forama gymnasium so forama is the name of the organization that's now maintaining maintaining this, you'll you'll you'll be able to access this as well.
+And so basically what it is is it's a set of simulation environments that can be used for testing reinforcement learning that use a common interface.
+interface. So there's a simple common interface to these environments. Once you learn how to
+interact with one of them, you can interact with any of them, which is nice. If you're
+trying to develop an algorithm that can work broadly across a whole bunch of different
+domains, this gives you a way that you can quickly test your code on lots of different
+examples, whether they're video game control examples, robotics examples, it's all a
+see what's going on with one of these environments.
+This is this lunar lander environment
+where you've got this ship that you're trying to learn.
+You're trying to land between these two flags.
+And you can actuate it by firing thrusters
+on different sides of the ship.
+And the idea is you want to land softly.
+You don't want to come to a crash landing between them.
+You don't want to land outside the flags.
+And just hopefully what's going on in this animation
+is that this learning agent is learning
+how to perform this task successfully through repetition.
+And even on the main page here, there's
+a quick code snippet right here that
+shows what that interface looks like when
+you're interacting with it.
+So almost any time you're setting up
+one of these environments, and we'll
+see this in greater detail when we go through Blackjack,
+There's one line that can be used to launch a new environment, select the environment
+that you want to work with, like the specific simulation environment that you want to work
+with.
+And then you typically just have some loop where in that loop you have whatever code
+you've implemented to select the actions that you want to take to try to actuate
+your environment.
+And then you pass that into your environment, you see what happens.
+Like, how does that, you know, what do I observe about changes to my environment after I've
+applied that action?
+And then did I achieve any sort of reward or pay any sort of cost by doing it?
+And then you just keep looping.
+And somewhere you have your learning algorithm implemented, which is hopefully coming up
+with smarter and smarter ways to select these actions.
+But that's essentially all that happens.
+And then you can close out your environment when you're done.
+So it's a super, super simple interface that's provided to all these different environments
+when you're testing out your algorithms. So just to give a sense of what types of
+environments you have available, there are these sort of simple classic control ones
+where you want to control these relatively simple physical systems. So this cart pull
+example is actually what you will have in your assignment this week. So you'll implement
+reinforcement learning algorithm to solve this cart-pole example. And so what cart-poles trying
+to do is it's basically you have a vertical pendulum, so that's unstable, right? It wants
+to fall from one side to the other, or one side or the other, depending on whether it's leaning
+one way or another. And you can control it by moving a cart that the pole rests on.
+Turns out to be harder than it looks, right? It looks like it's one of these things. I know
+if it starts to fall this way, I'll just move the cart a little bit that way and it
+will upright it again. Turns out to be actually quite a bit harder than that.
+But yeah, this whole class of examples,
+these are all like physical systems,
+like simple physical systems that you can learn
+how to control through reinforcement learning algorithms.
+There are these various robotics environments
+that involve more complicated robotics type setups
+than you have in those simple classical control examples.
+So these are again, physical systems,
+but they're ones with many more degrees of freedom.
+Like you hear you have a humanoid robot
+that has a number of limbs
+and can be actuated at each of those limbs,
+and you're trying to teach this robot
+maybe to stand up on its own
+from an arbitrary position laying down
+and then remain standing once it's standing.
+So there are a whole bunch of these
+various robotics type environments here.
+And you have these relatively simple environments,
+simple in the sense that there are relatively
+fewer degrees of freedom than you have
+in these robotics examples.
+Like one of them here is the game of Blackjack,
+which is what we're going to be working with today.
+But several others that look like very simple video game
+environments.
+And then maybe to look at one more,
+and there are others that we won't look at here.
+But another big one is they have environments
+for many of these classic Atari 2600 video games.
+So, yeah, these are all from a video game system
+that came out in, I think, the early 1980s.
+But that was one of the big developments of DeepMind
+about 10 years ago, where they demonstrated
+deep Q learning algorithms, which we'll cover later today,
+could actually learn how to play arbitrary Atari 2600
+video games pretty well, just by repeated attempts
+at playing them.
+So those are all part of part of gymnasium as well.
+So you have a lot of stuff there to experiment with
+if you're interested in reinforcement learning
+and you want to get hands on with it.
+So let's see what one of these environments
+actually looks like in action.
+So we'll work with the Blackjack environment
+from Gymnasium.
+And before we look at it, I know
+folks might be familiar with how Blackjack works.
+But for people who haven't seen Blackjack before or ever
+played Blackjack R21, as it's sometimes called,
+I'm just going to give a really quick overview
+of the rules just so you can follow along with the example.
+So the idea is to card game.
+And typically the player is playing against a dealer, and the player is dealt two cards to start.
+And the value of their hand is worth the sum of the values on the cards.
+So I give you two cards. If you have a six and a three, your hand is worth a nine at that point.
+And the idea is you want to get as close to 21 as possible without going over.
+If you go over 21, you lose, you just lose automatically.
+If you don't get close to 21,
+there's a chance that you're gonna get beaten
+by the dealer, right?
+So the idea is that you start off with these two cards,
+you want the value of your hand is equal
+to the sum of the values of the cards,
+and you wanna get as close to 21 as possible.
+So you can request additional cards one at a time.
+Each time you request an additional card
+that will increase the value,
+but it also increases the risk of going over 21.
+So, you know, cards with cards that have numbers on them are worth the numerical value on the cards, jacks, queens and kings are worth 10 points, and then an ace can be worth one or 11.
+So you have that choice right so if it be having it be worth 11 gets you closer to 21 that's great if having it be worth 11 gets you over 21 that he can it can be worth one.
+And so the idea is the player keeps taking cards until they either go over 21 or they decide to stop, and then the dealer plays. And then when the dealer plays, they keep taking cards until they either beat the player's hand or they go over 21.
+If the dealer goes over 21, dealer loses, player wins. Otherwise, if the dealer beats the player's hand, the dealer wins. So that's basically the idea of the game.
+And so we'll see how this works for in Gymnasium.
+So we'll go through a notebook here, and I'll go through each of the steps that will show us how to actually set up Gymnasium before we run our environment.
+So you can just kind of see how you can do this on your own if you're starting from scratch.
+And so the first thing that we need to do, the only dependency that we need to install here is
+I'll make this a little bit bigger, is just gymnasium.
+And that's just a pip install gymnasium
+to get that working.
+And then for this notebook,
+and this is gonna be the same notebook we'll use
+for all of our examples.
+We will set up all the packages that we'll use here.
+So we're gonna use PyTorch only at the very end
+when we do deep reinforcement learning
+and deep Q learning, we'll use PyTorch.
+So we don't need to worry about that at first.
+We'll import gymnasium.
+And then we're just actually importing some packages
+that will help us display outputs
+when we're running gymnasiums.
+And then some for random number generation.
+But most of these other ones
+are just ones that we'll use later
+when we get to deep reinforcement learning.
+So it's a pretty straightforward setup.
+And now what I'll do is I'll demonstrate
+how Blackjack works by...
+I'll play the part of the agent, right, the decision-making agent.
+We won't implement an algorithm quite yet, but we'll do that in just a minute.
+And so I'll sort of walk through the situation where dealer deals me a hand.
+I look at that hand.
+I make a decision about what action I want to take next.
+I can make that decision, and then we can see the impact it has on the environment.
+So in order to set that up here, that's all happening in this one cell where the
+thing we're going to do is we're going to create the Blackjack gymnasium environment. So, we'll
+launch the Blackjack environment. I had mentioned before it's kind of a one-liner to get to pick
+your environment and get it started. This line here will deal the cards, right? So, that will
+sort of set up the initial random configuration of our environment. In the case of Blackjack,
+This is, you can think of this as dealing our cards.
+I'll talk a little bit more about what all these things mean
+when we get deeper into just sort of the generalities
+of reinforcement learning.
+But you can think of this as being,
+you take your first observation
+of the state of your environment
+when it's been randomly initialized.
+Then what we'll do is we'll actually
+just display a visualization in the notebook
+just showing what the dealer's hand looks like
+and what the player's hand looks like.
+This isn't really necessary if you're running some learning
+algorithm behind the scenes, but it's useful if you're
+interacting, if I'm viewing this directly myself.
+So I'm going to render a visualization
+of what the current configuration looks like.
+And then I'm just going to loop.
+I'm going to loop one and just make my decisions
+to play the game interactively until the game ends.
+And so as long as we're playing the game,
+The first thing I'm gonna do is I'm gonna be prompted
+to see whether or not I wanna take a new card.
+That's what we call hitting.
+Do I wanna take a new card or do I wanna stop
+and stay with the hand that I have right now?
+And that's called standing.
+So I'm gonna play the role of the decision-making agent
+so I'll make that decision in each step.
+Once that action has been chosen,
+we'll pass it to the environment
+and we'll see what happens, right?
+Like, okay, I'm dealt a new card.
+Does that new card put me over 21?
+if it doesn't, what's my new hand value? And so on. And then I'll just update the display
+of the environment. So that's all we're going to do here, right, just to sort of show how
+gymnasium works. So in this case, this is the initial state that we've been dealt
+where I have hand worth 15.
+Part of that hand is composed of an ace.
+It's saying usable ace here, meaning I have an ace.
+It's probably the case that I have two cards.
+It doesn't show me my two cards, right?
+But I'm going to assume it's an ace and a four, right?
+Because it's an ace that I'm probably using as 11 plus a four.
+That's giving me a total of 15.
+And then this is the dealer's hand.
+And the funny thing about the dealer with Blackjack
+is that they show one of their two cards as I'm playing.
+So I have some kind of hint about what the dealer has
+in their hand.
+And then I can make my decisions to play from there.
+And for some reason, I'm not seeing the, here, let me,
+I should be prompted to, I should be prompted here
+to take an action.
+OK, yeah, there we go.
+Yeah, so here's a situation where, I just
+dealt a new hand here just because I don't know why it
+wasn't showing before.
+But here, I have two cards worth 11.
+The dealer is showing an ace.
+I can decide whether I want to hit or stand.
+I'm going to hit.
+I'm going to take another card.
+So I take another card.
+I must have gotten an 8, because now my hand
+is worth 19.
+I'm not going to take another card if I'm 19,
+because that's probably going to put me over 21.
+So I'm going to stop there.
+I'm going to stand.
+And then it's going to tell me what happened.
+Okay, and the only thing, the only information I get back from this visualization, it's not
+telling me exactly what the dealer's hand is, but it's actually telling me that I lost.
+So somehow or another, even though I had 19, which is pretty close to 21, the dealer
+must have beaten me.
+The dealer must have gotten a 20 or a 21.
+It's entirely possible they could have a card worth 10 sitting underneath this
+one right here, and as soon as they flipped it over, they had 21 and they beat me.
+And so this over here that I'm printing out is the reward.
+In this case, because I lost,
+I earned a reward of negative ones.
+Had I won, I would have earned a reward of one, right?
+So this is the reward signal that comes back.
+So that's just to give you an idea
+of what gymnasium looks like.
+Let's, before we close this part out,
+Let's take a look at what it actually looks like if we actually run an algorithm,
+something that in a more automated way can play blackjack.
+How would we hook up an automated strategy for playing
+blackjack to this gymnasium environment and have it play interactively with this environment?
+So we'll do a super simple heuristic strategy before we get into any learning,
+which we'll do later on in this module. So a few notes about the code sample that we just saw.
+So we created our environment using this gym.make, right? And that was the one
+liner I had mentioned before that, you know, is kind of part of this common
+interface to all these different gymnasium environments.
+We initialize our environment by calling the reset method on the environment.
+And that, in this case, deals the cards.
+When we initialize the environment,
+we get back a snapshot of the current state
+of the environment.
+This is our observation of the environment.
+And that tells me the current total
+of what my cards are worth, what the one card
+that the dealer is showing, like in the last hand
+we saw they were showing an ace, and then whether or not
+I have a usable ace that can be converted from 11 to 1.
+So that information is given to me at the start.
+I'm going to iterate over turns, where in each turn
+I'm going to choose an action.
+Each time I choose an action, I pass it to the environment.
+And passing it to the environment
+and calling the step method on the environment
+updates the environment in response to my action.
+And then when the environment's updated,
+I get a new state that gives me my new total of my cards.
+the dealer card isn't going to change and it's going to tell me, you know, maybe whether or not I still have a usable ace or maybe I picked up a new one.
+And when I call this step, it also gives me the reward, right? So you can make sure that picture that we looked at before where user takes an action, they see the updated state and they see the reward.
+This is also going to tell me the reward in each step. It's going to tell me if I get a reward of one if I won the hand, negative one if I lost the hand and zero otherwise.
+And so, yeah, there's a question here.
+What is the final outcome?
+A model which is capable of playing blackjack on its own?
+Exactly.
+Right.
+So what we're going to see here is we're going to see I can give a generic learning
+algorithm to this environment without telling it anything about the rules of blackjack.
+And after playing, you know, whatever, I think I'd give it 500,000 attempts to
+play, 500,000 hands to play, 500,000 hands to play, it will learn how to play blackjack
+pretty skillfully.
+So that's the end goal for all of this.
+What we'll just to understand how this code works,
+because this is what we're going to be working with here
+and what you'll be working with in your environment,
+we're kind of building up incrementally.
+And so the next thing we'll show is
+how would you plug in a given policy?
+Like if I had a given heuristic policy
+for playing blackjack,
+how would I plug it into this environment?
+And then what you're gonna do eventually is,
+or what we're gonna do here eventually is
+not give it a heuristic policy,
+We're just going to have it learn its own policy from scratch.
+So OK, so one other question.
+No, so it's not a one-turn game.
+It's a game where you're playing multiple turns, right?
+If the dealer is close to 14 and we have 10,
+I can say, I want another card.
+And I can ask for another card.
+And maybe if my other card is 8, I get an 8,
+and my 10 now becomes an 18.
+And then I'm prompted again.
+Now, do you still want another card?
+or do you want to keep, or do you want to stop there?
+So I can take it, I can take multiple turns
+in that I can keep asking for new cards.
+The way it's presented here,
+we don't see that iterative process for the dealer, right?
+We just see that the dealer had a hand,
+I decided to stop,
+and then we just see the dealer's final hand
+after they've pulled all of their cards.
+But for us, we get to make multiple,
+we can make up potentially multiple decisions.
+We might make a single decision, right?
+We might get our initial hand and say, that's good enough.
+I want to stop there.
+But we can take multiple turns, and we're getting feedback
+at each of those turns.
+So just to see how a simple policy might look for this,
+let's imagine that we play the policy where
+if my hand is worth less than 17, I take a new card.
+So I hit if I'm less than 17.
+And if I'm 17 or above, I stop.
+So that's going to be my policy.
+So I've implemented this just as a simple function,
+where it's going to take this state, right?
+The state's going to be this triple, right?
+This player, current, total, the dealer,
+upward-facing card, and whether or not I have usable A's.
+It's going to take those as input.
+And if I'm less than 17, I'll return one,
+meaning I want to hit, right?
+I want to take another card.
+And if it's 17 or greater, I'll return zero,
+saying I want to stop.
+So it's just a simple heuristic to get us started.
+So now I'm going to introduce this function
+that we're going to reuse throughout this module.
+You can even reuse something like this
+when you do your assignment, which
+allows us to run a simulation on an environment
+multiple times.
+So this will say, I'll tell you the number of games
+I want to play.
+And you can give me a function that implements your policy.
+So in this case, that's this function right here.
+And then it's just gonna play as many games
+as I specified.
+And in this case, it's gonna give me my win rate, right?
+So if I say, you know, play 50,000 games,
+use this policy to play them,
+it's gonna tell me what fraction of games
+I actually won using that policy.
+And so the idea here is that
+In this way, this function will work.
+I'll create my environment.
+I'll just keep track of the total number of wins
+over all of the games that I play.
+And I'm just going to iterate over the number of games
+I specified.
+Each time I play a new game, I reset the new environment.
+So I deal the cards for the first time.
+I select an action based on the policy
+that was provided in my policy function.
+In this case, it's less than 17, take a new card,
+17 or greater, stay.
+I update my environment, and then if the game ends,
+I update the count of wins, right?
+So if the game ended and I got a reward of one,
+that means I won the game,
+and so I update my count of wins.
+And then when I'm done with the whole thing,
+I close out the environment,
+and then I'm just gonna return
+the fraction of games that I won.
+So we could see how this works now when we play our simple policy here for 50,000.
+I could actually run that cell.
+Okay, so now we can see how that works if I play our simple policy for 50,000 hands.
+So I'll just take a second just to run through all of these.
+But yeah, when we're done, we won 41.26% of hands.
+And so, you know, because there's some randomness in the simulation, it can vary each time we run it.
+But, yeah, here we expect it to win around 40 to 41 percent of times.
+OK, so that shows us how to actually interact with our environment.
+Now, our ultimate goal is going to be to come up with a sort of more systematic way to learn how to play Blackjack on its own without knowing the rules of the game or any hints for strategy.
+Okay, so before we wrap up this part and take a break,
+I wanna highlight a few key concepts
+that are concepts that we're gonna see over and over again
+and they're things that we can now link back up
+to Blackjack to get some sort of
+concrete understanding of them.
+And so those key elements here are the notions
+of states, actions, and rewards, right?
+The states being like the observations
+that we could make at each period,
+Like, what the total of my hand was worth, whether I had a usable ace and what card the dealer was showing, the actions being the decisions that I get to make at each point in time, whether or not I want to take a new card or stand, and then the rewards. In this case, the reward being a signal that tells me whether I won the game or not, or whether the game is just in progress and I didn't win or lose. I just got a reward of zero.
+So let's take take a few minutes to just go through each of those for this example.
+And this will help us build some strong intuition for what these things are.
+Okay, so the state, so you can think of the state as being.
+Certainly in blackjack, but more broadly, it, it, it's something that tells you everything you need to know.
+About both the past and present.
+In order to model where the game might go in the future.
+So, this graphic here, this is sort of illustrating the state, and this is the thing that was displayed in our notebook each time we took an action.
+This tells us, again, what the total value of our hand is, whether we have a usable ace, and what card the dealer is showing.
+And when I say it tells you everything you need to know about the past and the present in order to model where the game is going in the future,
+The idea there is it doesn't matter how I got to 20.
+It doesn't matter whether I had a seven, a three, and then a card worth a 10.
+It doesn't matter whether I was dealt a king and a 10 on my first hand.
+It doesn't matter whether I have four cards that are, or in this case, I have a usable ace, right?
+So I know I have at least an ace.
+But it doesn't matter whether I have, you know, ace three six or I was dealt ace six three.
+All that matters is that's where I am right now.
+And that's the only information that's relevant to what might happen in, you know, subsequent plays.
+And so the idea is that all of these problems, we have something like this, where there's something that sort of summarizes everything you need to know about this system in order to kind of say where it might go next.
+And sometimes there are lots of ways you could get there and it doesn't matter how you got there.
+All that matters is that you're there right now.
+And so that's this notion of state.
+And so that's a really key concept in modeling these reinforcement learning problems, is that you have to have some notion of what the state is in your problem.
+And that's something that you're going to model explicitly.
+And so what we need to know about the past and the present in this case, I've already said it a bunch of times, but just to really reiterate it.
+The total value of the player's hand, and we see that right here.
+Which card the dealer is showing, we see that right here.
+And whether the player has an ace, that can be reduced in value.
+Like they're using it as an 11 right now, but it can be reduced to a 1.
+And that's indicated right here.
+And there's nothing else about the present or the past, like the order of the cards that were drawn doesn't matter.
+That's relevant for determining what might happen next.
+That's the only thing you need to know if you want to know what's going on.
+What might happen next.
+So that's the concept of state in Blackjack, but this is the idea of state that we're going to see in every one of these problems that we look at.
+And so the actions in this case are pretty simple, right?
+There are two decisions I can make in every turn.
+I can take another card, or I can stop taking cards.
+I can hit, or I can stay.
+And so these are my two actions.
+And then the rewards that I get in this particular case.
+Are modeled as follows.
+I mentioned this before, but just again to see it here.
+If I win the hand, like if I beat the dealer, I get positive one.
+That's the good outcome.
+If I lose the hand, the dealer beats me, I get negative one.
+That's I lost.
+That's the bad outcome.
+And then everything else in leading up to a win or a loss is zero reward.
+That's the game is in progress.
+So I get zero reward.
+And so I only re in this case.
+I only received non-zero or non-zero reward once in a given hand, even though I might make multiple decisions.
+And the goal is to select actions that move towards a state where we're likely to eventually earn a positive reward.
+And so that's how you could see how this is getting a little bit tricky, where I only get the reward at the other, at the end of the game.
+But how can I, at a given point in time say, huh, like, well, I'm not, I know I'm not going to get any reward.
+It's no, it's unlikely that I'm going to get a reward for this action I make now.
+But this action I perform now is going to put me in a better position to more likely achieve a reward of one in the future.
+Um, and so that's the kind of, you know, learning that these algorithms, those are the kinds of things that these algorithms need to learn how to do well.
+That's sort of, you know, multi-step looking ahead, considering the uncertainty of the environment.
+So there's one other important element of this, and this is something that we actually don't have to model explicitly in the learning algorithms, but when we talk about Markov decision processes next, we will spend some time trying to explicitly model these.
+And this is the part that's kind of a pain.
+And it's one of the things that's nice about the learning algorithms is that we don't have to do this.
+But if we're, if we were to actually model the game of blackjack, we would also have to somehow explicitly model state transitions.
+Like we would have to say, if this is what my hand is right now, and this is the card that the dealer is using, I'm going to have to do this.
+And this is what the dealer is showing.
+And I make a decision to take another card.
+What states might I go into next?
+And for every single one of those specific states I might go to next, what's the probability that I go from where I am now to that specific state?
+Right.
+So like at each turn, I make a decision and then I go to some other state and there's even some randomness in terms of determining which state I go to.
+Um, and if I was going to model this explicitly.
+I would actually have to work out those probabilities for every possible pair of states that I could go from right now to in the next step.
+Um, and those are actually influenced by my action.
+So I'd have to do it twice.
+In this case, I'd have to do it once for each possible action that I could take.
+Um, so just to look at an example, if I suppose my current state is 14, 10, 0, meaning that the total value of my hand is 14.
+The dealer is showing a 10 or a jack.
+A queen or a king.
+A card worth 10.
+Um, in their hand.
+And I don't have a usable ace.
+If I choose to hit.
+So if I choose to take another card.
+I could, I could transition maybe from.
+Uh, 14, 10, 0 to 16, 10, 0 to 17, 10, 0.
+In fact, I could go to 15, 10, 0.
+If I got an ace and I used it right away.
+So there are all these different states I could go to.
+Like, so for example.
+One of the states I could go to among others is 19, 10, 0.
+And that would incur, that would achieve a reward of zero.
+And so if I was fully modeling this, I would have to go through each of these and work out those probabilities.
+Well, what is the probability that I go to 19, 10, 0?
+Well, it's the probability that I'm Delta five.
+I could work out what the probability is that I've dealt exactly a card worth five.
+Um, if I choose to stay.
+Then this remains my hand.
+But then the deal.
+Or we'll play their whole handout.
+And I might either win because I beat the dealer with a 14 or I might lose because the dealer beat me.
+In which case.
+I'm going to go to some end state, but then I'm going to either achieve a reward of negative one or positive one.
+And I would want to work out the probabilities of also of each of those possible possible outcomes.
+Um, and so we'll see later on that you could explicitly model these state transitions by conditional probabilities.
+You know, what's the next state given the current state.
+And the action.
+Um, that's the sort of painful process that will go through for Markov decision processes.
+The learning algorithms will sort of implicitly learn that.
+We have those.
+They'll they'll be able to learn everything they need to know about state transitions just by interacting with the environment.
+Okay, so.
+Um, just to close this section out just to generalize everything we've seen so far.
+So the problems that we're going to going to look at.
+The.
+The broader class of problems that we're going to look at.
+We could call them multi stage decision problems, and they all have several common characteristics.
+There's a sequence of decisions that needs to be made over time.
+There's some information that's available to you.
+When making each decision, right?
+Like, so you could look at your current state that can guide what decision that you're going to make.
+There's uncertainty.
+There doesn't have to be, but in general, there can be uncertainty in the outcomes.
+And your decisions are made to sort of balance long.
+Term versus short term rewards.
+Right?
+Like, I'm not necessarily saying, well, what's going to give me the most reward right now?
+I might also be thinking, well, you know, what's something I could do that's not going to give me a reward right now, but it's going to put me in a state that's going to leave me better positioned to collect rewards in the future.
+So that the type of decision making that you're making is kind of balancing that long term versus short term thinking.
+And so Markov decision processes are a mathematical framework that you could use to.
+Model these types of problems.
+You could kind of.
+Give a mathematical form for a formula.
+Formulation that captures all of these aspects.
+And so that's the first.
+That's the next thing we're going to do is we're going to go through this Markov decision process for framework.
+And then from there, we'll say, okay, let's look, let's, let's, let's, let's look at reinforcement learning algorithms as a way of solving Markov decision processes.
+Okay.
+So just to summarize the key takeaways here is that in reinforcement learning.
+You have systems that learn to act by interacting with their environment.
+States actions and rewards are, are these key elements that we're going to be talking about over and over again, as we go through this.
+Actions, you know, you, you pick an action in each at each period and actions.
+Influence the environment.
+They can influence which state you go to next and what rewards you can earn.
+And these are things that you take that are taken sequentially.
+And.
+You.
+Have to your museum.
+One way to answer those questions is.
+You use the States summarized the information that you, you need to know, in order to select an action.
+And they kind of tell you everything about the past and the present.
+And that rewards are really the, the, the thing that you want to collect.
+before we go into Markov decision processes.
+All right, so we will wrap up this section with a quick quiz.
+We'll go back to our dice game that we had talked about at the very beginning and we'll start linking that up to some of the concepts that we've covered here.
+And then we'll do that in each of the following sections as well.
+So in the dice game that we had earlier, what do you think the state's actions and rewards are in this game?
+So give that a few minutes of thought.
+After you think about it for a few minutes, you can put some ideas in the chat for other folks to see and then we'll cover what the state's actions and rewards are.
+Okay, I see some good suggestions for the state.
+What about the actions and rewards?
+Any thoughts on that?
+Good, good.
+I'm seeing all the right answers come in here.
+But also some interesting things that are thinking a little bit ahead that I'll point out.
+Some of the ones that were a little bit different than what I was thinking.
+So the action is that decision.
+Do I roll again?
+Or do I collect the payout and stop?
+And I can see a number of folks had that.
+Action equals roll, stop.
+I see that one here.
+Action, do we need next roll?
+So exactly, that's the exact idea.
+The states being the die outcomes.
+What number is showing right now?
+Although you might think of there even being a special state to indicate that the game is over.
+That's something that we'll talk about in a little bit.
+Okay.
+In more generality, when we talk about modeling Markov decision processes later.
+Something that can let us know, okay, we're not playing anymore.
+The game has ended.
+But certainly the die outcomes.
+Which number is showing on the die?
+And I see that here as well.
+And then the reward is the dollar amount that you received.
+Which could be zero on a given turn if you've decided to keep playing.
+If you're eligible to take another turn and you're going to keep playing, it might be zero because you haven't stopped the game yet.
+But I do see that one of the answers here was, where was it?
+There was one that mentioned, yeah, reward.
+Some, I think Benjamin had put reward, current reward versus expected future reward, which is a really, you're thinking ahead here, which is good.
+Like that's ultimately the thing that we want to learn.
+We want to learn this model of expected, expected, and expected reward.
+And you want to be able to compare that against what reward I could get now versus what reward I might be able to earn if I keep playing.
+That's going to be the key thing that we actually learn in these learning, these value-based learning algorithms.
+Or that's going to be the sort of solution that we're after when we solve Markov decision processes.
+But that's kind of distinct from the basic one-step reward itself.
+The basic one-step reward itself is like, did you collect any money yet?
+Or did you, or not, right?
+It's zero or the money that you collected right now because you decided to stop the game.
+When you actually solve this, we're going to be thinking like, okay, well, this is how much I could get right now.
+But if I keep playing, there's some expected future reward.
+So, you know, it's good you're thinking ahead.
+That's not what the reward is in this context, but that's something that we're going to be exposed to later on.
+Okay, good.
+So we're going to take a break.
+Does anybody have any questions?
+Any questions that they'd want to cover before we move on to the next module?
+You can put those in the Q&A and we can do a quick Q&A section.
+Or if we've covered everything as we've been going forward, we could stop here and take about five minutes.
+So I'll wait a minute to see if any questions come in.
+And then if not, if not, we'll break.
+Okay.
+All right.
+I'm not seeing any questions coming in.
+It is, I'm on the East Coast.
+So it's 1.17 my time right now.
+Why don't we come back in about five minutes?
+We've got a lot of stuff to cover.
+So if we come back at 1.22, I'll answer any questions that come in between now and then if there are some that come in.
+But otherwise, we'll come back at 1.22 and we'll pick it up on the next section.
+All right.
+Everyone, welcome back.
+So I don't see any new questions in the Q&A.
+So I think we can just move ahead.
+We can get on to the next section.
+So here's where we are now.
+So we've laid down some of the background.
+I think we have enough of the intuition built up through our blackjack example that we could start to cover Markov decision processes.
+So this is probably going to be the most kind of math and theory heavy part.
+I think we're going to continue to work on that.
+I think we're going to continue tofloat on that.
+So we're going to continue to work on the question of what's the best way to get the most out of this module?
+But this is important to build a foundation for everything that we do with Q-learning and then everything that you'll do with the policy-based methods that you'll see in the next module as well.
+So it's important to lay this one down and kind of get familiar with these details, even though we're not necessarily seeing any learning algorithms yet at this point.
+Okay.
+So let's sort of spell out abstractly what a Markov decision process is.
+But in the meantime, let's link this up with some things that we have some intuition about right now.
+So typically when we talk about Markov decision processes, often what people are actually referring to are finite state, finite action Markov decision processes.
+And what we mean by a finite state, finite action MDP is a problem where a problem instance is specified by some finite set of states.
+And you could think of these as all the possible states that you could be in.
+So in Blackjack, this is all the possible observable values of hand that I can have, card that dealer is showing, and yes or no, whether or not I have a usable ace.
+So this is all the possibilities.
+This is the whole space of possible states that I might observe.
+And there are finitely many of them.
+For Blackjack and for the types of problems that we're going to talk about here, there are finitely many of them.
+You have a finite set of actions that you could take in each period.
+So in the case of Blackjack, that's two.
+The size of that action space is two.
+But it could be any finite set of actions.
+You have some reward function.
+And in this case, we say that the reward function is a function of the state that you're in now, the action that you chose, and the state that you landed in next after choosing that action.
+So in this case, S is the current state.
+A is the action.
+And then this thing that we're calling S prime here is the next.
+And then this thing that we're calling S prime is the next state.
+Now, we're going to see a trick that we can use to simplify that later on so that we can make the rewards just a function of the current state and action.
+But in general, when we start out with this, let's just say that the rewards can be a function of where you are now, what action you took, and where you ended up next.
+So then you have this state transition probability function, which tells us if you're in a certain state right now, and you take some.
+Action right now.
+What are all the probabilities associated with each of the individual states that you could end up in next, in the state space.
+And this is this thing I was kind of referring to before when we were talking about state transitions were talking about a specific blackjack hand.
+I think it was 14-10-0.
+Well, there are all these different states I could end up in if I choose to take another card.
+If I was going to model this explicitly, I need to model actually those probabilities of going from that state to every possible other state.
+other state that I could actually transition to.
+Then often I have, in general, I could have some initial state distribution as well, right?
+That's something that just sort of tells me, you know, when I start out, what state am I in?
+And that might be random.
+And what's the distribution over states that I might start in?
+So you can think of this in the case of blackjack is, as cards are shuffled, you're dealt some hand, you're going to be dealt some random hand.
+What's the distribution over possible hands that you could be dealt at the start of the game?
+It turns out that we don't actually really need to worry too much about this one.
+I mean, for completeness, you would include this as part of the model.
+But when you're coming up with strategies for your learning algorithm, or even if you're solving it in a markup decision process directly, that turns out not to actually even be something that you need to use in constructing the solution.
+So we won't worry too much about that one.
+Um, but but that's, that's another, it could be another element of your model, right?
+The sort of distribution of what states you started.
+And then the goal, you know, if I give you a markup decision process, right, I specify each of these ingredients for some specific problem and say, Okay, here's your markup decision process.
+Well, what do you want to do?
+Well, your goal is to find some way of selecting actions that maximize some notion of reward over time, right?
+So I'm going to be selecting lots of actions, and I'm going to be collecting a lot of actions.
+And I'm going to be collecting a lot of actions.
+And I'm going to be collecting maybe lots of rewards over time, I want to have some method of selecting a sequence of actions to maximize the expected cumulative reward that's earned earned over some time horizon, the fixed time horizon that I'm going to whatever time horizon, I'm going to be sort of running the system for.
+And the time horizon that's considered can depend on the problem.
+And so what I mean by time horizon is, in the case of blackjack, the time horizon was the number of steps, however many steps it takes.
+is the number of steps it takes.
+In order for the hand to end, right.
+I could on my first turn say, That's it, I don't, I don't want to take another card, I'm going to stay.
+In the dealer plays their hand in the games over, and that was the full horizon.
+Or I could sit there and I could hit maybe multiple times without going over 21 and the number of steps that that took is my time horizon.
+There are going to be problems that you could imagine.
+Your time horizon is just infinite.
+You just kind of keep.
+on the specific problem.
+And that's something that we want to kind of be thinking about as we're modeling these as well.
+And there's some nice tricks you can use to kind of put all problems into the framework of an infinite horizon problem.
+And that makes some of the theory a little bit easier because you don't have to think about different exceptions and how to handle them differently.
+But you have this notion of time horizon when you're working with Markov decision processes, which is an important ingredient.
+Okay, so just to sort of see a graphical representation of all of this.
+And these types of pictures here, these types of bubble diagrams that I show here are actually really common.
+If you pick up a textbook or you start reading around on the web about MDPs, you'll surely run into one of these kinds of things.
+What this state transition diagram is illustrating is a system where you have, you have three states, right?
+So here's state one, or sorry, state zero, state one, and state two.
+So you have these three different states.
+From each of these states, you could take one of two actions.
+So let's say I'm sitting here in state zero.
+I can choose between action zero or action one.
+I have state transition probabilities that depend on my current state and the action that I choose, right?
+So for example, if I'm sitting here, I'm sitting here in state zero, and I choose action zero, then there are two possible transitions.
+With probability 0.5, I go to state two, and that's illustrated by this arrow here with the 0.5 next to it.
+Or with probability 0.5, I'm going to go back to state zero, and that's indicated by this arrow here.
+And then I have a couple of specific transitions in this diagram.
+So for example, if I'm sitting here in state one, and I choose action zero, there's a probability of 0.7 that I go back to state zero.
+And in this case, I earn a reward of plus five units.
+That's good.
+So that's what I want.
+I want positive reward.
+On the other hand, if I'm sitting here in state two, and I choose action one, there's a probability of 0.5 that I transition back to state zero, and in the process, earn a reward of negative one.
+Negative rewards are bad.
+Those are costs.
+And so you can imagine if you're solving this Markov decision process, and you're trying to find a rule for selecting actions, what you want to do probably is you probably want to drive yourself to state one as often as possible.
+And then once you're in state, you're going to have to do a lot of work.
+And then once you're in state one, you want to choose action zero, because that's the one that's most, that's the only action, in fact, that can earn you any positive reward.
+And with probability 0.7, it does.
+So you want to do whatever you can to get yourself into state one as quickly as possible, hopefully avoiding these negative rewards.
+And then you want to choose action zero, right?
+So that's sort of, you know, the thing that you can pull out of this diagram if you look at this graphical representation of this particular problem.
+Anyway, I just point this out because these types of diagrams are super common.
+Like if you start reading about this, you're probably going to see these types of diagrams used to illustrate MDPs.
+All right.
+So I had mentioned time horizon before as, you know, an important characteristic of an MDP.
+And there's this distinction between what are called episodic tasks and continuing tasks.
+And this is really common in the reinforcement learning literature too.
+Like you'll sort of see this distinction made.
+It's a useful distinction in terms of kind of, you know, thinking about modeling specific problems.
+Mathematically, it turns out that everything can be cast in the framework of a continuing task.
+And so let's understand what the distinction is first, but then we'll see the modeling trick that lets us just handle one of these cases.
+And that makes our lives simpler because we just don't have to think about these two different cases and handle them differently.
+So an episodic task, episodic tasks are these ones like blackjack, where they have a constant number of cases.
+And then they have a clear start and end.
+The game starts when I'm dealt my cards.
+It ends when either I win or the dealer wins.
+Right?
+And I don't know how many turns it's going to take.
+It might take one turn.
+It might take two turns.
+It might take five turns.
+But there's a clear start and end.
+And there are these conditions that characterize when the game ends.
+You could also think of the game ending in a terminal state.
+Like there's some sort of last state that the system will land in.
+And when it lands in that state, it's over.
+Nothing else is happening.
+So in the case of blackjack, that might be something like having a win or a lose state.
+We'll see that in a minute, right?
+Where you win the game or you lose the game.
+And that's our terminal state.
+And then reward is accumulated over a finite time horizon.
+And we saw in the case of blackjack, you can have lots of situations where you get zero reward.
+But in general, you have this finite time horizon.
+And you're accumulating rewards.
+Then the game ends.
+You land in your terminal state.
+It's over.
+You stop collecting reward.
+And that's the end.
+And so there's a single episode.
+That's the idea.
+You can think of this as there's a single episode that has a clear start and a clear end.
+A continuing task, on the other hand, it just never ends.
+It just runs continuously.
+Like you're just forever bouncing around.
+You're in the state space just collecting rewards.
+You don't have any terminal state.
+There's no clear end to the game.
+And your reward is something that you're just accumulating indefinitely.
+So in fact, this thing that we saw on this slide right here, you could think of that as a continuing task.
+Because state 0, 1, or 2, whichever state you're in, you're expected to make some decision.
+And then you're going to transition to another state.
+There's no clear end to this game.
+You just keep bouncing around between states.
+0, 1, and 2, collecting reward where you can, hopefully avoiding paying that negative 1 reward.
+And you're just going to indefinitely keep accumulating reward as you play.
+So that would be an example of sort of an abstract example, but something like a continuing task.
+In reality, you might think of something like a certain robotics example, like a continuing task.
+Like maybe you have a robot that just performs a certain task over and over again.
+There's no clear, I mean, yes, at some point in principle, you're going to stop it.
+But you're going to stop it.
+But that's not like a clearly defined event in modeling this.
+You just want to kind of keep performing this task indefinitely.
+You might model that as a continuing task where you just say, well, let's just assume I do it forever.
+And treat the way you model transitions and rewards and so on as though that's the case.
+So that's a distinction that we're going to make between episodic and continuing.
+But like I've been saying, we're going to focus on it.
+We're going to do it.
+We're going to do it.
+We're going to do it.
+We're going to do it.
+We're going to do it.
+We're going to develop a common formulation that captures both kinds of tasks.
+Turns out you can model both of these things as continuing tasks.
+And then we can just have one sort of set of algorithms for dealing with continuing tasks.
+And we don't have to worry about any distinctions between those.
+OK.
+So for any episodic task, what we can do is we can model the task as having a terminal state.
+That's what you'd call it.
+We'd call it an absorbing state.
+And an absorbing state is a state that always transition back to itself.
+And it earns zero reward.
+And so what that means is that if this task is just continuing on indefinitely, then you might bounce around between states one, two, and three.
+In this case, you go from state one to state two.
+You go to state three.
+And maybe you're earning.
+Positive reward or negative reward as you're doing that.
+But at some point, you're going to go to one of these terminal states.
+Which once you land there.
+You're then only going to just keep transitioning back to the state over and over indefinitely and earning no reward.
+And so if you think about it that way.
+Then, you know, anything interesting happens over a finite time horizon, right?
+Anything that's interesting happen that happens, happens while you're moving around.
+But there's nothing interesting that happens over the course of time.
+So it's not that you're going to just keep moving around in between states one, two, and three.
+But in principle, this thing does run continuously forever.
+It's just at some point you land in one of these absorbing states and then nothing interesting ever happens again, right?
+You just sort of stay there and you just keep transitioning back to yourself and earning no reward.
+And so what about Blackjack?
+Right.
+I mean, so Blackjack was clearly an episodic task, but how might we model it?
+As a continuing task.
+So the idea there.
+Is.
+This.
+you could think of this as, you know, with Blackjack, you have some state space, right?
+You have some, you know, different states that you could be in.
+Like, I think we used 14, 10, 0 as an example of a state.
+And you might have all these other states corresponding to hands that you could have, right?
+In fact, I'm just going to draw this big cloud here of all my other states.
+And I can transition, you know, back and forth between these different states based on, based on, you know, whether I decide to hit or stay.
+And then what I would do is I'm going to add two new states.
+In addition to all these kind of natural states that we have here of, you know, the card that I'm showing, the card, my hand value, the dealer's card that's showing in the usable ace, I might add, these separate win and lose states where if at any point in time, you know, I draw over 21, I automatically go to the lose state.
+This transition has a reward of negative one.
+Going from any state to the, to the lose state gives me a transition, transitioning from any state to the lose state gives me a reward of negative one.
+And then once I land there, I just stay there.
+Forever.
+And I earn a reward of zero, right?
+I could just stay there and I just keep looping back and back, back and forth, back to my lose state, earning no reward.
+The only time I earn a reward is in that one step into the lose state.
+And then from there, I just stay there.
+And similar thing with win, right?
+There might be some chance that, you know, from my various states, I can transition into the win state, in which case I get a reward of plus one.
+For that transition.
+But then once I land there, I just keep looping back and forth.
+I'm sorry, looping back to win over and over again and incurring zero reward.
+And so that might be one way that I could model blackjack is I'm going to introduce these sort of artificial win and lose states with self transitions, zero rewards on those self transitions.
+And then, you know, rewards of one and minus one when I enter those states for the first time.
+Okay, so so what I mean, like, it seems like we just took something that was seemed like it was being modeled in a fairly straightforward way.
+And we kind of just made it more complex.
+Just so we could model it in an infinite time horizon continuing task format.
+Well, this just nice just because now now, as far as we're concerned, every single task is a continuing task.
+We don't have to make this distinction between episodic and continuing when we're developing algorithms to solve the problems.
+You solve every problem as though it's a continuing task.
+And then you know that you can whatever, whatever the way the problem presents itself to you, you can always convert it to a continuing task.
+So that that's the point of this exercise here.
+So we're going to do one more simplification before we get to the sort of general framework for solving continuing tasks.
+And that's that we could simplify our reward structure somewhat.
+So even though we're not going to be able to solve all of these tasks, we're going to be able to solve all of these tasks.
+So let's just Yuan you ended up having the same kind of set of functions as I did with the tutorial to prove these are set quasi forward Each just a way of a simple basic, you know, analog analyze learning.
+And really, one it when we specified the problem originally, we said the most general formulation and rewards that were a function of your, you know, your current state, your action and your next day.
+It turns out that we can degree of freedom that we need to consider in the algorithms for solving these problems.
+And that's just going to be something that we're going to sort of, you know, move the effort over to modeling just to make sure that when we set up a model, we know how to capture rewards in this format.
+And so the idea here is that a Markov decision process that has rewards in this format, this state action next state format, can always be converted into one that has rewards in this state action format by just defining the state action reward as the expected reward where the expectation is taken over the next state.
+So this here is the transition probability to all the different next states given your current state in action.
+And then all I have to do is basically, just sum this if I have finite state finite action MDP is I just sum this, I just sum it over all values of S prime.
+And that just gives me the expected reward if I'm in state S and I take action A.
+Yeah, so I can interpret this as the expected reward if I choose action A in state S.
+And then if I model the problem that way, I can interpret this as the expected reward if I choose action A in state S.
+And then if I model the problem that way, I can interpret this as the expected reward if I choose action A in state S.
+Then the policy, the optimal strategy for choosing actions is indifferent to which formulation of the rewards I use.
+If I were to use rewards in this format, I'm going to get the same exact optimal strategy as I would if I use rewards of this format.
+So again, this just kind of gives us a simple common format to specify these problems in when we're developing the algorithms for actually solving them.
+And then for Blackjack, how do you interpret these rewards, right?
+So Blackjack, you know, we looked at this example over here.
+We said, you know, I had these rewards of plus one if I'm in some state and I transition into the win state.
+So it seems to be pretty dependent on which state I go to next.
+Similarly, this seems to be pretty dependent on which state I go to next.
+If I lose, I get a reward of negative one if I go from some state to the lose state.
+It's dependent on which one I'm going to go to next.
+So I'm going to go from some state to the lose state.
+So I'm going to go from some state to the lose state.
+And I'm transitioning into.
+But you can still set up.
+You can still set up rewards of these formats for Blackjack, right?
+So if I'm in some state.
+And I choose to hit, right, like the action that I choose is to take a new card.
+Then the reward in this case is just equal to negative one times.
+The probability.
+That I transition to the lose state.
+Right.
+So if I had.
+If I'm in some state right now and I choose to hit.
+I can just find.
+The probability that I transition to the lose state from that state and multiply that by negative one.
+And that gives me the equivalent.
+That gives me the equivalent state action reward.
+And similarly.
+If I'm in some state.
+And I decide to stay.
+Then that just gives me, you know, the equivalent state action reward is just negative one.
+Times the probability.
+That I transition into the lose state.
+Plus.
+One times the probability that I transition to the win state.
+So I'm going to transition to one of those.
+Once I decide to stay in the next.
+I'm either going to.
+I'm either going to win or I'm going to lose.
+In the next.
+In the next state.
+And so.
+The reward associated with that state action pair in any given state.
+If I choose to stay.
+Can be computed from the.
+State action.
+Next state reward in that way.
+So I always have.
+Some way of converting back to this format.
+And again, this is just giving me kind of a simpler.
+Common framework that I can.
+Or common formulation of the model that I can work with.
+Okay.
+So.
+So.
+I think at this point, what we want to do is we want to.
+Start thinking about.
+How does it.
+You know.
+If I'm.
+If I'm.
+Running this system over an infinite time horizon.
+And my goal is to.
+Collect cumulative rewards over time.
+Is that a problem?
+Like, is that going to be something that actually causes us problems?
+Because.
+You know, what if I was earning a reward.
+You know.
+I'm just going to accumulate a reward.
+For.
+You know.
+One or two units at every time period.
+And I'm just doing this forever.
+I mean.
+Isn't this just going to accumulate without any bound at all.
+And so the idea here is that.
+You know.
+I need to have some sort of mechanism from.
+For, you know, making the.
+The reward that I can incur over a continuing time horizon.
+Not just blow up.
+Not just go out to infinity as my.
+As I just play this game longer and longer and longer.
+And.
+Without having an exhaust of 끓 Ojên, either way.
+I think that body so And it these Arnold, the Jม, it's still making its strong.
+But in general.
+I mean, Oh, yeah, just the intensity of it is getting out.
+So it's not just.üllt task.
+And so how do you model these rewards when you can have an arbitrarily long time horizon, but possibly be collecting positive rewards in every single period?
+And so the idea here is what's commonly used, the most commonly used sort of framework for modeling.
+This case is what's called an expected total discounted reward.
+And the idea is that you add up your expected rewards over this whole infinite horizon for your continuing task, but you multiply your rewards in each period by this discount factor.
+And this discount factor is strictly less than one, right?
+So let's say, for example, my discount factor is equal to 0.99.
+That means that time zero, I'm raising this to the t power where t is the time step I'm looking at.
+I'm sitting here and I'm looking at the very first time step, but I raise it to the zero.
+That's going to be 0.99.
+And so I'm going to be able to multiply that by 0.99.
+And so I'm going to equal to one.
+But my reward in my next time period is going to be weighed by 0.99.
+After that, it's going to be weighed by 0.99 squared.
+And so basically what I'm doing is I'm weighing these by a few discounts on my rewards.
+Then I can be getting positive reward on every single time step.
+I can be looking at an infinite time horizon, but that infinite horizon discounted reward will still converge to something finite.
+As long as I'm using this discount factor that's strictly less than one, something between zero and strictly less than one.
+And so it's super common to see this sort of discounted reward formulation.
+Like again, if you look at any textbooks on reinforcement learning or you look at any papers, you're almost always going to see this kind of formulation that has this discount factor thrown into the reward.
+And that discount factor is something that's ultimately introduced for this reason.
+But it also has you can be justified from two angles.
+One of them being that it's mathematically convenient for the reasons we just mentioned.
+Like your infinite sums yield finite values.
+So I don't have to worry about my cumulative reward blowing up as my time horizon gets longer and longer.
+But it's also actually like an economically justifiable way to think about reward.
+Basically what it's saying is, if I give you a dollar now, or if I give you a dollar in 100 years, are those the exact same thing?
+I mean, it's a dollar, right?
+A dollar is a dollar.
+Why do you care if I give it to you now versus 100 years from now?
+Well, obviously you want it now versus 100 years from now.
+Deferring that reward, even though it's the exact same reward, is going to be worth less to you.
+I mean, 100 years is kind of ridiculous because we all have a finite lifetime, but you get the idea, right?
+You know, if I give you something now, you have the option to just hold on to it as long as you want.
+Even if I said I'm going to give you a dollar in two weeks, well, great, I could take it now and just put it away for two weeks.
+But I'd have the option to spend it before then if I wanted to.
+But if you tell me you're only going to give it to me for two weeks, I have to wait two weeks.
+So in some sense, the same reward is worth more now than it is in the future.
+And so, there's this also this kind of economic justification of discounting that there's a time value to rewards.
+Rewards received now are preferable to the same rewards received in the distant future.
+So it's not a crazy idea, right?
+It's not like this thing that's totally unnatural that's introduced purely to make the math work out.
+It actually does make sense, right?
+So those are kind of the two common reasons why this is used, but the beauty of it is that, you know, now a lot of the math becomes a lot easier, right?
+A whole number of things.
+Not only do you now have finite infinite horizon rewards, but, you know, the types of problems that we want to solve now have unique solutions.
+And it's just, you know, a number of things work out under this framework.
+And so to give you an example, right, of what this looks like.
+So let's suppose I got the exact same reward in every single time period, right?
+Like no matter what I did, I just got, I got $10.
+I got $10 in the first period, on the second period, on the third period, on the fourth period, I just did this forever.
+And let's suppose my discount factor in this case, let's say it's, let's say it's 0.9.
+Then if I were to look at this over an infinite time horizon, you know, I guess, in this case actually this should be, I should be something this from zero to infinity, then it would be Gamma to the zero R for the first time period.
+And so Gamma to the zero R for the first time period- So Gamma to the zero R for the first time period- 0, r is just going to, that's going to be equal to 1, right?
+So the first, so I'm going to have gamma to the 0, r plus gamma to the 1, r plus gamma to the gamma squared, r, and so on.
+I'm going to keep adding those up, right?
+Which would just be r plus 0.9, r plus 0.81, r, and so on.
+And if I added that up over an infinite time horizon, that actually has a closed form solution, right?
+It's just going to be 1 over 1 minus gamma times r.
+In this case, 1 minus gamma is 0.1, so 1 over 0.1 is just going to be equal to 10 r.
+So even though I'm adding these positive rewards up over an infinite time horizon, because the weight is shrinking the further I'm getting out, it actually adds up to something finite.
+Right.
+So that's this notion of discounting.
+That's something that we're going to use in all of the algorithms that we look at.
+And that's sort of how and why it gets introduced.
+All right.
+So what does it mean to actually solve an MDP?
+Like we've been talking about so far, the idea is that we want to be able to find a good way to select actions or a sequence of actions.
+But like, what do we mean specifically by, you know, you know, like, what is the actual option?
+What is the actual option?
+What is the actual option?
+What is the actual option?
+What is the actual object that we're in search of?
+You know, it's not just a sequence of actions.
+It's something beyond that.
+What we're actually looking for is a rule, right?
+It's a rule that says, given the state, here's the action that you should take, right?
+So it's this mapping from current states to actions.
+So, you know, our ultimate goal is to choose actions that maximize total discount and reward, but there's uncertainty, right?
+I can't tell you what action I'm going to take 10 steps from now, because I don't know what's going to happen 10 steps from now.
+So I'm going to take 10 steps from now.
+And I'm going to take 10 steps from now.
+And I'm going to take 10 steps from now.
+There's some randomness in the system.
+And, you know, maybe one thing could happen, maybe another thing could happen.
+And I'm going to figure out what action I take when I get there, depending on what the current state is.
+Like when you play blackjack, I don't sit down at the very start of the game and say, all right, I'll tell you what, I'm going to hit for the first for the first three turns, and then I'm going to stay.
+No, you actually look at your cards, and you make a decision based on what you've been dealt most recently, you get some feedback before you make that decision.
+And so the same exact idea is coming into play here, is that you're not just looking to specify the sequence of actions that you're going to take ahead of time, you need some sort of rule that can say, well, it depends, I'm going to look at the state, depending on what I see, that's going to dictate what action I choose next.
+You know, each time we choose an action, we want to use all the information that's available to us at that time, and all the information that's encoded in the state.
+The state encodes all the relevant information.
+And so each action should be chosen based on the state.
+And so the policy, a policy is what we're after.
+And a policy is basically a function that maps states into actions, right?
+So we'll call these, we'll call mu, we'll use mu to denote a policy.
+It's really a function from our finite action space, I'm sorry, our finite state space into our finite action space.
+And that's really what you're after, right?
+Like, if I can find a policy, and I can give that to you and say, here, here's a solution to this problem, that, that solves the MDP, right?
+That's the ultimate goal is to find a policy.
+So now when you think back to blackjack, we had this heuristic strategy that we used, right?
+If, if, if you're, if the total value of your hand is less than 17, you hit, if it's 17 or greater, you stay, that's actually a policy, right?
+That's a rule that maps every single possible state in our state space to some action.
+It ignores the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the dealer is showing.
+It ignores whether or not you have an ace, but it looks at the value of your hand.
+And for every value, hand value, it prescribes an action.
+If it's less than 17, you hit, if it's greater or equal, you stay.
+So that's a policy.
+That's an example of a policy.
+But now what we want to have is we want to have some sort of more systematic way to compute policies.
+And so that's, that's the goal of solving MDPs is have algorithms that can compute an optimal policy, a policy that can maximize the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, the, total expected discounted reward given the false problem specification of the states, the actions, the transition probabilities, and the rewards.
+Okay, so here's a quick question.
+So if you're mapping an action to every state, doesn't it become more of a deterministic solution than a probabilistic one?
+Michael bigot, FIA774 des мед.
+Yeah, sort of.
+So, in this case, what you're looking for is a deterministic policy will always solve the problem, right?
+And you could think of a deterministic policy as basically being a rule that says, hey, for every single, for every single possible state you could be in, here's what you should do.
+I just don't know which state I'm going to be in, when, right?
+And that's where the probabilistic part comes in.
+It says, I could be here, or they did it, you know What's your, like what's your definition, what, the effecient getup.
+be there that's going to dictate which action i choose but the rule for choosing the action is still prescribed based on you know the state right based on what i know about where i am right now so the way that the system evolves can be probabilistic but the rule for deciding what i do in each in each position is something that i can i can specify like i could give you a card that says hey for blackjack this is the exact uh decision you should make for every possible you know for every possible state that you're in and you could use this and it doesn't every game is going to evolve differently but still you have the same set of rules that you follow um so that's the idea here um it's going to turn out not not today right not anything we do here but what you've seen what you'll see in reinforcement learning too it's going to actually help to think about the possibility of maybe policies being being randomized as well like there being a possibility that sometimes you want to take a random action in a certain state it's going to help us computationally it's going to sort of open up the space of like how we can search over policies but for today you just want to think about policies being purely deterministic and the optimal policy is always in this in this framework is always going to be deterministic okay so in terms of computation um it helps to think about these things in terms of matrices so the idea here is that if i have a given policy right if i have a policy mu that policy is going to tell me which actions to take in in a given state and so if i have a problem that's specified by its state transition probabilities and i'm going to use a specific action right this tells me which states i'm going to go into i'm extremely mungkin to in a given state this j Tammy in a given state so if i'm going to go to gotlock point in and therefore i'm too likely to or the probability of going transitioning to each state next given my current state and um given my action but now here my action is dependent on my state because i'm plugged i've plugged in a policy then this thing right here now becomes a probability of next state given current state a policy, then my action is a function of the state.
+This whole thing just becomes now a function.
+The reward is just a function of the state.
+And so if that's the case, I can write these out for a finite state, finite action problem in terms of a matrix and a vector.
+Right?
+Like maybe I could just write this reward function just as a big vector where if I enumerate my states as one, two, three, four, five, six, all the way down to state N, then maybe, you know, this is the reward I get in the first state.
+This is the reward I get in the second state.
+This is the reward I get in the third state, all the way down.
+Similarly, I could have state transition probabilities, right?
+Where I think about, you know, this is the state that I'm in right now.
+I could be in state one, I could be in state two, and so on.
+These are the states I could go to next, right?
+So these up here are S prime.
+And then maybe there's some probability, say 0.1, that if I'm in state one, that I stay in state one.
+There's some probability of 0.3 that if I'm in state one, that I go to state two next, and so on.
+I could fill out this whole matrix.
+And so I can describe my transition probabilities as a matrix.
+I can describe my rewards as a vector.
+And once I...
+do that, I could write my expected total discounted reward just in terms of that matrix and vector, right?
+So I could have this infinite sum of, you know, discounted matrix powers.
+You know, these are just powers, you know, so I start off with p to the 0, p to the 1, p to the 2, each times that reward vector.
+And I could compute this whole infinite sum.
+And that's going to give me...
+this vector of discounted rewards starting from each initial state, right?
+And so we're kind of packing a lot of things in here, but this is sort of, you know, when we get to algorithms, this is kind of typically how these are implemented in terms of this matrix vector formulation.
+And so probably the most important concept that we see for MDPs, you know, sort of solution concept for these value-based methods is this thing called the value function, which we can define as, you know, what we call the value state with that down class.
+And that...
+is essentially what we're talking about.
+What we what built in the additionally is the 15 degree answer.
+So when it comes to 100, it's going to take the possible variable that it characterizes that infinite sum.
+And basically, what you can interpret that is, that's the expected discounted reward that I will earn starting from each initial state.
+Like if I initialize myself in state one and then I move around to all the different random states from there, I'm going to pick up some rewards over time.
+In the first element of that vector, vu is going to give me the expected reward that I earned from some sum minutes before I close it.
+You, you can, you know, you can..
+You can calculate by ta footprints, Yeah.
+So the idea is to measure the value of that vector in terms of the final costs, okay?
+starting in that state.
+The second element being the expected reward that I'd earned from starting in state two and so on.
+And so somebody had made this point when I had asked about the rewards in the dice game.
+Somebody had said, well, it's comparing what's on the dice now to the expected future reward.
+That's exactly where we're heading with this.
+And this V, this vector V, is that.
+It's those expected future rewards, right?
+This tells you if I'm running some policy, here's just the expected total reward I expect to earn over the whole future discounted if I start in a given state and then use that policy.
+So that's a super important component of the solution.
+It's going to turn out that's going to be the main thing we're going to try to find.
+And if we can find that, then later on, when we're going to try to find that, then we're going to try to find that.
+And if we can find that, then later on, when we're going to try to find that, then later on, computing policies, computing policies becomes easy.
+So, you know, just kind of keep in mind that that's sort of what we're after is being able to compute this vector v here.
+And, you know, now we'll look at some ways that that's actually computed in practice, because that ends up tying into the algorithms for finding optimal policies.
+So, this vector v that we defined on the previous slide, it actually satisfies a really interesting property, which is that for any given policy, this v mu, for any given policy mu, v mu is equal to the single stage reward plus the discount factor times that transition matrix times the value function v mu, right?
+So, it satisfies this equation.
+And so, to kind of get a sense of the you can look at this up here.
+If I were to break this sum up, right, the sum is going to be equal to, well, the first term of this sum for t equals zero, you know, this gamma p mu to the t when t is equal to zero, that term is just going to be equal to r mu.
+And then if I add up over all of the remaining terms, right, so from t equals one up to infinity, p mu to the t, r mu, that's equal to this sum, right?
+But this right here, if I just factor out a gamma p mu term from this, then I'll add a new, right?
+So, if I take this, and I just factor this out, right?
+So, I'm starting this sum from t equals one, that's equal to r mu plus gamma p mu starting from t equals zero, right?
+Because if I just multiply this term right back here through here, that's just going to increase this exponent by one.
+That's going to be the equivalent of running this sum from t equals one to infinity.
+But this right here, that's just the definition of v mu that we started with, right?
+So, that just means that v mu satisfies this equation.
+Sorry, that should be plus.
+And so, that's actually super useful to notice that it satisfies that equation, because if I'm talking about this in terms of the matrix formulation, it just becomes a matrix equation that we need to solve.
+So, this thing is called, this equation is called the Bellman equation.
+And that's actually at the heart of the value-based reinforcement learning methods that we're going to see later in the module.
+And so, you know, just to kind of interpret this a minute, right?
+It's basically saying, if you start with a value-based reinforcement, you're going to get a value-based reinforcement.
+So, if you start out in some state, s right now, that the total discounted reward, that the total expected discounted reward that you're going to earn starting out in that state is equal to the reward that you earn in the first state, plus the discount factor times the reward that you'll earn, the total discounted expected reward that you'll earn.

@@ -1,0 +1,835 @@
+And sometimes there are lots of ways you could get there, and it doesn't matter how you got there,
+all that matters is that you're there right now. And so that's this notion of state. And so
+that's a really key concept in modeling these reinforcement learning problems,
+is that you have to have some notion of what the state is in your problem,
+and that's something that you're going to model explicitly. And so what we need to
+know about the past and the present in this case, I've already said it a bunch of times,
+but just to really reiterate it, the total value
+of the player's hand, and we see that right here,
+which card the dealer is showing, we see that right here,
+and whether the player has an ace
+that can be reduced in value,
+like they're using it as an 11 right now,
+but it can be reduced to a one,
+and that's indicated right here.
+And there's nothing else about the present or the past,
+like the order of the cards that were drawn
+doesn't matter, that's relevant for determining
+what might happen next.
+That's the only thing you need to know
+if you want to know what might happen next.
+So that's the concept of state in Blackjack,
+but this is the idea of state that we're
+going to see in every one of these problems that we look at.
+And so the actions in this case are pretty simple, right?
+There are two decisions I can make in every turn.
+I can take another card, or I can stop taking cards.
+I can hit, or I can stay.
+So these are my two actions.
+And then the rewards that I get in this particular case are modeled as follows.
+I mentioned this before, but just again to see it here.
+If I win the hand, like if I beat the dealer, I get positive one.
+That's the good outcome.
+If I lose the hand, the dealer beats me, I get negative one.
+That's a loss. That's the bad outcome.
+And then everything else in leading up to a win or a loss is zero reward.
+That's the game is in progress. So I get zero reward.
+And so I only in this case I only received non zero or non zero reward once in a given hand, even though I might make multiple decisions.
+And the goal is to select actions that move towards a state where we're likely to eventually earn a positive reward.
+So that's how you could see how this is getting a little bit tricky, where I only get the reward at
+the other at the end of the game, but how can I at a given point in time say, huh, like, well,
+I know I'm not going to get any reward. It's unlikely that I'm going to get a reward
+for this action I make now, but this action I perform now is going to put me in a better
+position to more likely achieve a reward of one in the future. And so that's the kind of
+need to learn how to do well.
+That sort of multi-step, looking ahead,
+considering the uncertainty of the environment.
+So there's one other important element of this.
+And this is something that we actually
+don't have to model explicitly in the learning algorithms.
+But when we talk about Markov decision processes next,
+we will spend some time trying
+to explicitly model these.
+And this is the part that's kind of a pain.
+And it's one of the things that's
+nice about the learning algorithms
+is that we don't have to do this.
+But if we were to actually model the game of Blackjack,
+we would also have to somehow explicitly model state
+transitions.
+Like we would have to say, if this
+is what my hand is right now, and this is the card
+that the dealer is showing, and I make a decision
+to take another card, what states might I go into next?
+And for every single one of those specific states
+I might go to next, what's the probability
+that I go from where I am now to that specific state?
+right? So like at each turn I make a decision and then I go to some other state and there's
+even some randomness in terms of determining which state I go to. And if I was going to model this
+explicitly I would actually have to work out those probabilities for every possible pair of
+states that I could go from right now to in the next step. And those are actually influenced
+by my action so I'd have to do it twice in this case. I'd have to do it once for each
+possible action that I could take.
+So just to look at an example, suppose my current state
+is 14, 10, 0, meaning that the total value of my hand
+is 14, the dealer is showing a 10, or a jack, a queen,
+or a king, a card worth 10 in their hand,
+and I don't have a usable ace.
+If I choose to hit, so if I choose to take another card,
+I could transition maybe from 14.10.0 to 16.10.0 to 17.10.0. In fact, I could go to 15.10.0
+if I got an ace and I used it right away. So there are all these different states I
+could go to. So for example, one of the states I could go to, among others, is 19.10.0.
+And that would achieve a reward of 0. And so if I was fully modeling this, I would
+to go through each of these and work out those probabilities. Well, what is the probability that
+I go to 19, 10, 0? Well, it's the probability that I'm dealt a 5. I could work out what the
+probability is that I've dealt exactly a card worth 5. If I choose to stay, then this remains
+my hand, but then the dealer will play their whole hand out and I might either win because
+I beat the dealer with a 14 or I might lose because the dealer beat me, in which case
+I'm going to go to some end state, but then I'm going to either achieve a reward of negative one
+or positive one, and I would want to work out the probabilities of also each of those possible
+outcomes. And so we'll see later on that you could explicitly model these state transitions
+by conditional probabilities. You know, what's the next state given the current state and the
+action? That's the sort of painful process that we'll go through for Markov decision
+processes, the learning algorithms
+will sort of implicitly learn that.
+They'll be able to learn everything
+they need to know about state transitions just
+by interacting with the environment.
+OK, so just to close this section out,
+just to generalize everything we've seen so far.
+So the problems that we're going
+to look at, the broader class of problems
+that we're going to look at, we
+could call them multi-stage decision problems.
+And they all have several common characteristics.
+there's a sequence of decisions that needs to be made over time. There's some information that's
+available to you when making each decision, right? Like so you could look at your current state
+that can guide what decision that you're going to make. There's uncertainty. There doesn't have to
+be, but in general, there can be uncertainty in the outcomes. And your decisions are made to sort
+of balance long-term versus short-term rewards, right? Like I'm not necessarily saying, well,
+going to give me the most reward right now? I might also be thinking, well, you know, what's
+something I could do that's not going to give me a reward right now, but it's going to put me in a
+state that's going to leave me better positioned to collect rewards in the future? So that the
+type of decision making that you're making is kind of balancing that long-term versus short-term
+thinking. And so Markov decision processes are a mathematical framework that you could use to
+model these types of problems. You could kind of give a mathematical formulation that captures all of these aspects.
+And so that's the next thing we're going to do, is we're going to go through this Markov decision process framework.
+And then from there, we'll say, okay, let's look at reinforcement learning algorithms as a way of solving Markov decision processes.
+Okay, so just to summarize the key takeaways here is that in reinforcement learning, you have systems that learn to act by interacting with their environment states actions and rewards are these key elements that we're going to be talking about over and over again, as we go through this.
+Actions you pick an action in each at each period and actions.
+Influence the environment, they can influence which state you go to next and what rewards you can earn. And these are things that you take that are taken sequentially.
+The states summarize the information that you need to know in order to select an action and they kind of tell you everything about the past and the present.
+And that rewards are really the thing that you want to collect, you want to collect positive rewards and they're earned at each step as actions are taken and they can be zero reward, right, it's possible to have a situation where really nothing exciting happens and you earn zero reward but in principle you're earning some reward.
+And that's sort of the general framework that we're that we're sort of setting up before we go into Markov decision processes.
+All right. So we will wrap up this section with a quick quiz. We'll go back to our dice
+game that we had talked about at the very beginning, and we'll start linking that up
+to some of the concepts that we've covered here, and then we'll do that in each of
+the following sections as well. So in the dice game that we had earlier, what do you
+rewards are in this game. So give that a few minutes of thought. After you think about it
+for a few minutes, you can put some ideas in the chat for other folks to see, and then we'll cover
+what the state's actions and rewards are. Okay, I see some good suggestions for the state.
+What about the actions and rewards? Any thoughts on that? Good, good. Yeah, I'm seeing all the
+Some interesting things that are thinking a little bit ahead
+that I'll point out.
+Some of the ones that were a little bit different
+than what I was thinking.
+So the action is that decision.
+Do I roll again?
+Or do I collect the payout and stop?
+And I can see a number of folks had that.
+Action equals roll, stop.
+I see that one here.
+Action, do we need next roll?
+So exactly, that's the exact idea.
+The states being the die outcomes.
+What number is showing right now?
+Although you might think of there even being a special state to indicate that the game is over.
+That's something that we'll talk about in more generality when we talk about modeling Markov decision processes later.
+Something that can let us know, okay, we're not playing anymore. The game has ended.
+But certainly the die outcomes. Which number is showing on the die?
+And I see that here as well. And then the reward is the dollar amount that you received, which could be zero on a given turn. If you've, if you've decided to keep playing, right? If you, if you're eligible to take another turn and you're going to keep playing, it might be zero because you haven't stopped the game yet.
+I do see that one of the answers here was where was it?
+There was one that mentioned, yeah, reward some, I think Benjamin had put a reward current reward versus expected future award, which is a really you're thinking ahead here, which is good. Like that. That's, that's, that's ultimately the thing that we want to learn.
+We want to learn this model of expected future reward, and you want to be able to compare that against what reward I could get now versus what reward I might be able to earn if I keep playing.
+That's going to be the key thing that we actually learn in these learning out these value-based learning algorithms, or that's going to be the sort of solution that we're after when we solve Markov decision processes.
+But that's kind of distinct from the basic one-step reward itself. The basic one-step reward itself is like, did you collect any money yet, or did you or not, right? It's zero or the money that you collected right now because you decided to stop the game.
+When you actually solve this, we're going to be thinking like, okay, well, this is how much I could get right now. But if I keep playing, there's some expected future award. So, you know, it's good. You're thinking ahead that that's not what the reward is in this in this context, but that's something that we're going to be exposed to later on.
+Okay, good. So we're going to take a break.
+Does anybody have any questions that they'd want to cover before we move on to the next
+module?
+You can put those in the Q&A, and we can do a quick Q&A section.
+Or if we've covered everything as we've been going forward, we could stop here and take
+about five minutes.
+So I'll wait a minute to see if any questions come in, and then if not, if not, we'll
+break.
+Okay.
+All right.
+I'm not seeing any questions coming in.
+It is I'm on the East Coast, so it's 117 my time right now.
+Why don't we come back in about five minutes?
+We've got a lot of stuff to cover.
+So if we come back at 122,
+I'll answer any questions that come in between now
+and then if there are some that come in,
+but otherwise we'll come back at 122
+and we'll pick it up on the next section.
+All right.
+Everyone, welcome back.
+So I don't see any new questions in the Q&A,
+so I think we can just move ahead.
+We can get on to the next section.
+So here's where we are now.
+So we've laid down some of the background.
+I think we have enough of the intuition
+built up through our blackjack example
+that we can start to cover Markov decision processes.
+So this is probably going to be the most kind of math
+and theory heavy part of this module.
+But this is important to build a foundation for everything
+that we do with Q learning and then
+everything that you'll do with the policy based
+methods that you'll see in the next module as well.
+So it's important to lay this one down and kind of get
+familiar with these details, even though we're not necessarily
+seeing any learning algorithms yet at this point.
+OK, so what is a Markov decision process?
+So let's sort of spell out abstractly
+what a Markov decision process is.
+But in the meantime, let's link this up
+with some things that we have some intuition about right now.
+So typically when we talk about Markov decision
+Often what people are actually referring to are finite state, finite action Markov decision processes.
+And what we mean by a finite state finite action MDP is a problem where a problem instance is specified by some finite set of states.
+And you could think of these as all the possible states that you could be in.
+in blackjack this is all the possible observable values of hand that I can have card that dealer
+is showing and what yes or no whether or not I have a usable ace so this is all the possibilities
+right this is the whole space of possible states that I might observe and there are
+finitely many of them for blackjack and for the types of problems that we're going to
+talk about here there are finitely many of them you have a finite set of actions that
+could take in each period. So, in the case of Blackjack, that's two, right? The size of that
+state's action space is two. But it could be any finite set of actions. You have some reward function
+and in this case, we say that the reward function is a function of the state that you're
+in now, the action that you chose, and the state that you landed in next after choosing
+that action. So, in this case, S is the current state, A is the action, and then this thing
+that we're calling S prime here is the next state. Now, we're going to see a way that
+– a trick that we can use to simplify that later on so that we can make the rewards
+just a function of the current state and action. But in general, when we start out
+Let's just say that the rewards can be a function of where you are now, what action you took, and where you ended up next.
+So then you have this state transition probability function, which tells us if you're in a certain state right now and you take some action right now,
+what are all the probabilities associated with each of the individual states that you could end up in next in the state space?
+And this is this thing I was kind of referring to before when we were talking about state
+transitions.
+We were talking about a specific blackjack hand, I think it was 14, 10, 0, well there
+are all these different states I could end up in if I choose to take another card.
+If I was going to model this explicitly, I need to model actually those probabilities
+of going from that state to every possible other state that I could actually transition
+to.
+Then often I have, in general, I could have some initial state distribution as well, right?
+That's something that just sort of tells me, you know, when I start out, what state am
+I in?
+And that might be random.
+And what's the distribution over states that I might start in?
+So you can think of this in the case of blackjack is as cards are shuffled, you're
+dealt some hand, you're going to be dealt some random hand.
+What's the distribution over possible hands that you could be dealt at the start of
+game.
+It turns out that we don't actually really need
+to worry too much about this one.
+I mean, for completeness, you would include
+this as part of the model.
+But when you're coming up with strategies for your learning
+algorithm, or even if you're solving it and markup decision
+process directly, that turns out
+not to actually even be something
+that you need to use in constructing the solution.
+So we won't worry too much about that one.
+But that could be another element of your model,
+right, the sort of distribution of what states you started.
+And then the goal, you know,
+if I give you a Markov decision process, right,
+I specify each of these ingredients
+for some specific problem and say,
+okay, here's your Markov decision process.
+Well, what do you want to do?
+Well, your goal is to find some way of selecting actions
+that maximize some notion of reward over time, right?
+So I'm going to be selecting lots of actions
+and I'm going to be collecting maybe
+lots of rewards over time.
+I want to have some method of selecting a sequence of actions to maximize the expected cumulative reward that's earned over some time horizon, the fixed time horizon that I'm going to, whatever time horizon I'm going to be sort of running the system for.
+And the time horizon that's considered can depend on the problem.
+And so what I mean by time horizon is, in the case of Blackjack, the time horizon was
+the number of steps, however many steps it takes in order for the hand to end, right?
+I could on my first turn say, that's it, I don't want to take another card, I'm going
+to stay.
+And then the dealer plays their hand and the game's over.
+And that was the full horizon.
+Or I could sit there and I could hit maybe multiple times without going over 21.
+and the number of steps that that took is my time horizon.
+There are going to be problems that you could imagine
+your time horizon is just infinite.
+You just kind of keep playing them forever
+and ever and ever.
+So time horizon can be dependent
+on the specific problem.
+And that's something that we wanna
+kind of be thinking about as we're modeling these
+as well.
+And there's some nice tricks you can use
+to kind of put all problems into the framework
+of an infinite horizon problem.
+that makes some of the theory a little bit easier because you don't have to think about
+different exceptions and how to handle them differently. But you have this notion of time
+horizon when you're working with Markov decision processes, which is an important ingredient.
+Okay, so just to sort of see a graphical representation of all of this,
+in these types of pictures here, these types of bubble diagrams that I show here are actually
+really common. You know, if you pick up a textbook or you start reading around,
+You know, on the web about MDPs, you'll surely run into one of these kinds of things.
+What this state transition diagram is illustrating is a system where you have three states, right?
+So here's state one, or sorry, state zero, state one, and state two.
+So you have these three different states.
+From each of these states, you could take one of two actions.
+So let's say I'm sitting here in state 0. I can choose between action 0 or action 1.
+I have state transition probabilities that depend on my current state and the action that I choose, right?
+So, for example, if I'm sitting here in state 0 and I choose action 0, then there are two possible transitions.
+With probability 0.5, I go to state 2, and that's illustrated by this arrow here with the 0.5 next to it.
+Or with probability 0.5, I'm going to go back to state 0, and that's indicated by this arrow here.
+And then I have a couple of specific transitions in this diagram that have rewards associated with them.
+So, for example, if I'm sitting here in state 1 and I choose action 0, there's a probability
+of 0.7 that I go back to state 0, and in this case I earn a reward of plus 5 units.
+That's good.
+So that's what I want.
+I want positive reward.
+On the other hand, if I'm sitting here in state 2 and I choose action 1, there's
+probability of 0.3 that I transition back to state 0 and in the process earn a reward of
+negative 1, right? Negative rewards are bad. Those are costs. And so you can imagine if
+you're solving this Markov decision process and you're trying to find a rule for selecting
+actions, what you want to do probably is you probably want to drive yourself to state
+one as often as possible and then once you're in state one you want to choose action zero because
+that's the one that's most that that's the only action in fact that can earn you any positive
+reward and with probability 0.7 it does so you want to do whatever you can to get yourself into
+state one as quickly as possible hopefully avoiding these negative rewards and then
+you want to choose action zero right so that's sort of you know the thing that you can pull
+out of this diagram if you look at this graphical representation of this particular problem
+Anyway, I just point this out because these types of diagrams are super common, like, if you start reading about this stuff, you're probably going to see these types of diagrams used to illustrate MDPs.
+All right, so I had mentioned time horizon before as, you know, an important characteristic of an MDP, and there's this distinction between what are called episodic tasks and continuing tasks.
+And this is really common in the reinforcement learning literature too, like you'll sort of see this distinction made.
+It's a useful distinction in terms of kind of, you know, thinking about modeling specific problems. Mathematically, it turns out that everything can be cast in the framework of a continuing task.
+And so, let's understand what the distinction is first, but then we'll see the modeling trick that lets us just handle one of these cases and that makes our lives simpler because we just don't have to think about these two different cases and handle them differently.
+So an episodic task, as the episodic tasks are these ones like Blackjack, where they have a clear start and end.
+The game starts when I'm dealt my cards, it ends when either I win or the dealer wins.
+I don't know how many turns it's going to take. It might take one turn, it might take two turns, it might take five turns.
+But there's a clear start and end, and there are these conditions that characterize when
+the game ends.
+You could also think of the game ending in a terminal state, like there's some sort
+of last state that the system will land in, and when it lands in that state, it's
+over.
+Nothing else is happening.
+So in the case of Blackjack, that might be something like having a win or a lose state, you know, we'll see that in a minute, right, where you win the game or you lose the game.
+And that's the that's our terminal state.
+And then reward is accumulated over a finite time horizon, you know, we saw it in the case of Blackjack, you can have lots of situations where you get zero reward.
+But in general, you have this finite time horizon and you're accumulating rewards.
+Then the game ends. You land in your terminal state. It's over. You stop collecting reward.
+And that's the end. So there's a single episode.
+That's the idea. You know, you can think of this as there's a single episode that has a clear start and a clear end.
+A continuing task, on the other hand, it just never ends. It just runs continuously.
+Like you're just forever bouncing around this state space, just collecting rewards.
+You don't have any terminal state.
+There's no clear end to the game.
+And your reward is something that you're just
+accumulating indefinitely.
+So in fact, this thing that we saw on this slide right here,
+you could think of that as a continuing task, right?
+Because state 0, 1, or 2, it doesn't,
+whichever state you're in, you're
+expected to make some decision.
+And then you're going to transition to another state.
+There's no clear end to this game.
+You just keep bouncing around between states 0, 1, and 2,
+collecting reward where you can, hopefully avoiding paying that negative one reward,
+and you're just going to indefinitely keep accumulating reward as you play.
+So that would be an example of, you know, sort of an abstract example, but something like
+a continuing task. In reality, you might think of something like a certain robotics example,
+like a continuing task, like maybe you have a robot that just performs a certain task
+over and over again. There's no clear, I mean, yes, at some point in principle,
+going to stop it. But that's not like a clearly defined event in modeling this, right? You just
+want to kind of keep performing this task indefinitely. You might model that as a continuing
+task where you just say, well, let's just assume I do it forever and, you know, treat the way you
+model transitions and rewards and so on as though that's the case. So that's a distinction
+that we're going to make between episodic and continuing. But like I've been saying,
+we're going to focus on it.
+We're going to develop a common formulation that
+captures both kinds of tasks.
+Turns out you can model both of these things
+as continuing tasks.
+And then we can just have one sort of set
+of algorithms for dealing with continuing tasks.
+And we don't have to worry about any distinctions
+between those.
+OK, so for any episodic task, what we can do
+is we can model the task as having a terminal state.
+That's what you'd call an absorbing state.
+And an absorbing state is a state
+that always transitioned back to itself
+and it earns zero reward.
+And so what that means is that if this task
+is just continuing on indefinitely,
+then you might bounce around between states one,
+two, and three.
+In this case, you go from state one to state two,
+you go to state three.
+And maybe you're earning positive reward or negative reward as you're doing that, but at some point you're going to go to one of these terminal states, which once you land there, you're then only going to just keep transitioning back to the state over and over and definitely in earning no reward.
+And so if you think about it that way, then, you know, anything interesting happens over
+a finite time horizon, right?
+Anything that's interesting that happens, happens while you're moving around between
+states one, two, and three.
+But in principle, this thing does run continuously forever.
+It's just at some point you land in one of these absorbing states and then nothing
+interesting ever happens again, right?
+You just sort of stay there and you just keep transitioning back to yourself and earning
+no reward.
+And so what about blackjack, right, I mean, so blackjack was clearly an episodic task,
+but how might we model it as a continuing task.
+So the idea there is you could think of this as, you know, with blackjack, you have some
+state space, right, you have some, you know, different states that you could be in, like,
+I think we used 14, 10, 0 as an example of a state.
+And you might have all these other states corresponding
+to hands that you could have.
+In fact, I'm just going to draw this big cloud here.
+All my other states.
+And I can transition back and forth
+between these different states based
+on whether I decide to hit or stay.
+And then what I would do is I'm going to add two new states in addition to all these these kind of natural states that we have here of, you know, the card that I'm showing the card by the by hand value of the dealer's card that's showing in the usable ace.
+I might add these separate win and lose states, where if at any point in time.
+You know, I draw over 21. I automatically go to the lose state. This transition has a reward of negative one.
+Going from any state to the lose state gives me a transition transitioning from any state to the lose state gives me a reward of negative one.
+And then once I land there, I just stay there forever.
+And I earn a reward of zero, right? I could just stay there and I just keep looping back and back, back and forth back to my lose state, earning no reward.
+The only time I earn a reward is in that one step into the lose state. And then from there, I just stay there.
+And similar thing with win, right? There might be some chance that, you know, from my various states, I can transition into the win state, in which case I get a reward of plus one.
+for that transition, but then once I land there,
+I just keep looping back and forth,
+I'm sorry, looping back to win over and over again
+and incurring zero reward.
+And so that might be one way that I can model Blackjack
+because I'm gonna introduce these sort of artificial
+win and lose states with self transitions,
+zero rewards on those self transitions
+and then rewards of one and minus one
+when I entered those states for the first time.
+OK, so what?
+I mean, it seems like we just took something
+that seemed like it was being modeled
+in a fairly straightforward way.
+And we kind of just made it more complex
+just so we could model it in an infinite time horizon
+continuing task format.
+Well, this is nice, just because now,
+as far as we're concerned, every single task
+is a continuing task.
+We don't have to make this distinction
+between episodic and continuing
+when we're developing algorithms
+to solve the problems.
+You solve every problem as though it's a continuing task,
+and then you know that you can whatever
+the way the problem presents itself to you,
+you can always convert it to a continuing task.
+So that's the point of this exercise here.
+So we're going to do one more simplification
+before we get to the sort of general framework
+for solving continuing tasks.
+And that's that we could simplify our reward structure
+somewhat. So even though when we specified the problem, originally we said the most general
+formulation had rewards that were a function of your current state, your action, and your next
+state, it turns out that we can develop algorithms that can solve problems that only just have
+rewards that are just of this simpler structure, that are just a function of the current state
+in the current action.
+And this is just going to make things a little bit easier.
+This is just going to be one fewer degree of freedom
+that we need to consider in the algorithms for solving
+these problems.
+And that's just going to be something
+that we're going to move the effort over to modeling just
+to make sure that when we set up a model,
+we know how to capture rewards in this format.
+And so the idea here is that a Markov decision
+process that has rewards in this format, this state action next state format, can always
+be converted into one that has rewards in this state action format by just defining
+the state action reward as the expected reward where the expectation is taken over the next
+state.
+So this here is the transition probability to all the different next states given your
+current state in action, and then all I have to do is basically just sum this. If I have
+finite state, finite action MDP, is I just sum this. I just sum it over all values of
+S prime, and that just gives me the expected reward if I'm in state S and I take action
+A. Yeah, so I can interpret this as the expected reward if I choose action A in
+us. And then if I model the problem that way, then the policy, the optimal strategy for choosing
+actions is indifferent to which formulation of the rewards I use. If I were to reuse rewards in
+this format, I'm going to get the same exact optimal strategy as I would if I used rewards
+of this format. So again, this just kind of gives us a simple common format to specify
+these problems in when we're developing the algorithms
+for actually solving them.
+And then for Blackjack, how do you
+interpret these rewards?
+So Blackjack, we looked at this example over here.
+We said I had these rewards of plus 1 if I'm in some state
+and I transition into the win state.
+So it seems to be pretty dependent on which
+state I go to next.
+Similarly, this seems to be pretty dependent
+on which state I go to next.
+I lose, I get a reward of negative one if I go from some state to the lose state. It's dependent
+on which one I'm transitioning into. But you can still set up rewards of these formats
+for blackjack, right? So if I'm in some state and I choose to hit, right, like the action
+that I choose is to take a new card, then the reward in this case is just equal to negative
+1 times the probability that I transition to the lose state.
+So if I'm in some state right now and I choose to hit,
+I can just find the probability that I transition
+to the lose state from that state
+and multiply that by negative 1.
+And that gives me the equivalent state action
+reward.
+And similarly, if I'm in some state
+and I decide to stay, then that just gives me the equivalent state action reward is just
+negative 1 times the probability that I transition into the lose state plus 1 times the probability
+that I transition to the win state.
+So I'm going to transition to one of those once I decide to stay in the next.
+I'm either going to win or I'm going to lose in the next state.
+And so the reward associated with that state action pair in any given state, if I choose
+to stay, can be computed from the state action next state reward in that way.
+So I always have some way of converting back to this format.
+And again, this is just giving me kind of a simpler common framework that I can, or
+common formulation of the model that I can work with.
+Okay. So, I think at this point, what we want to do is we want to start thinking about
+how does it, you know, if I'm running this system over an infinite time horizon, and
+my goal is to collect cumulative rewards over time, is that a problem? Like, is that
+going to be something that actually causes us problems? Because, you know, what if
+I was earning a reward of one or two units
+in every time period, and I'm just doing this forever.
+I mean, isn't this just going to accumulate
+without any bound at all?
+And so the idea here is that I need
+to have some sort of mechanism for making the reward
+that I can incur over a continuing time horizon,
+not just blow up, not just go out to infinity
+as I just play this game longer and longer and longer.
+It might be in the case like Blackjack
+where it will resolve itself because I'll eventually
+transition to some absorbing state
+and then earn zero reward.
+But in general, that doesn't have
+to be the case for a continuing task.
+And so how do you model these rewards
+when you can have an arbitrarily long time
+horizon but possibly be collecting positive rewards
+in every single period?
+And so the idea here is what's commonly used, the most commonly used sort of framework for
+modeling. This case is what's called an expected total discounted reward. And the idea is that you
+add up your expected rewards over this whole infinite horizon for your continuing task,
+but you multiply your rewards in each period by this discount factor. And this discount
+factor is strictly less than 1.
+So let's say, for example, my discount factor
+is equal to 0.99.
+That means that time 0, I'm raising this to the t power
+where t is the time step I'm looking at.
+If I'm sitting here and I'm looking
+at the very first time step and I raise it to the 0,
+that's going to be equal to 1.
+But my reward in my next time period
+is going to be weighed by 0.99.
+After that, it's going to be weighed by 0.99 squared.
+And so basically what I'm doing is I'm, I'm weighing these by.
+Or.
+It's.
+Counting on my rewards.
+Then I can be getting positive reward on every single time step.
+I could be looking at an infinite time horizon.
+But that infinite horizon discounted reward will still converge to something finite.
+As long as I'm using this discount factor that's strictly less than one, something between zero and strictly less than one.
+And so it's super common to see these sort of discounted reward formulation.
+Like, again, if you look at any textbooks on reinforcement learning or you look at any papers,
+and you're almost always going to see this kind of formulation that has this discount factor
+thrown into the reward, and that discount factor is something that's ultimately introduced for this
+reason, right? But it also has, you know, it has kind of two, you can be justified from two angles,
+right? You know, one of them being that it's mathematically convenient for the reasons we
+just mentioned, like your infinite sums yield finite values, so I don't have to worry about
+my cumulative reward blowing up as my time horizon gets longer and longer, but it's also actually like an economically justifiable way to think about reward, right?
+Basically, what it's saying is, you know, if I give you a dollar now, or if I give you a dollar in 100 years, you know, are those the exact same thing?
+I mean, it's a dollar, right? A dollar's a dollar. Why do you care if I give it to you now versus 100 years from now?
+Well, obviously you want it now versus 100 years from now.
+Deferring that reward, even though it's
+the exact same reward, is going to be worth less to you.
+I mean, 100 years is kind of ridiculous
+because we all have a finite lifetime.
+But you get the idea, right?
+If I give you something now, you
+have the option to just hold on to it as long as you want.
+Even if I said I'm going to give you a dollar in two
+weeks, well, great.
+I could take it now and just put it away for two weeks.
+But I'd have the option to spend it before then
+if I wanted to.
+but if you tell me you're only going to give it to me for two weeks, I have to wait two weeks.
+So in some sense, the same reward is worth more now than it is in the future. And so there's
+this also this kind of economic justification of discounting that there's a time value to rewards.
+Rewards received now are preferable to the same rewards received in the distant future.
+So it's not a crazy idea, right? It's not like this thing that's totally unnatural,
+that's introduced purely to make the math work out. It actually does make sense, right?
+So those are kind of the two common reasons why this is used.
+But the beauty of it is that now a lot of the math
+becomes a lot easier, a whole number of things.
+Not only do you now have finite infinite horizon
+rewards, but the types of problems that we want to solve
+now have unique solutions.
+And just a number of things work out under this framework.
+And so to give you an example of what this looks like,
+so let's suppose I got the exact same reward
+in every single time period, right?
+Like, no matter what I did, I just got $10.
+I got $10 in the first period, on the second period,
+on the third period, on the fourth period,
+and I just did this forever.
+And let's suppose my discount factor in this case,
+let's say it's 0.9.
+Then if I were to look at this
+over an infinite time horizon.
+I guess in this case, actually, this
+should be something that's from 0 to infinity.
+Then it would be gamma to the 0 r for the first time period.
+And so gamma to the 0 r is just going to be equal to 1.
+So I'm going to have gamma to the 0 r plus gamma
+to the 1r plus gamma squared r, and so on.
+I'm going to keep adding those up,
+which would just be r plus 0.9r plus 0.81r, and so on.
+And if I added that up over an infinite time horizon,
+that actually has a closed form solution.
+It's just going to be 1 over 1 minus gamma times r.
+In this case, 1 minus gamma is 0.1,
+So 1 over 0.1, is this going to be equal to 10r?
+So even though I'm adding these positive rewards up
+over an infinite time horizon, because the weight
+is shrinking the further I'm getting out,
+it actually adds up to something finite.
+So that's this notion of discounting.
+That's something that we're going
+to use in all of the algorithms that we look at.
+And that's how and why it gets introduced.
+All right, so what does it mean
+to actually solve an MDP.
+We've been talking about so far the ideas
+that we want to be able to find a good way to select
+actions or a sequence of actions.
+But what do we mean specifically by,
+what is the actual object that we're in search of?
+It's not just a sequence of actions.
+It's something beyond that.
+What we're actually looking for is a rule.
+It's a rule that says, given the state,
+here's the action that you should take.
+Right, so it's this mapping from current states to actions.
+So, you know, our ultimate goal is to choose actions
+that maximize total discount and reward,
+but there's uncertainty, right?
+I can't tell you what action
+I'm gonna take 10 steps from now
+because I don't know what's gonna happen
+10 steps from now.
+There's some randomness in the system
+and, you know, maybe one thing could happen,
+maybe another thing could happen.
+And I'm gonna figure out what action I take
+when I get there depending on what the current state is.
+Like when you play blackjack,
+I don't sit down at the very start of the game and say,
+all right, I'll tell you what,
+I'm gonna hit for the first three turns
+and then I'm gonna stay.
+No, you actually look at your cards
+and you make a decision based on
+what you've been dealt most recently.
+You get some feedback before you make that decision.
+And so the same exact idea is coming into play here
+is that you're not just looking to specify
+the sequence of actions that you're gonna take
+ahead of time, you need some sort of rule
+that can say, well, it depends,
+I'm gonna look at the state,
+depending on what I see,
+That's going to dictate what action I choose next.
+Each time we choose an action, we want to use all the information that's available to
+us at that time and all the information that's encoded in the state.
+The state encodes all the relevant information, and so each action should be chosen based
+on the state.
+And so the policy, a policy is what we're after, and a policy is basically a function
+that maps states into actions.
+right? So we'll call these, we'll call mu. We'll use mu to denote a policy. It's really
+a function from our finite action space. I'm sorry, our finite state space into our finite
+action space. And that's really what you're after, right? Like if I can find a policy
+and I can give that to you and say, here, here's a solution to this problem, that solves
+the MDP, right? That's the ultimate goal is to find a policy. So now when you
+back to Blackjack, we had this heuristic strategy that we used, right? If the total value of your
+hand is less than 17, you hit. If it's 17 or greater, you stay. That's actually a policy,
+right? That's a rule that maps every single possible state in our state space to some
+action. It ignores the card that the dealer is showing. It ignores whether or not you have
+ace, but it looks at the value of your hand.
+And for every hand value, it prescribes an action.
+If it's less than 17, you hit.
+If it's greater or equal, you stay.
+That's a policy.
+That's an example of a policy.
+But now what we want to have is
+we want to have some sort of more systematic way
+to compute policies.
+And so that's the goal of solving MDPs,
+is have algorithms that can compute an optimal policy,
+a policy that can maximize total expected discounted
+given the false problem specification of the states, the actions, the transition probabilities, and the rewards.
+So, okay, so here's a quick question. So if you're mapping an action to every state,
+doesn't it become more of a deterministic solution than a probabilistic one?
+Yeah, sort of. So in this case, you can, you know, what you're looking for is,
+A deterministic policy will always solve the problem, right, and you can think of a deterministic
+policy as basically being a rule that says, hey, for every single possible state you could
+be in, here's what you should do.
+I just don't know which state I'm going to be in when, right, and that's where
+the probabilistic part comes in.
+It says, you know, I could be here, I could be there.
+That's going to dictate which action I choose.
+But the rule for choosing the action is still prescribed based on the state, based on what I know about where I am right now.
+So the way that the system evolves can be probabilistic, but the rule for deciding what I do in each position is something that I can specify.
+I could give you a card that says, hey, for Blackjack, this is the exact decision you should make for every possible state that you're in.
+And you could use this.
+And every game is going to evolve differently,
+but still you have the same set of rules that you follow.
+So that's the idea here.
+It's going to turn out, not today, not anything we do here,
+but what you'll see in reinforcement learning too.
+It's going to actually help to think
+about the possibility of maybe policies being randomized as
+well, like there being a possibility that sometimes you
+want to take a random action in a certain state.
+It's going to help us computationally.
+It's going to open up the space of how
+we can search over policies.
+But for today, you just want to think about policies
+being purely deterministic.
+And the optimal policy in this framework
+is always going to be deterministic.
+OK, so in terms of computation,
+it helps to think about these things in terms
+of matrices.
+So the idea here is that if I have a given policy,
+If I have a policy mu, that policy
+is going to tell me which actions
+to take in a given state.
+And so if I have a problem that's
+specified by its state transition probabilities,
+then I'm going to use a specific action.
+This tells me which states I'm going to go into.
+I'm likely to, or the probability of transitioning
+to each state next, given my current state
+and given my action.
+But now here, my action is dependent on my state
+because I've plugged in a policy,
+then this thing right here now becomes a probability
+of next state given current state.
+And similarly for my rewards here,
+my rewards are usually a function of state and action.
+But if I plug in a policy,
+then my action is a function of the state,
+this whole thing just becomes now a function.
+The reward is just a function of the state.
+And so if that's the case,
+I can write these out
+for a finite state, finite action problem
+in terms of a matrix and a vector, right?
+Like maybe I could just write this reward function just
+as a big vector, where if I enumerate my states as 1, 2,
+3, 4, 5, 6, all the way down to state n, then maybe,
+you know, this is the reward I get in the first state.
+This is the reward I get in the second state.
+This is the reward I get in third state all the way down.
+Similarly, I could have state transition probabilities, right, where I think about, you know, this
+is the state that I'm in right now.
+I could be in state one, I could be in state two, and so on.
+These are the states I could go to next, right, so these up here are S prime.
+And then maybe there's some probability, say 0.1, that if I'm in state one that
+I stay in state one, there's some probability of 0.3 that if I'm in state one that I
+to state 2 next and so on, I could fill out this whole matrix. And so I can describe my
+transition probabilities as a matrix. I can describe my rewards as a vector. And once
+I do that, I could write my expected total discounted reward just in terms of that
+matrix and vector, right?
+So I could have this infinite sum of discounted matrix
+powers.
+These are just powers.
+So I start off with p to the 0, p to the 1, p to the 2,
+each times that reward vector.
+And I could compute this whole infinite sum.
+And that's going to give me this vector
+of discounted rewards starting from each initial state,
+right?
+And so we're kind of packing a lot of things in here.
+But this is sort of, when we get to algorithms,
+this is kind of typically how these
+are implemented in terms of this matrix vector formulation.
+And so probably the most important concept
+that we see for MDPs, sort of solution concept
+for these value-based methods,
+is this thing called the value function, which
+we can define as that infinite sum.
+And basically, what you can interpret
+that is, is that's the expected discounted reward
+that I will earn starting from each initial state.
+Like if I initialize myself in state one
+and then I move around to all the different random states
+from there, I'm going to pick up some rewards over time.
+And the first element of that vector v mu
+is going to give me the expected reward
+that I earned from starting in that state.
+The second element being the expected reward
+that I'd earned from starting in state two and so on.
+And so somebody had made this point
+when I had asked about the rewards in the dice game,
+somebody had said, well, you know,
+it's comparing what's on the dice now
+to the expected future reward.
+Like that's exactly where we're heading with this.
+And this V, this vector V is that,
+it's those expected future rewards, right?
+This tells you, if I'm running some policy,
+here's just the expected total reward
+expect to earn over the whole future discounted if I start in a given state and then use that
+policy. So that's a super important component of the solution. It's going to turn out that's going
+to be the main thing we're going to try to find. And if we can find that, then later
+on when we're computing policies, computing policies becomes easy. So just got to keep in
+that that's sort of what we're after, is being able to compute this vector v here.
+And, you know, now we'll look at some ways that that's actually computed in practice,
+because that ends up tying into the algorithms for finding optimal policies.
+So this vector v that we defined on the previous slide,
+it actually satisfies a really interesting property, which is that for any given policy,
+this v mu for any given policy mu, v mu is equal to the single stage reward plus the discount factor times that transition matrix times the value function v mu, right?
+So it satisfies this equation. And so to kind of get a sense of that, you can look at this up here.
+If I were to break this sum up, right, the sum is going to be equal to, well, the first term of this sum for t equals zero,
+You know, this gamma P mu to the T when T is equal to 0, that term is just going to be equal to R mu.
+And then if I add up over all of the remaining terms, right, so from T equals 1 up to infinity, P mu to the T R mu, that's equal to this sum, right?
+But this right here, if I just factor out a gamma P mu term from this, then I'll add
+a new.
+Right?
+So if I take this and I just factor this out, right, so I'm starting this sum from
+t equals 1, that's equal to R mu plus gamma P mu starting from t equals 0, right?
+Because if I just multiply this term right back here
+through here, that's just going to increase this exponent by 1.
+That's going to be the equivalent of running
+this sum from t equals 1 to infinity.
+But this right here, that's just the definition of v mu
+that we started with.
+So that just means that v mu satisfies this equation.
+Sorry, that should be plus.
+And so that's actually super useful to notice
+that it satisfies that equation, because if I'm talking about this in terms
+of the matrix formulation, it just becomes a matrix equation that we need to solve.
+So this thing is called, this equation is called the Bellman equation.
+And that's actually at the heart of the value-based reinforcement learning
+methods that we're going to see later in the module.
+And so just to kind of interpret this a minute,
+It's basically saying, if you start out in some state S right now, that the total discounted reward, that the total expected discounted reward that you're going to earn starting out in that state is equal to the reward that you earn in the first state plus the discount factor times the reward that you'll earn, the total discounted expected reward that you'll earn.
