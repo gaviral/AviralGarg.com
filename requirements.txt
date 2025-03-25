@@ -1,5 +1,5 @@
 openai
 python-dotenv
-pyaudio
+# pyaudio
 numpy
 matplotlib

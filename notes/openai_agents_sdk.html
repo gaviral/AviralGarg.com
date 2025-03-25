@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAI Agents SDK</title>
+    <!-- GitHub Markdown CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+    <!-- Inter font for modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Mermaid support -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        // Global mermaid initialization with themes
+        let mermaidConfig = {
+            startOnLoad: true,
+            theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+            securityLevel: 'loose',
+            fontFamily: 'Inter',
+        };
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            mermaid.initialize(mermaidConfig);
+        });
+    </script>
+    <style>
+        :root[data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #24292e;
+            --table-bg: #ffffff;
+            --table-border: #e1e4e8;
+            --toggle-bg: #e1e4e8;
+            --toggle-circle: #ffffff;
+            --home-button-bg: #f6f8fa;
+            --home-button-hover: #e1e4e8;
+            --home-button-text: #24292e;
+        }
+        
+        :root[data-theme="dark"] {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --table-bg: #161b22;
+            --table-border: #30363d;
+            --toggle-bg: #30363d;
+            --toggle-circle: #0d1117;
+            --home-button-bg: #21262d;
+            --home-button-hover: #30363d;
+            --home-button-text: #c9d1d9;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .markdown-body {
+            box-sizing: border-box;
+            margin: 0%;
+            padding: 45px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* Simple table styling */
+        .markdown-body table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+            background-color: var(--table-bg);
+        }
+
+        .markdown-body table th,
+        .markdown-body table td {
+            padding: 8px 16px;
+            border: 1px solid var(--table-border);
+            background: none !important;
+        }
+
+        .markdown-body table tr {
+            background: none !important;
+        }
+
+        .nav-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .home-button {
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--home-button-bg);
+            color: var(--home-button-text);
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .home-button:hover {
+            background-color: var(--home-button-hover);
+        }
+
+        .home-button svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        /* Theme toggle switch styling */
+        .theme-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--toggle-bg);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-switch::after {
+            content: '';
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            width: 26px;
+            height: 26px;
+            background: var(--toggle-circle);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        [data-theme="dark"] .theme-switch::after {
+            transform: translateX(30px);
+        }
+
+        .theme-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8px;
+            box-sizing: border-box;
+            pointer-events: none;
+            color: var(--text-color);
+        }
+
+        .theme-icons svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+        svg.markmap {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+
+<style>
+</style>
+<script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@0.18"></script>
+
+</head>
+<body class="markdown-body">
+    <div class="nav-controls">
+        <a href="/" class="home-button" aria-label="Go to home page">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
+            </svg>
+        </a>
+        <div class="theme-switch" onclick="toggleTheme()" role="button" tabindex="0">
+            <div class="theme-icons">
+                <svg class="sun-icon" viewBox="0 0 24 24">
+                    <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24">
+                    <path d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+
+            // Store all mermaid diagram definitions
+            const mermaidDivs = document.querySelectorAll('.mermaid');
+            const diagrams = Array.from(mermaidDivs).map(div => div.innerHTML);
+            
+            // Clear all mermaid divs
+            mermaidDivs.forEach(div => {
+                // Save the inner content (the diagram definition)
+                const definition = div.innerHTML;
+                // Mark this div for processing
+                div.setAttribute('data-mermaid-definition', definition);
+                // Clear the div content
+                div.innerHTML = '';
+            });
+
+            // Update mermaid configuration with new theme
+            mermaidConfig.theme = newTheme === 'dark' ? 'dark' : 'default';
+            
+            // Completely reset mermaid
+            window.mermaid.initialize(mermaidConfig);
+            
+            // Render all diagrams again with new theme
+            mermaidDivs.forEach((div, index) => {
+                const definition = div.getAttribute('data-mermaid-definition');
+                const id = `mermaid-diagram-${index}-${Date.now()}`;
+                
+                try {
+                    window.mermaid.render(id, definition).then(result => {
+                        div.innerHTML = result.svg;
+                    });
+                } catch (error) {
+                    console.error('Failed to render mermaid diagram', error);
+                    // Fallback - show the original diagram code
+                    div.innerHTML = definition;
+                }
+            });
+        }
+    </script>
+  
+    <!-- Wrap Markdown source in `.markmap` elements -->
+        <div class="markmap">
+            <script type="text/template">
+            ---
+            markmap:
+            colorFreezeLevel: 6
+            duration: 1
+            maxWidth: 400
+            initialExpandLevel: 8
+            extraJS: []
+            extraCSS: []
+            zoom: true
+            pan: true
+            ---
+            - **<a href="https://github.com/openai/openai-agents-python" target="_blank">OpenAI Agents SDK</a>**
+                - **Overview** <!-- markmap: fold -->
+                    - lets you:
+                        - build **agentic AI apps**
+                        - use a lightweight, easy-to-use package with very few abstractions
+                        - production-ready upgrade of <a href="https://github.com/openai/swarm/tree/main" target="_blank">Swarm</a>
+                    - introduces very small set of primitives **$\Rightarrow$ Python + SDK primitives**:
+                        - Existing Python primitives
+                        - **3 new SDK primitives**:
+                            - **Agents**: LLMs equipped with instructions and tools
+                            - **Handoffs**: Allow agents to delegate to other agents for specific tasks
+                            - **Guardrails**: Enable the inputs to agents to be validated
+                        - Powerful enough to:
+                            - express complex **relationships b/w tools & agents**
+                            - let you **build real-world applications** without a steep learning curve
+                    - SDK has 2 driving **design principles**:
+                        - **Enough features** $\rightarrow$ **worth using**, **Few enough** primitives $\rightarrow$ **quick to learn**.
+                        - Works great **out of the box**, but you can **customize** exactly what happens.
+                    - Main features of the SDK:
+                        - **Agent loop**: Built-in agent loop that handles:
+                            - calling tools
+                            - sending results to the LLM
+                            - looping until the LLM is done
+                        - **Python-first**: Use built-in language features to **orchestrate and chain agents**, rather than needing to learn new abstractions.
+                        - **Handoffs**: A powerful feature to **coordinate and delegate** between multiple agents.
+                        - **Guardrails**: Run input validations and checks in parallel to your agents, breaking early if the checks fail.
+                        - **Function tools**: Turn any Python function into a tool, with automatic schema generation and Pydantic-powered validation.
+                        - **Tracing**: Built-in tracing that lets you:
+                            - **visualize** your agentic workflow
+                            - **debug** and **monitor** your workflows
+                            - use the OpenAI suite of:
+                                - **evaluation** tools
+                                - **fine-tuning** tools
+                                - **distillation** tools
+                            - integrate with external processors like Logfire, AgentOps, Braintrust, Scorecard, and Keywords AI
+                - **Example**<br> <!-- markmap: fold -->
+                    **Multi-agent workflow**
+                    **with handoffs & guardrails**:
+                    - <br>**Setup**:<br><br>
+                        ```bash
+                        mkdir my_project && cd my_project
+                        uv venv && source .venv/bin/activate
+                        echo "openai-agents" > requirements.txt && uv pip install -r requirements.txt
+                        export OPENAI_API_KEY=sk-...
+                        ```
+                    - <br>**Imports**:<br><br>
+                        ```python
+                        from agents import Agent, InputGuardrail, GuardrailFunctionOutput, Runner
+                        from pydantic import BaseModel
+                        import asyncio
+                        ```
+                    - <br>**Create multiple agents and define handoffs**:<br><br>
+                        ```python
+                        # Define guardrail output structure
+                        class HomeworkOutput(BaseModel):
+                            is_homework: bool
+                            reasoning: str
+
+                        math_tutor_agent = Agent(
+                            name="Math Tutor",
+                            handoff_description="Specialist agent for math questions",
+                            instructions="You provide help with math problems. Explain your reasoning at each step and include examples",
+                        )
+
+                        history_tutor_agent = Agent(
+                            name="History Tutor",
+                            handoff_description="Specialist agent for historical questions",
+                            instructions="You provide assistance with historical queries. Explain important events and context clearly.",
+                        )
+                        ```
+                    - <br>**Add guardrail**:<br><br>
+                        ```python
+                        # Define guardrail agent
+                        guardrail_agent = Agent(
+                            name="Guardrail check",
+                            instructions="Check if the user is asking about homework.",
+                            output_type=HomeworkOutput,
+                        )
+                        
+                        async def homework_guardrail(ctx, agent, input_data):
+                            result = await Runner.run(guardrail_agent, input_data, context=ctx.context)
+                            final_output = result.final_output_as(HomeworkOutput)
+                            return GuardrailFunctionOutput(
+                                output_info=final_output,
+                                tripwire_triggered=not final_output.is_homework,
+                            )
+
+                        triage_agent = Agent(
+                            name="Triage Agent",
+                            instructions="You determine which agent to use based on the user's homework question",
+                            handoffs=[history_tutor_agent, math_tutor_agent],
+                            input_guardrails=[
+                                InputGuardrail(guardrail_function=homework_guardrail),
+                            ],
+                        )
+                        ```
+                    - <br>**Run the agent orchestration**:<br><br>
+                        ```python
+                        async def main():
+                            # Run with a history question
+                            result = await Runner.run(triage_agent, "Who was the first president of the United States?")
+                            print(result.final_output)
+
+                            # Run with a non-homework question
+                            result = await Runner.run(triage_agent, "What is life")
+                            print(result.final_output)
+
+                        if __name__ == "__main__":
+                            asyncio.run(main())
+                        ```
+                - **Examples** <!-- markmap: fold -->
+                    - **Common agent design patterns**:
+                        - **Deterministic workflows**: Structuring agents for predictable, linear execution paths
+                        - **Agents as tools**: Using agents as tools for other agents
+                        - **Parallel agent execution**: Running multiple agents concurrently
+                    
+                    - **SDK foundational capabilities**:
+                        - **Dynamic system prompts**: Customizing agent instructions at runtime
+                        - **Streaming outputs**: Processing agent responses in real-time
+                        - **Lifecycle events**: Hooking into agent execution lifecycle
+                    
+                    - **Tool Examples**:
+                        - Integration with OAI hosted tools like **web search** and **file search**
+                    
+                    - **Model Providers**:
+                        - Using **non-OpenAI models** with the SDK
+                    
+                    - **Handoffs**:
+                        - Practical examples of **agent-to-agent delegation**
+                    
+                    - **Real-world Applications**:
+                        - **Customer Service**: Example customer service system for an airline
+                        - **Research Bot**: Simple deep research clone
+                - **Agents**:
+                    - **Core building block**: Agents are LLMs configured with **instructions** and **tools**
+                    
+                    - **Basic configuration**:
+                        - **`instructions`**: System prompt/developer message
+                        - **`model`**: Which LLM to use and optional `model_settings`
+                        - **`tools`**: Tools the agent can use
+                        - **`model_settings`** [optional]: Controls LLM parameters like temperature, top_p, etc.
+                            - <br>**Example**:<br><br>
+                                ```python
+                                from agents import Agent, ModelSettings, function_tool
+
+                                # Available model_settings parameters
+                                model_settings = ModelSettings(
+                                    temperature=0.7,           # Controls randomness (higher = more random)
+                                    top_p=0.95,                # Controls diversity (1.0 = consider all tokens)
+                                    frequency_penalty=0.0,     # Penalizes repeated tokens
+                                    presence_penalty=0.0,      # Penalizes tokens based on presence
+                                    tool_choice="auto",        # Can be "auto", "required", "none", or specific tool name
+                                    parallel_tool_calls=True,  # Allow parallel tool execution
+                                    truncation="auto",         # "auto" or "disabled"
+                                    max_tokens=None            # Max output tokens to generate
+                                )
+                                
+                                agent = Agent(
+                                    name="Weather agent",
+                                    instructions="You are a helpful agent.",
+                                    tools=[get_weather],
+                                    model_settings=model_settings
+                                )
+                                ```
+                        - **Example**:<br><br>
+                            ```python
+                            from agents import Agent, ModelSettings, function_tool
+
+                            @function_tool
+                            def get_weather(city: str) -> str:
+                                return f"The weather in {city} is sunny"
+
+                            agent = Agent(
+                                name="Haiku agent",
+                                instructions="Always respond in haiku form",
+                                model="o3-mini",
+                                tools=[get_weather],
+                            )
+                            ```
+                    - **Context**:
+                        - Generic **dependency-injection** tool that's passed to every agent, tool, handoff, etc.
+                        - Serves as a dependency and state container for the agent run
+                        - **Example**:<br>
+                            ```python
+                            @dataclass
+                            class UserContext:
+                            uid: str
+                            is_pro_user: bool
+
+                            async def fetch_purchases() -> list[Purchase]:
+                                return ...
+
+                            agent = Agent[UserContext](
+                                ...,
+                            )
+                            ```
+                    - **Output types**:
+                        - Default: plain text (`str`)
+                        - Can specify **structured outputs** using **Pydantic** or any type compatible with `TypeAdapter`
+                        - **Example**:<br>
+                            ```python
+                            from pydantic import BaseModel
+                            from agents import Agent
+
+                            class CalendarEvent(BaseModel):
+                                name: str
+                                date: str
+                                participants: list[str]
+
+                            agent = Agent(
+                                name="Calendar extractor",
+                                instructions="Extract calendar events from text",
+                                output_type=CalendarEvent,
+                            )
+                            ```
+                        - Note: When `output_type` is provided, the model uses **structured outputs** instead of plain text
+                    - **Handoffs**:
+                        - **Sub-agents** that the agent can delegate to
+                        - Allows orchestrating **modular, specialized agents**
+                        - **Example**:<br>
+                            ```python
+                            from agents import Agent
+
+                            booking_agent = Agent(...)
+                            refund_agent = Agent(...)
+
+                            triage_agent = Agent(
+                                name="Triage agent",
+                                instructions=(
+                                    "Help the user with their questions."
+                                    "If they ask about booking, handoff to the booking agent."
+                                    "If they ask about refunds, handoff to the refund agent."
+                                ),
+                                handoffs=[booking_agent, refund_agent],
+                            )
+                            ```                    
+                    - **Dynamic instructions**:
+                        - Provide instructions via a **function** instead of static text
+                        - Function receives `agent` and `context`, must return prompt
+                        - Supports both regular and **`async` functions**
+                        - **Example**:<br>
+                            ```python
+                            def dynamic_instructions(
+                                context: RunContextWrapper[UserContext], agent: Agent[UserContext]
+                            ) -> str:
+                                return f"The user's name is {context.context.name}. Help them with their questions."
+
+
+                                agent = Agent[UserContext](
+                                    name="Triage agent",
+                                    instructions=dynamic_instructions,
+                                )
+                                ```
+                    - **Lifecycle events (hooks)**:
+                        - Observe agent lifecycle (logging, pre-fetch data)
+                        - Hook into lifecycle by subclassing `AgentHooks`
+                    - **Guardrails**:
+                        - Run **validations** on user input in parallel to the agent
+                        - Example: screen input for relevance
+                    - **Cloning/copying agents**:
+                        - Use `clone()` method to duplicate an Agent
+                        - Optionally change properties
+                        - **Example**:<br>
+                            ```python
+                            pirate_agent = Agent(
+                                name="Pirate",
+                                instructions="Write like a pirate",
+                                model="o3-mini",
+                            )
+
+                            robot_agent = pirate_agent.clone(
+                                name="Robot",
+                                instructions="Write like a robot",
+                            )
+                            ```
+                    - **Forcing tool use**:
+                        - Control tool usage with `ModelSettings.tool_choice`
+                        - Options:
+                            - **`auto`**: LLM decides whether to use a tool
+                            - **`required`**: LLM must use a tool (can pick which one)
+                            - **`none`**: LLM must not use a tool
+                            - Specific tool name: LLM must use that specific tool
+                        - Note: When requiring tool use, consider setting `Agent.tool_use_behavior` to stop the Agent from running when a tool output is produced, preventing infinite loops
+                - **Organize me later**: <!-- markmap: fold -->
+                    - **Examples**:
+                        - See the [examples in GitHub repo](https://github.com/openai/openai-agents-python/tree/main/examples) for complete implementations
+                    - **Quick Start**:
+                        - **Tracing**: View agent runs on [OpenAI Dashboard](https://platform.openai.com/traces)
+                        - **Next steps**: Learn about:
+                            - [Agent configuration](http://openai.github.io/openai-agents-python/agents/)
+                            - [Running agents](http://openai.github.io/openai-agents-python/running_agents/)
+                            - [Tools](http://openai.github.io/openai-agents-python/tools/)
+                            - [Guardrails](http://openai.github.io/openai-agents-python/guardrails/)
+                            - [Models](http://openai.github.io/openai-agents-python/models/)
+                </script>
+        </div>
+    </body>
+</html>
