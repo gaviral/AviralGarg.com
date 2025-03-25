@@ -250,14 +250,15 @@
             <script type="text/template">
             ---
             markmap:
-            colorFreezeLevel: 6
-            duration: 1
-            maxWidth: 400
-            initialExpandLevel: 8
-            extraJS: []
-            extraCSS: []
-            zoom: true
-            pan: true
+                colorFreezeLevel: -1
+                duration: 1000
+                maxWidth: 300
+                initialExpandLevel: -1
+                spacingVertical: 20
+                extraJS: []
+                extraCSS: []
+                zoom: true
+                pan: true
             ---
             - **<a href="https://github.com/openai/openai-agents-python" target="_blank">OpenAI Agents SDK</a>**
                 - **Overview** <!-- markmap: fold -->
@@ -297,20 +298,20 @@
                 - **Example**<br> <!-- markmap: fold -->
                     **Multi-agent workflow**
                     **with handoffs & guardrails**:
-                    - <br>**Setup**:<br><br>
+                    - **Setup**:
                         ```bash
                         mkdir my_project && cd my_project
                         uv venv && source .venv/bin/activate
                         echo "openai-agents" > requirements.txt && uv pip install -r requirements.txt
                         export OPENAI_API_KEY=sk-...
                         ```
-                    - <br>**Imports**:<br><br>
+                    - **Imports**:
                         ```python
                         from agents import Agent, InputGuardrail, GuardrailFunctionOutput, Runner
                         from pydantic import BaseModel
                         import asyncio
                         ```
-                    - <br>**Create multiple agents and define handoffs**:<br><br>
+                    - **Create multiple agents and define handoffs**:
                         ```python
                         # Define guardrail output structure
                         class HomeworkOutput(BaseModel):
@@ -329,7 +330,7 @@
                             instructions="You provide assistance with historical queries. Explain important events and context clearly.",
                         )
                         ```
-                    - <br>**Add guardrail**:<br><br>
+                    - **Add guardrail**:
                         ```python
                         # Define guardrail agent
                         guardrail_agent = Agent(
@@ -355,7 +356,7 @@
                             ],
                         )
                         ```
-                    - <br>**Run the agent orchestration**:<br><br>
+                    - **Run the agent orchestration**:
                         ```python
                         async def main():
                             # Run with a history question
@@ -393,155 +394,286 @@
                         - **Customer Service**: Example customer service system for an airline
                         - **Research Bot**: Simple deep research clone
                 - **Agents**:
-                    - **Core building block**: Agents are LLMs configured with **instructions** and **tools**
+                    - **Agents** are the core building blocks in your apps. 
+                        They are **LLMs** configured with **instructions** and **tools**.
                     
                     - **Basic configuration**:
-                        - **`instructions`**: System prompt/developer message
-                        - **`model`**: Which LLM to use and optional `model_settings`
-                        - **`tools`**: Tools the agent can use
-                        - **`model_settings`** [optional]: Controls LLM parameters like temperature, top_p, etc.
-                            - <br>**Example**:<br><br>
+                        - **Name**: Identifier for the agent
+                        - **Instructions**: System prompt/developer message
+                        - **Tools**: Functions the agent can use 
+                        - **Model**: Which LLM to use
+                        - **ModelSettings** (optional): Controls LLM parameters <!-- 🚨 **TODO: CONFIRM THESE LATER** -->
+                            - **temperature**: Controls randomness (higher = more random)
+                            - **top_p**: Controls diversity
+                            - **frequency_penalty**: Penalizes repeated tokens
+                            - **presence_penalty**: Penalizes tokens based on presence
+                            - **tool_choice**: Can be "auto", "required", "none", or a specific tool name
+                            - **parallel_tool_calls**: Allow parallel tool execution
+                            - **truncation**: "auto" or "disabled"
+                            - **max_tokens**: Max output tokens to generate
+                        - **Example**: <!-- markmap: fold -->
+                            - **Code**:
                                 ```python
                                 from agents import Agent, ModelSettings, function_tool
 
-                                # Available model_settings parameters
+                                @function_tool 
+                                def get_weather(city: str) -> str: 
+                                    return f"The weather in {city} is sunny"
+
                                 model_settings = ModelSettings(
-                                    temperature=0.7,           # Controls randomness (higher = more random)
-                                    top_p=0.95,                # Controls diversity (1.0 = consider all tokens)
-                                    frequency_penalty=0.0,     # Penalizes repeated tokens
-                                    presence_penalty=0.0,      # Penalizes tokens based on presence
-                                    tool_choice="auto",        # Can be "auto", "required", "none", or specific tool name
-                                    parallel_tool_calls=True,  # Allow parallel tool execution
-                                    truncation="auto",         # "auto" or "disabled"
-                                    max_tokens=None            # Max output tokens to generate
+                                    temperature=0.7,
+                                    top_p=0.95,
+                                    frequency_penalty=0.0,
+                                    presence_penalty=0.0,
+                                    tool_choice="auto",
+                                    parallel_tool_calls=True,
+                                    truncation="auto",
+                                    max_tokens=None
                                 )
-                                
+
                                 agent = Agent(
                                     name="Weather agent",
-                                    instructions="You are a helpful agent.",
+                                    instructions="Always respond in haiku form",
                                     tools=[get_weather],
+                                    model="o3-mini",
                                     model_settings=model_settings
                                 )
                                 ```
-                        - **Example**:<br><br>
-                            ```python
-                            from agents import Agent, ModelSettings, function_tool
-
-                            @function_tool
-                            def get_weather(city: str) -> str:
-                                return f"The weather in {city} is sunny"
-
-                            agent = Agent(
-                                name="Haiku agent",
-                                instructions="Always respond in haiku form",
-                                model="o3-mini",
-                                tools=[get_weather],
-                            )
-                            ```
+                    
                     - **Context**:
-                        - Generic **dependency-injection** tool that's passed to every agent, tool, handoff, etc.
-                        - Serves as a dependency and state container for the agent run
-                        - **Example**:<br>
-                            ```python
-                            @dataclass
-                            class UserContext:
-                            uid: str
-                            is_pro_user: bool
+                        - Agents are generic on their **`context` type**.
+                        - **Context** is a **dependency-injection tool**:
+                            - It's an object you **create** and **pass** to `Runner.run()`
+                            - It is **passed to every**:
+                                - **agent**
+                                - **tool**
+                                - **handoff**
+                                - etc.
+                            - It serves as a **grab bag of dependencies and state** for the agent run
+                        - You can provide **any Python object** as the context.
+                        - **Example**: <!-- markmap: fold -->
+                            - **Code**:
+                                ```python
+                                @dataclass
+                                class UserContext:
+                                uid: str
+                                is_pro_user: bool
 
-                            async def fetch_purchases() -> list[Purchase]:
-                                return ...
-
-                            agent = Agent[UserContext](
-                                ...,
-                            )
-                            ```
-                    - **Output types**:
-                        - Default: plain text (`str`)
-                        - Can specify **structured outputs** using **Pydantic** or any type compatible with `TypeAdapter`
-                        - **Example**:<br>
-                            ```python
-                            from pydantic import BaseModel
-                            from agents import Agent
-
-                            class CalendarEvent(BaseModel):
-                                name: str
-                                date: str
-                                participants: list[str]
-
-                            agent = Agent(
-                                name="Calendar extractor",
-                                instructions="Extract calendar events from text",
-                                output_type=CalendarEvent,
-                            )
-                            ```
-                        - Note: When `output_type` is provided, the model uses **structured outputs** instead of plain text
-                    - **Handoffs**:
-                        - **Sub-agents** that the agent can delegate to
-                        - Allows orchestrating **modular, specialized agents**
-                        - **Example**:<br>
-                            ```python
-                            from agents import Agent
-
-                            booking_agent = Agent(...)
-                            refund_agent = Agent(...)
-
-                            triage_agent = Agent(
-                                name="Triage agent",
-                                instructions=(
-                                    "Help the user with their questions."
-                                    "If they ask about booking, handoff to the booking agent."
-                                    "If they ask about refunds, handoff to the refund agent."
-                                ),
-                                handoffs=[booking_agent, refund_agent],
-                            )
-                            ```                    
-                    - **Dynamic instructions**:
-                        - Provide instructions via a **function** instead of static text
-                        - Function receives `agent` and `context`, must return prompt
-                        - Supports both regular and **`async` functions**
-                        - **Example**:<br>
-                            ```python
-                            def dynamic_instructions(
-                                context: RunContextWrapper[UserContext], agent: Agent[UserContext]
-                            ) -> str:
-                                return f"The user's name is {context.context.name}. Help them with their questions."
-
+                                async def fetch_purchases() -> list[Purchase]:
+                                    return ...
 
                                 agent = Agent[UserContext](
-                                    name="Triage agent",
-                                    instructions=dynamic_instructions,
+                                    ...,
                                 )
                                 ```
-                    - **Lifecycle events (hooks)**:
-                        - Observe agent lifecycle (logging, pre-fetch data)
-                        - Hook into lifecycle by subclassing `AgentHooks`
-                    - **Guardrails**:
-                        - Run **validations** on user input in parallel to the agent
-                        - Example: screen input for relevance
-                    - **Cloning/copying agents**:
-                        - Use `clone()` method to duplicate an Agent
-                        - Optionally change properties
-                        - **Example**:<br>
-                            ```python
-                            pirate_agent = Agent(
-                                name="Pirate",
-                                instructions="Write like a pirate",
-                                model="o3-mini",
-                            )
+                    
+                    - **Output types**:
+                        - By default, agents produce **plain text** (i.e. `str`) outputs.
+                        - Use the **`output_type` parameter** for **structured outputs**:
+                            - [**Pydantic**](https://docs.pydantic.dev/) objects
+                            - **dataclasses**
+                            - **lists**
+                            - **TypedDict**
+                            - Any type compatible with Pydantic [**TypeAdapter**](https://docs.pydantic.dev/latest/api/type_adapter/)
+                        - When you pass `output_type`, the model uses [**structured outputs**](https://platform.openai.com/docs/guides/structured-outputs) instead of plain text.
+                        - **Example**: <!-- markmap: fold -->
+                            - **Code**:
+                                ```python
+                                from pydantic import BaseModel
+                                from agents import Agent
 
-                            robot_agent = pirate_agent.clone(
-                                name="Robot",
-                                instructions="Write like a robot",
-                            )
-                            ```
+                                class CalendarEvent(BaseModel):
+                                    name: str
+                                    date: str
+                                    participants: list[str]
+
+                                agent = Agent(
+                                    name="Calendar extractor",
+                                    instructions="Extract calendar events from text",
+                                    output_type=CalendarEvent,
+                                )
+                                ```
+                    
+                    - **Handoffs**:
+                        - **Handoffs** are **sub-agents** that the main agent can **delegate to**.
+                        - You provide a **list of handoffs**, and the agent chooses when to delegate.
+                        - This pattern enables **modular, specialized agents** that excel at specific tasks.
+                        - Read more in the [handoffs documentation](http://openai.github.io/openai-agents-python/handoffs/).
+                        - **Example**: <!-- markmap: fold -->
+                            - **Code**:
+                                ```python
+                                from agents import Agent
+
+                                booking_agent = Agent(...)
+                                refund_agent = Agent(...)
+
+                                triage_agent = Agent(
+                                    name="Triage agent",
+                                    instructions=(
+                                        "Help the user with their questions."
+                                        "If they ask about booking, handoff to the booking agent."
+                                        "If they ask about refunds, handoff to the refund agent."
+                                    ),
+                                    handoffs=[booking_agent, refund_agent],
+                                )
+                                ```
+                    
+                    - **Dynamic instructions**:
+                        - Instead of **static instructions**, you can provide a **function**.
+                        - The function receives the **agent** and **context** and returns the prompt.
+                        - Both **regular** and **`async` functions** are supported.
+                        - **Example**: <!-- markmap: fold -->
+                            - **Code**:
+                                ```python
+                                def dynamic_instructions(
+                                    context: RunContextWrapper[UserContext], 
+                                    agent: Agent[UserContext]
+                                ) -> str:
+                                    # Generate instructions based on context
+                                    return f"The user's name is {context.context.uid}. Help them with their questions."
+                                
+                                agent = Agent[UserContext](
+                                    name="Dynamic Agent",
+                                    instructions=dynamic_instructions,
+                                )
+                                
+                                # Async function also works
+                                async def async_instructions(context, agent) -> str:
+                                    user_data = await fetch_user_data(context.context.uid)
+                                    return f"User preferences: {user_data['preferences']}. Respond accordingly."
+                                ```
+                    
+                    - **Lifecycle events (hooks)**:
+                        - Observe the **lifecycle** of an agent for **logging** or **pre-fetching** data.
+                        - Use the **`hooks` property** with a custom **AgentHooks** subclass.
+                        - Override the methods you're interested in.
+                        - **Example**: <!-- markmap: fold -->
+                            - **Code**:
+                                ```python
+                                from agents import Agent, AgentHooks, AgentResult, RunContextWrapper
+                                
+                                # Custom hooks implementation
+                                class CustomHooks(AgentHooks):
+                                    def on_agent_start(self, context, agent) -> None:
+                                        print(f"Agent {agent.name} started")
+                                    
+                                    async def on_agent_finish(
+                                        self, 
+                                        context: RunContextWrapper, 
+                                        agent: Agent, 
+                                        result: AgentResult
+                                    ) -> None:
+                                        print(f"Agent {agent.name} finished with: {result.final_output[:50]}...")
+                                
+                                agent = Agent(
+                                    name="Hooked Agent",
+                                    instructions="Be helpful and concise",
+                                    hooks=CustomHooks(),
+                                )
+                                ```
+                    
+                    - **Guardrails**:
+                        - Run **validations** on user input **in parallel** to the agent.
+                        - Examples: screen for **relevance** or check if asking for **homework solutions**.
+                        - Read more in the [guardrails documentation](http://openai.github.io/openai-agents-python/guardrails/).
+                        - **Example**: <!-- markmap: fold -->
+                            - **Code**:
+                                ```python
+                                from agents import Agent, InputGuardrail, GuardrailFunctionOutput, Runner
+                                from pydantic import BaseModel
+                                
+                                # Define guardrail output structure
+                                class HomeworkOutput(BaseModel):
+                                    is_homework: bool
+                                    reasoning: str
+                                
+                                # Define guardrail agent
+                                guardrail_agent = Agent(
+                                    name="Guardrail checker",
+                                    instructions="Check if the user is asking about homework.",
+                                    output_type=HomeworkOutput,
+                                )
+                                
+                                # Guardrail function to check input
+                                async def homework_guardrail(ctx, agent, input_data):
+                                    result = await Runner.run(guardrail_agent, input_data, context=ctx.context)
+                                    final_output = result.final_output_as(HomeworkOutput)
+                                    
+                                    return GuardrailFunctionOutput(
+                                        output_info=final_output,
+                                        tripwire_triggered=final_output.is_homework,
+                                    )
+                                
+                                # Create agent with guardrail
+                                agent = Agent(
+                                    name="Tutor Agent",
+                                    instructions="Help with questions, but don't solve homework",
+                                    input_guardrails=[
+                                        InputGuardrail(guardrail_function=homework_guardrail),
+                                    ],
+                                )
+                                ```
+                    
+                    - **Cloning/copying agents**:
+                        - The **`clone()`** method lets you **duplicate** an Agent.
+                        - You can **optionally change** any properties in the clone.
+                        - **Example**: <!-- markmap: fold -->
+                            - **Code**:
+                                ```python
+                                from agents import Agent
+                                
+                                # Create original agent
+                                pirate_agent = Agent(
+                                    name="Pirate",
+                                    instructions="Write like a pirate",
+                                    model="o3-mini",
+                                )
+                                
+                                # Clone agent with modifications
+                                robot_agent = pirate_agent.clone(
+                                    name="Robot",
+                                    instructions="Write like a robot",
+                                )
+                                ```
+                    
                     - **Forcing tool use**:
-                        - Control tool usage with `ModelSettings.tool_choice`
+                        - Control tool usage with **`ModelSettings.tool_choice`**.
                         - Options:
-                            - **`auto`**: LLM decides whether to use a tool
-                            - **`required`**: LLM must use a tool (can pick which one)
-                            - **`none`**: LLM must not use a tool
-                            - Specific tool name: LLM must use that specific tool
-                        - Note: When requiring tool use, consider setting `Agent.tool_use_behavior` to stop the Agent from running when a tool output is produced, preventing infinite loops
+                            1. **`auto`**: LLM decides whether to use a tool
+                            2. **`required`**: LLM must use a tool (can decide which one)
+                            3. **`none`**: LLM must not use a tool
+                            4. **Specific tool name** (e.g., `"my_tool"`): LLM must use that tool
+                        - Consider setting **`Agent.tool_use_behavior`** to stop the Agent after tool output to prevent infinite loops.
+                        - **Example**: <!-- markmap: fold -->
+                            - **Code**:
+                                ```python
+                                from agents import Agent, ModelSettings, function_tool
+                                
+                                @function_tool
+                                def search_database(query: str) -> str:
+                                    return f"Results for {query}: ..."
+                                
+                                # Create agent that must use tools
+                                agent = Agent(
+                                    name="Research Agent",
+                                    instructions="Research topics using the search tool",
+                                    tools=[search_database],
+                                    model_settings=ModelSettings(
+                                        tool_choice="required",
+                                    ),
+                                    tool_use_behavior="stop_on_tool",
+                                )
+                                
+                                # Create agent that must use a specific tool
+                                agent_specific = Agent(
+                                    name="Search Agent",
+                                    instructions="Search for information",
+                                    tools=[search_database],
+                                    model_settings=ModelSettings(
+                                        tool_choice="search_database",
+                                    ),
+                                )
+                                ```
                 - **Organize me later**: <!-- markmap: fold -->
                     - **Examples**:
                         - See the [examples in GitHub repo](https://github.com/openai/openai-agents-python/tree/main/examples) for complete implementations
