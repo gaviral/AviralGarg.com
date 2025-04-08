@@ -107,6 +107,47 @@
         - **Focus**:
             - Apply **Algorithm Design Strategies** to actual interview problems (sorting context)
             - **Code** the resulting algorithms
+        - **Problem Statement Example: Sort Array**
+            - **Task**: Given array `nums` (integers), sort in **ascending order**.
+            - **Input Details**:
+                - Can contain **duplicates**.
+                - Examples are **toy examples** (actual size likely larger).
+            - **Constraints**: May be provided (relevance varies).
+            - **Classification**: **Exercise** (method is generally known, e.g., from **foundations** or prior knowledge).
+            - **Algorithm Options & Trade-offs**:
+                - **Simple (Generally Avoid)**:
+                    - **Selection Sort**: O(n^2) worst-case. Avoid.
+                    - **Bubble Sort**: O(n^2) worst-case. **Strongly Avoid**.
+                    - **Insertion Sort**:
+                        - O(n^2) worst-case.
+                        - **Useful Cases**:
+                            - **Almost Sorted** Array: Runs near O(n).
+                            - **Very Small** Array Size: Efficient.
+                - **Efficient (n log n class)**:
+                    - **Merge Sort**:
+                        - Strategy: Divide & Conquer.
+                        - Time: O(n log n) **worst-case**.
+                        - Space: **Not In-Place** (O(n) auxiliary array needed).
+                        - Stability: **Stable**.
+                    - **Quick Sort**:
+                        - Strategy: Divide & Conquer.
+                        - Time:
+                            - O(n^2) worst-case (deterministic).
+                            - O(n log n) **average/expected** (use **Randomized** version).
+                        - Space: **In-Place** (O(1) aux vars).
+                            - *Caveat*: O(log n) avg / O(n) worst **implicit stack space** (recursion). Usually acceptable as "in-place".
+                        - Stability: **Not Stable**.
+                        - Performance: Often **empirically fastest**.
+                    - **Heap Sort**:
+                        - Strategy: Transform & Conquer (uses Heap).
+                        - Time: O(n log n) **worst-case**.
+                        - Space: **In-Place** (O(1) aux vars, no recursion stack issue).
+                        - Stability: **Not Stable**.
+                - **Choosing Algorithm**: Depends on requirements:
+                    - Need **Stability**? -> Merge Sort.
+                    - Need **Worst-case O(n log n) AND In-place**? -> Heap Sort.
+                    - Need **Fastest Average AND In-place** (O(log n) stack OK)? -> Randomized Quick Sort.
+                    - Input **Almost Sorted / Very Small**? -> Insertion Sort might be viable.
 </script>
 </div>
 
