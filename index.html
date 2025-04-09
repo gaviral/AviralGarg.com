@@ -19,6 +19,18 @@
     <!-- Wrap Markdown source in `.markmap` elements -->
     <div class="markmap">
         <script type="text/template">
+---
+markmap:
+    <!-- colorFreezeLevel: -1
+    duration: 1000
+    maxWidth: 300
+    initialExpandLevel: -1 -->
+    <!-- spacingVertical: 20 -->
+    <!-- extraJS: []
+    extraCSS: []
+    zoom: true
+    pan: true -->
+---
 - **DSA**
     - **Intro**
         - **Problem Solving**
@@ -44,7 +56,7 @@
             - Ability to **fluently transform** designed algorithm into **working code**
             - Corresponds to **Part 2** of Ideal Interview (Code Implementation)
             - Developed via **repetitive use** of **coding patterns** for speed.
-    - **Technical Interview**
+    - **Technical Interview** <!-- markmap: fold -->
         - **Goal**: Test ability on **unseen problems**
             - Assess **Problem Solving** (Algorithm Design)
             - Assess **Coding Skills** (Implementation)
@@ -103,7 +115,7 @@
                         - **Interview Behavior**:
                             - Even for familiar problems (exercises): **Show problem-solving path** to interviewer.
                             - Do not just retrieve solution from memory.
-    - **Sorting**
+    - **Sorting** <!-- markmap: fold -->
         - **Focus**:
             - Apply **Algorithm Design Strategies** to actual interview problems (sorting context)
             - **Code** the resulting algorithms
@@ -112,42 +124,46 @@
             - **Input Details**:
                 - Can contain **duplicates**.
                 - Examples are **toy examples** (actual size likely larger).
+                - Integers are **primitives** -> **Stability not important**.
             - **Constraints**: May be provided (relevance varies).
             - **Classification**: **Exercise** (method is generally known, e.g., from **foundations** or prior knowledge).
             - **Algorithm Options & Trade-offs**:
                 - **Simple (Generally Avoid)**:
-                    - **Selection Sort**: O(n^2) worst-case. Avoid.
-                    - **Bubble Sort**: O(n^2) worst-case. **Strongly Avoid**.
-                    - **Insertion Sort**:
-                        - O(n^2) worst-case.
-                        - **Useful Cases**:
-                            - **Almost Sorted** Array: Runs near O(n).
-                            - **Very Small** Array Size: Efficient.
+                    - **Selection Sort**: O(n^2). Likely **TLE**. Code available for review.
+                    - **Bubble Sort**: O(n^2). **Strongly Avoid**. Likely **TLE**. Code available for review.
+                    - **Insertion Sort**: O(n^2). Likely **TLE** (unless almost sorted/small). Code available for review.
+                        - **Useful Cases**: Almost Sorted / Very Small Array.
                 - **Efficient (n log n class)**:
                     - **Merge Sort**:
-                        - Strategy: Divide & Conquer.
-                        - Time: O(n log n) **worst-case**.
-                        - Space: **Not In-Place** (O(n) auxiliary array needed).
-                        - Stability: **Stable**.
+                        - **Strategy**: Divide & Conquer.
+                        - **Time**: O(n log n) worst-case. **Accepted**.
+                        - **Space**: Not In-Place (O(n) aux).
+                        - **Stability**: Stable (but irrelevant for primitives).
+                        - **Coding Target**: Under **10 mins**. (Components reusable). Code available for review.
                     - **Quick Sort**:
-                        - Strategy: Divide & Conquer.
-                        - Time:
-                            - O(n^2) worst-case (deterministic).
-                            - O(n log n) **average/expected** (use **Randomized** version).
-                        - Space: **In-Place** (O(1) aux vars).
-                            - *Caveat*: O(log n) avg / O(n) worst **implicit stack space** (recursion). Usually acceptable as "in-place".
-                        - Stability: **Not Stable**.
-                        - Performance: Often **empirically fastest**.
+                        - **Strategy**: Divide & Conquer.
+                        - **Time**: O(n log n) avg (Randomized). **Accepted**.
+                        - **Space**: In-Place (O(log n) stack).
+                        - **Stability**: Not Stable.
+                        - **Performance**: Often empirically fastest.
+                        - **Coding Target**: Under **10 mins**. (Components reusable). Code available for review.
                     - **Heap Sort**:
-                        - Strategy: Transform & Conquer (uses Heap).
-                        - Time: O(n log n) **worst-case**.
-                        - Space: **In-Place** (O(1) aux vars, no recursion stack issue).
-                        - Stability: **Not Stable**.
-                - **Choosing Algorithm**: Depends on requirements:
-                    - Need **Stability**? -> Merge Sort.
-                    - Need **Worst-case O(n log n) AND In-place**? -> Heap Sort.
-                    - Need **Fastest Average AND In-place** (O(log n) stack OK)? -> Randomized Quick Sort.
-                    - Input **Almost Sorted / Very Small**? -> Insertion Sort might be viable.
+                        - **Strategy**: Transform & Conquer.
+                        - **Time**: O(n log n) worst-case. **Accepted**.
+                        - **Space**: In-Place.
+                        - **Stability**: Not Stable.
+                        - **Coding Target**: Under **5 mins** (using library). Familiarize w/ library functions (heap/priority queue). Understand heap design once. Code available for review.
+                - **Specialized (Integer Keys)**:
+                    - **Counting Sort**: Code available for review (less critical).
+                    - **Radix Sort**:
+                        - Exploits integer structure (bit strings).
+                        - Often **fastest** for integer arrays.
+                        - Interview Frequency: Less common now.
+                        - Code available for review (less critical).
+                - **Choosing Algorithm (for Integers)**:
+                    - Stability irrelevant -> Merge Sort less compelling.
+                    - Fastest often **Radix Sort** (if applicable/known).
+                    - Good general choices: **Randomized Quick Sort** (avg speed), **Heap Sort** (worst-case guarantee, in-place).
 </script>
 </div>
 
